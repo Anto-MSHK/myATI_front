@@ -32,8 +32,8 @@ export const Nav = () => {
 
   const items: MenuItem[] = [
     getItem("Расписание", "1", <UnorderedListOutlined />, [
-      getItem(<Link to="/schedule/fvo">ФВО</Link>, "11"),
-      getItem(<Link to="/schedule/spo">СПО</Link>, "12"),
+      getItem(<Link to="/groups/fvo">ФВО</Link>, "11"),
+      getItem(<Link to="/groups/spo">СПО</Link>, "12"),
     ]),
     getItem("Структура", "2", <ApartmentOutlined />, [
       getItem(<Link to="/edu/teacher">Преподаватели</Link>, "22"),
@@ -49,7 +49,7 @@ export const Nav = () => {
     >
       <div
         style={{
-          height: 45,
+          height: 35,
           margin: 16,
           overflow: "hidden",
           position: "relative",
@@ -57,9 +57,9 @@ export const Nav = () => {
       >
         <img
           style={{
-            width: "80px",
-            top: -12,
-            left: -15,
+            width: "75px",
+            top: -18,
+            left: -14,
             position: "absolute",
           }}
           src={logo}
@@ -67,12 +67,12 @@ export const Nav = () => {
         />
         <h1
           style={{
-            fontSize: 24,
+            fontSize: 22,
             color: "white",
             position: "absolute",
             display: "inline",
-            left: 60,
-            top: -15,
+            left: 50,
+            top: -20,
           }}
         >
           My ATI

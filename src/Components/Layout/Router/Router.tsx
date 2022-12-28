@@ -8,8 +8,8 @@ export const Router = () => {
   return (
     <Content>
       <Routes>
-        <Route path="/schedule/fvo" element={<GroupPage faculty={"FVO"} />} />
-        <Route path="/schedule/spo" element={<GroupPage faculty={"SPO"} />} />
+        <Route path="/groups/fvo" element={<GroupPage faculty={"FVO"} />} />
+        <Route path="/groups/spo" element={<GroupPage faculty={"SPO"} />} />
       </Routes>
     </Content>
   );
