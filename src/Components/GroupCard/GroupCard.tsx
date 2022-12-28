@@ -7,10 +7,11 @@ import { setGroup } from "src/State/Slices/groupSlice";
 
 interface GroupCardI {
   name: string;
+  faculty: string;
   elder?: string;
 }
 
-export const GroupCard: FC<GroupCardI> = ({ name, elder }) => {
+export const GroupCard: FC<GroupCardI> = ({ name, faculty, elder }) => {
   const dispatch = useAppDispatch();
 
   //   const handleGroupName = () => {
@@ -22,13 +23,13 @@ export const GroupCard: FC<GroupCardI> = ({ name, elder }) => {
       <Col span={80}>
         <Card
           title={
-            <Link to={`/group/${name}`}>
-              <span
+            <Link to={`/schedule/${name}`}>
+              <h2
                 className={"groupName-title"}
                 //  onClick={() => dispatch(handleGroupName)}
               >
                 {name}
-              </span>{" "}
+              </h2>{" "}
             </Link>
           }
           //  extra={<CardExtra />}

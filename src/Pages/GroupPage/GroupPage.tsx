@@ -47,7 +47,7 @@ export const GroupPage: FC<any> = ({ faculty }) => {
           {courses.map((course, index: number) => {
             return (
               <Card
-                title={<h3 style={{ margin: "0px" }}>{++index} курс</h3>}
+                title={<h2 style={{ margin: "0px" }}>{++index} курс</h2>}
                 size={"small"}
                 style={{
                   padding: "10px",
@@ -60,7 +60,11 @@ export const GroupPage: FC<any> = ({ faculty }) => {
                   {course.map((group, index) => {
                     return (
                       /* Залить данные для elder с сервера по мере их появления */
-                      <GroupCard key={group._id + index} {...group} />
+                      <GroupCard
+                        key={group._id + index}
+                        {...group}
+                        faculty={faculty}
+                      />
                     );
                   })}
                 </Row>

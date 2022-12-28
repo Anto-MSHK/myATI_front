@@ -1,0 +1,83 @@
+.lesson {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #ebebeb;
+}
+.lesson__radio-week {
+  position: relative;
+  /* margin: 0 0 0 10px; */
+  /* right: 10px; */
+  /* left: 10px; */
+  width: 100%;
+}
+
+.lesson-card {
+  position: relative;
+  width: 100%;
+}
+
+.main {
+  justify-content: unset;
+}
+
+.lesson-card__main {
+  display: flex;
+  align-items: baseline;
+  gap: 300px;
+  margin: 10px 0 10px 0;
+}
+
+.main {
+  /* margin: 0 0 10px 0; */
+}
+
+.main__count {
+  width: 70px;
+  border-radius: 0;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: right;
+  border-width: 0px;
+
+  position: absolute;
+  left: 0px;
+}
+.main__count-text {
+  margin: 0;
+  padding: 5px 0;
+}
+.main__title {
+  margin: 3px 0 0 70px;
+  width: 100%;
+}
+
+.secondary {
+  display: inline-flex;
+  flex-direction: row;
+  text-align: center;
+  width: 100%;
+}
+
+h4 {
+  margin: 0;
+}
+.secondary__time {
+  margin: 0 0 0 10px;
+}
+.secondary__time-line {
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  margin: 0;
+}
+.secondary__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 0 25px;
+  text-align: start;
+}
+.secondary__info-type {
+  margin: 0 10px 0 0;
+}

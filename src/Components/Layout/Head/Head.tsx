@@ -4,6 +4,7 @@ import React from "react";
 import { Breadcrumbs } from "../Breadcrumbs/Breadcrumbs";
 import { Tabs } from "./../../Tabs/Tabs";
 import { Awatar } from "./../../Awatar/Awatar";
+import { PushpinOutlined } from "@ant-design/icons";
 
 export const Head = () => {
   const {
@@ -28,7 +29,7 @@ export const Head = () => {
           <Breadcrumbs />
         </div>
         <Card size="small" bodyStyle={{ padding: 5 }} color={""}>
-          Закреплено:
+          <PushpinOutlined style={{ margin: "0 5px" }} />
           <Tabs />
         </Card>
         <Awatar />

@@ -5,7 +5,7 @@ import { UserOutlined } from "@ant-design/icons";
 export const Awatar = () => {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <h1>Hello!</h1>{" "}
+      <h2>Hello!</h2>{" "}
       <Avatar
         shape="square"
         icon={<UserOutlined />}

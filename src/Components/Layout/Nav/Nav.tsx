@@ -72,7 +72,7 @@ export const Nav = () => {
             position: "absolute",
             display: "inline",
             left: 50,
-            top: -20,
+            top: 6,
           }}
         >
           My ATI
