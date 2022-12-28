@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { BrowserRouter } from "react-router-dom";
+import { Nav } from "./Components/Layout/Nav/Nav";
+import { Router } from "./Components/Layout/Router/Router";
+import { Breadcrumbs } from "./Components/Layout/Breadcrumbs/Breadcrumbs";
+
+const { Header, Content, Footer, Sider } = Layout;
+
+const App: React.FC = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Nav />
+        <Layout className="site-layout">
+          <Header
+            title="My ATI"
+            style={{ padding: 0, background: colorBgContainer }}
+          />
+          <Content style={{ margin: "0 16px" }}>
+            <Breadcrumbs />
+            <Router />
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            Ant Design ©2018 Created by Ant UED
+          </Footer>
+        </Layout>
+      </Layout>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
