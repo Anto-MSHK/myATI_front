@@ -6,9 +6,10 @@ const { Content } = Layout;
 
 export const Router = () => {
   return (
-    <Content style={{ padding: "0 24px", minHeight: 280 }}>
+    <Content>
       <Routes>
-        <Route path="/schedule/fvo" element={<GroupPage />} />
+        <Route path="/schedule/fvo" element={<GroupPage faculty={"FVO"} />} />
+        <Route path="/schedule/spo" element={<GroupPage faculty={"SPO"} />} />
       </Routes>
     </Content>
   );

@@ -18,9 +18,14 @@ export const groupsApi = createApi({
       }),
       transformResponse: (response: GroupsStateResponseT) => response.result,
     }),
-    fetchFacultyGroups: builder.query<GroupStateT[], void>({
-      query: () => ({
-        url: `?faculty=`,
+    fetchFacultyGroups: builder.query<
+      GroupStateT[],
+      { faculty: string; course?: number }
+    >({
+      query: (params: { faculty: string; course?: number }) => ({
+        url: `?faculty=${params.faculty}&course=${
+          params.course ? params.course : ""
+        }`,
       }),
       transformResponse: (response: GroupsStateResponseT) => {
         console.log("!!!");

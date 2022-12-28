@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Layout } from "antd";
+import { Menu, Layout, Image } from "antd";
 import type { MenuProps } from "antd";
 import {
   UnorderedListOutlined,
@@ -10,9 +10,8 @@ import {
   ExperimentOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-
+import logo from "./adaptive-icon.png";
 type MenuItem = Required<MenuProps>["items"][number];
-
 export const Nav = () => {
   const { Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
@@ -50,11 +49,35 @@ export const Nav = () => {
     >
       <div
         style={{
-          height: 32,
+          height: 45,
           margin: 16,
-          background: "rgba(255, 255, 255, 0.2)",
+          overflow: "hidden",
+          position: "relative",
         }}
-      />
+      >
+        <img
+          style={{
+            width: "80px",
+            top: -12,
+            left: -15,
+            position: "absolute",
+          }}
+          src={logo}
+          alt={"logo"}
+        />
+        <h1
+          style={{
+            fontSize: 24,
+            color: "white",
+            position: "absolute",
+            display: "inline",
+            left: 60,
+            top: -15,
+          }}
+        >
+          My ATI
+        </h1>
+      </div>
       <Menu
         theme="dark"
         defaultSelectedKeys={["1"]}

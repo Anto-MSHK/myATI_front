@@ -6,9 +6,11 @@ import { GroupStateT } from "src/Types/GroupTypes";
 import { useFetchFacultyGroupsQuery } from "src/State/services/GroupsApi";
 
 export const GroupPage: FC<any> = ({ faculty }) => {
-  const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery();
+  const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery({
+    faculty,
+  });
   const [courses, setCourses] = useState<GroupStateT[][]>([]);
-  console.log(facultyGroups);
+
   useEffect(() => {
     let firstCourse: GroupStateT[] = [];
     let secondCourse: GroupStateT[] = [];
@@ -44,19 +46,17 @@ export const GroupPage: FC<any> = ({ faculty }) => {
         <div>
           {courses.map((course, index: number) => {
             return (
-              <Menu
+              <Card
+                title={<h3 style={{ margin: "0px" }}>{++index} курс</h3>}
+                size={"small"}
                 style={{
-                  margin: "10px",
                   padding: "10px",
                   borderRadius: "10px",
+                  marginBottom: "10px",
+                  width: "fit-content",
                 }}
               >
-                <Card
-                  size="small"
-                  bordered={false}
-                  title={<div className="card-title">{++index} курс</div>}
-                />
-                <Row gutter={[16, 16]}>
+                <Row gutter={[16, 16]} style={{ marginTop: "10px" }}>
                   {course.map((group, index) => {
                     return (
                       /* Залить данные для elder с сервера по мере их появления */
@@ -64,7 +64,7 @@ export const GroupPage: FC<any> = ({ faculty }) => {
                     );
                   })}
                 </Row>
-              </Menu>
+              </Card>
             );
           })}
         </div>

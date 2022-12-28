@@ -5,25 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import { Nav } from "./Components/Layout/Nav/Nav";
 import { Router } from "./Components/Layout/Router/Router";
 import { Breadcrumbs } from "./Components/Layout/Breadcrumbs/Breadcrumbs";
+import { Head } from "./Components/Layout/Head/Head";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const App: React.FC = () => {
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-
   return (
     <BrowserRouter>
       <Layout style={{ minHeight: "100vh" }}>
         <Nav />
         <Layout className="site-layout">
-          <Header
-            title="My ATI"
-            style={{ padding: 0, background: colorBgContainer }}
-          />
+          <Head />
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumbs />
             <Router />
           </Content>
           <Footer style={{ textAlign: "center" }}>
