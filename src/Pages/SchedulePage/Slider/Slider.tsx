@@ -1,0 +1,99 @@
+import React, { useRef } from "react";
+import { Button, Carousel } from "antd";
+import { DayCard } from "src/Components/DayCard/DayCard";
+import { DayT } from "src/Types/GroupScheduleTypes";
+
+import "./Slider.css";
+import {
+  OrderedListOutlined,
+  PicCenterOutlined,
+  ArrowRightOutlined,
+  ArrowLeftOutlined,
+} from "@ant-design/icons";
+import { Weekend } from "src/Components/Weekend/Weekend";
+
+interface SliderI {
+  groupSchedule: DayT[] | undefined;
+}
+
+export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
+  const onChange = (currentSlide: number) => {
+    console.log(currentSlide);
+  };
+  let carousel = useRef<any>();
+
+  const next = () => {
+    (carousel as any).next();
+  };
+
+  const prev = () => {
+    (carousel as any).prev();
+  };
+
+  const goTo = (slideNumber: number, dontAnimate: boolean = true) => {
+    (carousel as any).goTo(slideNumber, dontAnimate);
+  };
+
+  return (
+    <div>
+      <div style={{ position: "absolute", zIndex: 10, right: 22, top: 15 }}>
+        <Button
+          style={{ margin: "0 10px 0 0" }}
+          shape="circle"
+          icon={<ArrowLeftOutlined />}
+          size={"middle"}
+          onClick={() => {
+            prev();
+          }}
+        />
+        <Button
+          shape="circle"
+          icon={<ArrowRightOutlined />}
+          size={"middle"}
+          onClick={() => {
+            next();
+          }}
+        />
+      </div>
+      <div
+        style={{
+          display: "inline-flex",
+          justifyContent: "center",
+          right: 0,
+          left: 0,
+          margin: "14px 0 0 0",
+          position: "absolute",
+          color: "white",
+          zIndex: 10,
+        }}
+      >
+        <div className="text">пн</div>
+        <div className="text">вт</div>
+        <div className="text">ср</div>
+        <div className="text">чт</div>
+        <div className="text">пт</div>
+        <div className="text">сб</div>
+      </div>
+      <Carousel
+        afterChange={onChange}
+        dots={{ className: "dot" }}
+        style={{ backgroundColor: "#001529", borderRadius: "10px" }}
+        dotPosition="top"
+        ref={(node) => (carousel = node as any)}
+      >
+        {groupSchedule?.map((day, index) => (
+          <div
+            key={`${day.lessons} + ${index}`}
+            style={{ marginBottom: "10px" }}
+          >
+            <DayCard
+              dayOfWeek={day.dayOfWeek}
+              isWeekend={day.isWeekend}
+              lessons={day.lessons}
+            />
+          </div>
+        ))}
+      </Carousel>
+    </div>
+  );
+};

@@ -1,7 +1,8 @@
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import React, { FC } from "react";
 import { LessonCard, LessonCardI } from "src/Components/LessonCard/LessonCard";
 import { LessonT } from "src/Types/GroupScheduleTypes";
+import { Weekend } from "../Weekend/Weekend";
 
 export interface DayCardI {
   dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5;
@@ -20,14 +21,27 @@ const week = {
 };
 
 export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
-  return lessons.length ? (
+  return (
     <Card
-      style={{ width: "100%", backgroundColor: "#001529" }}
+      style={{
+        width: "100%",
+        backgroundColor: "#001529",
+        height: "100%",
+        borderWidth: 0,
+      }}
       bodyStyle={{ padding: 15 }}
     >
-      <h1 style={{ marginLeft: 10, color: "white", marginBottom: 16 }}>
-        {week[dayOfWeek]}
-      </h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "0 10px 0 0",
+        }}
+      >
+        <h1 style={{ marginLeft: 10, color: "white", marginBottom: 16 }}>
+          {week[dayOfWeek]}
+        </h1>
+      </div>
       {lessons.map((lesson, index) => (
         <div key={`${lesson.time} +${index}`}>
           <LessonCard
@@ -39,8 +53,7 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
           />
         </div>
       ))}
+      {lessons.length === 0 && <Weekend />}
     </Card>
-  ) : (
-    <></>
   );
 };
