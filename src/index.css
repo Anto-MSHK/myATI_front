@@ -35,11 +35,11 @@ h4 {
 }
 
 .ant-radio-button-wrapper:first-child {
-  border-radius: 10px 0 0 0;
+  /* border-radius: 10px 0 0 0; */
 }
 
 .ant-radio-button-wrapper:last-child {
-  border-radius: 0 10px 0 0;
+  /* border-radius: 0 10px 0 0; */
 }
 .ant-popover {
   position: absolute;

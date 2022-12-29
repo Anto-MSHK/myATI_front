@@ -83,12 +83,17 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
           right: 0,
           position: "absolute",
           zIndex: 2,
+          borderRadius: "10px",
         }}
-      ></div>
+      />
       <Carousel
         afterChange={onChange}
         dots={{ className: "dot" }}
-        style={{ backgroundColor: "#001529", borderRadius: "10px" }}
+        style={{
+          backgroundColor: "#001529",
+          borderRadius: "10px",
+          overflow: "hidden",
+        }}
         dotPosition="top"
         ref={(node) => (carousel = node as any)}
       >

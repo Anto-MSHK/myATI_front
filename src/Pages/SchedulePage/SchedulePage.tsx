@@ -23,15 +23,15 @@ export const SchedulePage: React.FC = () => {
     groupName as string
   );
 
-  const [value, setValue] = useState("list");
+  const [value, setValue] = useState("slider");
 
   const onChange = ({ target: { value } }: RadioChangeEvent) => {
     setValue(value);
   };
 
   const options: CheckboxOptionType[] = [
-    { label: <OrderedListOutlined />, value: "list" },
     { label: <PicCenterOutlined />, value: "slider" },
+    { label: <OrderedListOutlined />, value: "list" },
   ];
 
   return (
