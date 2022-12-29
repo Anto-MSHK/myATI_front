@@ -34,13 +34,6 @@ h4 {
   white-space: unset;
 }
 
-.ant-radio-button-wrapper:first-child {
-  /* border-radius: 10px 0 0 0; */
-}
-
-.ant-radio-button-wrapper:last-child {
-  /* border-radius: 0 10px 0 0; */
-}
 .ant-popover {
   position: absolute;
   z-index: 1;

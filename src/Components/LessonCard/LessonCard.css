@@ -11,6 +11,14 @@
   width: 100%;
 }
 
+.lesson__radio-week .ant-radio-button-wrapper:first-child {
+  border-radius: 10px 0 0 0;
+}
+
+.lesson__radio-week .ant-radio-button-wrapper:last-child {
+  border-radius: 0 10px 0 0;
+}
+
 .lesson-card {
   position: relative;
   width: 100%;

@@ -74,7 +74,7 @@ export const LessonCard: FC<LessonCardI> = ({
   }, [time]);
 
   return (
-    <div className="lesson" >
+    <div className="lesson">
       {data.lowerWeek && (
         <Radio.Group
           className="lesson__radio-week"
@@ -83,12 +83,12 @@ export const LessonCard: FC<LessonCardI> = ({
           buttonStyle="solid"
           onChange={onChange}
           defaultValue="верхняя"
-          style={{}}
         />
       )}
       <Card
         className="lesson-card"
         size="small"
+        style={data.lowerWeek ? { borderRadius: "0 0 10px 10px" } : {}}
         title={
           <div className="lesson-card__main main">
             <Tag className="main__count" color={isLessonActive.backroundColor}>
