@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { DayT } from "src/Types/GroupScheduleTypes";
@@ -11,6 +11,7 @@ import {
   ArrowLeftOutlined,
 } from "@ant-design/icons";
 import { Weekend } from "src/Components/Weekend/Weekend";
+import { useAppSelector } from "src/State/hooks";
 
 interface SliderI {
   groupSchedule: DayT[] | undefined;
@@ -21,6 +22,11 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
     console.log(currentSlide);
   };
   let carousel = useRef<any>();
+  const curDayIndex = useAppSelector((state) => state.scheduleSettings.curDay);
+
+  useEffect(() => {
+    goTo(curDayIndex, true);
+  }, []);
 
   const next = () => {
     (carousel as any).next();

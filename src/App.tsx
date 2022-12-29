@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { BrowserRouter } from "react-router-dom";
@@ -6,10 +6,19 @@ import { Nav } from "./Components/Layout/Nav/Nav";
 import { Router } from "./Components/Layout/Router/Router";
 import { Breadcrumbs } from "./Components/Layout/Breadcrumbs/Breadcrumbs";
 import { Head } from "./Components/Layout/Head/Head";
+import { useAppDispatch } from "./State/hooks";
+import {
+  getWeek,
+  setCurDayAndWeek,
+} from "./State/Slices/scheduleSettingsSlice";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setCurDayAndWeek());
+  }, []);
   return (
     <BrowserRouter>
       <Layout style={{ minHeight: "100vh" }}>

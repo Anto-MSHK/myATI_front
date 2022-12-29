@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import { LessonCard, LessonCardI } from "src/Components/LessonCard/LessonCard";
 import { LessonT } from "src/Types/GroupScheduleTypes";
 import { Weekend } from "../Weekend/Weekend";
-
+import { LeftCircleFilled } from "@ant-design/icons";
+import { useAppSelector } from "src/State/hooks";
 export interface DayCardI {
   dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5;
   isWeekend: boolean;
@@ -21,6 +22,8 @@ const week = {
 };
 
 export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
+  const curDayIndex = useAppSelector((state) => state.scheduleSettings.curDay);
+
   return (
     <Card
       style={{
@@ -34,13 +37,33 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
           margin: "0 10px 0 0",
+          //  alignItems: "center",
         }}
       >
-        <h1 style={{ marginLeft: 10, color: "white", marginBottom: 16 }}>
+        <h1
+          style={{
+            marginLeft: 10,
+            color: "white",
+            marginBottom: 16,
+            fontWeight: 500,
+          }}
+        >
           {week[dayOfWeek]}
         </h1>
+        {curDayIndex === +dayOfWeek ? (
+          <LeftCircleFilled
+            size={100}
+            style={{
+              color: "#4096FF",
+              width: 30,
+              height: 30,
+              margin: "8px 0 0 0",
+            }}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       {lessons.map((lesson, index) => (
         <div key={`${lesson.time} +${index}`}>

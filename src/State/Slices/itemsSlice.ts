@@ -1,50 +1,36 @@
-
-
-
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-
-
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type SubjectT = {
-  title: string,
+  title: string;
   _id?: string;
-}
-
+};
 
 type SimpleScheduleListStateT = {
   subjects: SubjectT[];
   loading: boolean;
   error: string | null;
-}
-
+};
 
 type itemSliceState = {
   itemName: string;
-}
+};
 
 const initialState: itemSliceState = {
-  itemName: '',
-}
-
-
+  itemName: "",
+};
 
 const itemSlice = createSlice({
-  name: 'items',
+  name: "items",
   initialState,
   reducers: {
-    setItem(state, action: PayloadAction<string>){
-/*     
+    setItem(state, action: PayloadAction<string>) {
+      /*     
       console.log(action);
       console.log(state); */
-      state.itemName = action.payload.toString()
-    }
+      state.itemName = action.payload.toString();
+    },
   },
-})
+});
 
-
-
-
-export const { setItem } = itemSlice.actions 
-export default itemSlice.reducer 
+export const { setItem } = itemSlice.actions;
+export default itemSlice.reducer;

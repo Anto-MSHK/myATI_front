@@ -3,7 +3,10 @@ import { DownOutlined } from "@ant-design/icons";
 import { Checkbox, MenuProps, Radio } from "antd";
 import { Dropdown, Space } from "antd";
 
-export const Drop: React.FC = () => {
+interface DropI {
+  items: MenuProps["items"];
+}
+export const Drop: React.FC<DropI> = ({ items }) => {
   const [open, setOpen] = useState(false);
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -15,17 +18,6 @@ export const Drop: React.FC = () => {
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);
   };
-
-  const items: MenuProps["items"] = [
-    {
-      label: <Checkbox>Скрыть переключатель возле пар</Checkbox>,
-      key: "1",
-    },
-    {
-      label: <Checkbox>Скрыть выходные</Checkbox>,
-      key: "2",
-    },
-  ];
 
   return (
     <Dropdown

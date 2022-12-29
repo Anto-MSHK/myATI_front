@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { DayCard } from "src/Components/DayCard/DayCard";
-import { Button, Card, Space, Switch } from "antd";
+import { Button, Card, Checkbox, Space, Switch } from "antd";
 import { useParams } from "react-router-dom";
 import { useFetchGroupScheduleQuery } from "src/State/services/ScheduleApi";
-import { useAppSelector } from "src/State/hooks";
+import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { ViewSwitch } from "src/Components/ViewSwitch/ViewSwitch";
 import {
   PicCenterOutlined,
@@ -15,6 +15,13 @@ import type { CheckboxOptionType, RadioChangeEvent } from "antd";
 import { List } from "./List/List";
 import { Slider } from "./Slider/Slider";
 import { Drop } from "./../../Components/Drop/Drop";
+import {
+  getWeek,
+  setHideSwitch,
+  setSwitchWeek,
+} from "src/State/Slices/scheduleSettingsSlice";
+import { MenuProps } from "rc-menu";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
 /* const [timetable, setTimetable] = useState<any>(); */
 export const SchedulePage: React.FC = () => {
@@ -23,9 +30,17 @@ export const SchedulePage: React.FC = () => {
   const { data: groupSchedule, isLoading } = useFetchGroupScheduleQuery(
     groupName as string
   );
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getWeek());
+  }, []);
 
+  const hideSwitch = useAppSelector(
+    (state) => state.scheduleSettings.hideSwitch
+  );
+  const week = useAppSelector((state) => state.scheduleSettings.switchWeek);
   const [valueView, setValueView] = useState("slider");
-  const [valueWeek, setValueWeek] = useState("topWeek");
+  const [valueWeek, setValueWeek] = useState(week);
 
   const onChangeView = ({ target: { value } }: RadioChangeEvent) => {
     setValueView(value);
@@ -42,7 +57,12 @@ export const SchedulePage: React.FC = () => {
   const optionsWeek: CheckboxOptionType[] = [
     {
       label: (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{ display: "flex", alignItems: "center" }}
+          onClick={() => {
+            dispatch(setSwitchWeek("topWeek"));
+          }}
+        >
           <h4 style={{ margin: "0 10px 0 0", fontWeight: 500, fontSize: 14 }}>
             верхняя
           </h4>
@@ -53,7 +73,12 @@ export const SchedulePage: React.FC = () => {
     },
     {
       label: (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{ display: "flex", alignItems: "center" }}
+          onClick={() => {
+            dispatch(setSwitchWeek("lowerWeek"));
+          }}
+        >
           <h4
             style={{
               margin: "0 10px 0 0",
@@ -70,15 +95,58 @@ export const SchedulePage: React.FC = () => {
     },
   ];
 
+  const onHideSwitch = (e: CheckboxChangeEvent) => {
+    dispatch(setHideSwitch(e.target.checked));
+  };
+  const onHideWeekend = (e: CheckboxChangeEvent) => {
+    //  dispatch(setHideSwitch(e.target.checked));
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      label: (
+        <Checkbox
+          onChange={onHideSwitch}
+          value={hideSwitch}
+          defaultChecked={hideSwitch}
+        >
+          Скрыть переключатель возле пар
+        </Checkbox>
+      ),
+      key: "1",
+    },
+    {
+      label: <Checkbox onChange={onHideWeekend}>Скрыть выходные</Checkbox>,
+      key: "2",
+    },
+  ];
+
   return (
     <Card
       loading={isLoading}
+      style={{ width: "100%", position: "relative" }}
       bodyStyle={{ padding: 10 }}
       title={
-        <Space style={{ display: "flex", justifyContent: "space-between" }}>
+        <Space
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            position: "fixed",
+            // width: "100%",
+            left: 215,
+            right: 15,
+            margin: "-28px 0 0 0",
+            padding: 11,
+            background: "white",
+            zIndex: 40,
+            borderRadius: "10px 10px 0 0 ",
+            borderColor: "#F0F0F0",
+            border: "solid 1px",
+          }}
+        >
           <h1>{groupName}</h1>
           <div style={{ display: "flex" }}>
-            <Drop />
+            <Drop items={items} />
             <ViewSwitch
               title={"Неделя:"}
               value={valueWeek}
@@ -95,7 +163,6 @@ export const SchedulePage: React.FC = () => {
           </div>
         </Space>
       }
-      style={{ width: "100%" }}
     >
       {valueView === "list" ? (
         <List groupSchedule={groupSchedule} />

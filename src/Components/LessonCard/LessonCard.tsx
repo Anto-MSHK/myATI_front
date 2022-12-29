@@ -4,6 +4,7 @@ import React, { FC, useState, useEffect } from "react";
 import checkIsLessonActive from "src/Functions/CheckIsWeekAndLessonActive";
 import { lessonDataTeacher, subject } from "src/Types/TeacherScheduleTypes";
 import "./LessonCard.css";
+import { useAppDispatch, useAppSelector } from "src/State/hooks";
 type subjectData = {
   subject: subject;
   teacher?: {
@@ -44,7 +45,10 @@ type LessonActiveT = {
   color: string;
 };
 
-const options = ["верхняя", "нижняя"];
+const options = [
+  { label: "верхняя", value: "topWeek" },
+  { label: "нижняя", value: "lowerWeek" },
+];
 
 export const LessonCard: FC<LessonCardI> = ({
   count,
@@ -53,42 +57,56 @@ export const LessonCard: FC<LessonCardI> = ({
   group,
   dayOfWeek,
 }) => {
-  var [curWeek, setCurWeek] = useState<"topWeek" | "lowerWeek">("topWeek");
+  const week = useAppSelector((state) => state.scheduleSettings.switchWeek);
+  const hideSwitch = useAppSelector(
+    (state) => state.scheduleSettings.hideSwitch
+  );
+
+  const [curWeek, setCurWeek] = useState<"topWeek" | "lowerWeek">("topWeek");
+  const [weekBtn, setWeekBtn] = useState<"topWeek" | "lowerWeek">(week);
   const [isLessonActive, setIsLessonActive] = useState<LessonActiveT>({
     backroundColor: "blue",
     color: "black",
   });
 
   const onChange = ({ target: { value } }: RadioChangeEvent) => {
-    if (value === "верхняя") setCurWeek("topWeek");
-    else setCurWeek("lowerWeek");
+    setWeekBtn(value);
+    setCurWeek(value);
   };
 
   useEffect(() => {
-    checkIsLessonActive(time.from, time.to, dayOfWeek)
-      ? setIsLessonActive({
-          backroundColor: "rgb(240, 178, 72)",
-          color: "white",
-        })
-      : setIsLessonActive({ backroundColor: "blue", color: "black" });
-  }, [time]);
+    if (data.lowerWeek) {
+      setWeekBtn(week);
+      setCurWeek(week);
+    }
+  }, [week, data.lowerWeek]);
+  useEffect(() => {
+    if (checkIsLessonActive(time.from, time.to, dayOfWeek)) {
+      setIsLessonActive({
+        backroundColor: "#4096FF",
+        color: "white",
+      });
+    } else setIsLessonActive({ backroundColor: "blue", color: "black" });
+  }, [time, dayOfWeek]);
 
   return (
     <div className="lesson">
-      {data.lowerWeek && (
+      {data.lowerWeek && !hideSwitch && (
         <Radio.Group
           className="lesson__radio-week"
           options={options}
           optionType="button"
           buttonStyle="solid"
           onChange={onChange}
-          defaultValue="верхняя"
+          value={weekBtn}
         />
       )}
       <Card
         className="lesson-card"
         size="small"
-        style={data.lowerWeek ? { borderRadius: "0 0 10px 10px" } : {}}
+        style={
+          data.lowerWeek && !hideSwitch ? { borderRadius: "0 0 10px 10px" } : {}
+        }
         title={
           <div className="lesson-card__main main">
             <Tag className="main__count" color={isLessonActive.backroundColor}>
@@ -117,7 +135,16 @@ export const LessonCard: FC<LessonCardI> = ({
                     <h3>{group}</h3>
                   </div>
                 ) : (
-                  "Пары нет"
+                  <div
+                    style={{
+                      fontSize: 20,
+                      textOverflow: "ellipsis",
+                      // overflow: "hidden",
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    Пары нет
+                  </div>
                 )}
               </h1>
             </div>
