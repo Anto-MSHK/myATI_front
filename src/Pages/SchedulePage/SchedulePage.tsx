@@ -141,7 +141,7 @@ export const SchedulePage: React.FC = () => {
             zIndex: 40,
             borderRadius: "10px 10px 0 0 ",
             borderColor: "#F0F0F0",
-            border: "solid 1px",
+            border: "solid #F0F0F0 1px",
           }}
         >
           <h1>{groupName}</h1>
