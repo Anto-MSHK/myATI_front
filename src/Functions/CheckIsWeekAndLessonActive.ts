@@ -20,12 +20,6 @@ const checkIsLessonActive = (
   let currentHour = date.getHours();
   let currentMinutes = date.getMinutes();
 
-  /*   let startHour = parseInt(timeFrom.substring(0, 2))
-	  let endHour = parseInt(timeTo.substring(0, 2))
-	  let startMinutes = parseInt(timeFrom.substring(2, 4))
-	  let endMinute = parseInt(timeTo.substring(2, 4)) */
-  /*    console.log(currentDay - 1 + ' / ' + dayOfWeek); */
-
   if (currentDay - 1 !== Number(dayOfWeek)) return false;
 
   if (

@@ -36,7 +36,7 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
 
   return (
     <div>
-      <div style={{ position: "absolute", zIndex: 10, right: 22, top: 15 }}>
+      <div style={{ position: "absolute", zIndex: 25, right: 22, top: 15 }}>
         <Button
           style={{ margin: "0 10px 0 0" }}
           shape="circle"
@@ -67,13 +67,24 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
           zIndex: 10,
         }}
       >
-        <div className="text">пн</div>
-        <div className="text">вт</div>
-        <div className="text">ср</div>
-        <div className="text">чт</div>
-        <div className="text">пт</div>
-        <div className="text">сб</div>
+        <h3 className="text">пн</h3>
+        <h3 className="text">вт</h3>
+        <h3 className="text">ср</h3>
+        <h3 className="text">чт</h3>
+        <h3 className="text">пт</h3>
+        <h3 className="text">сб</h3>
       </div>
+      <div
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 22%, rgba(0,21,41,1) 38%, rgba(0,21,41,1) 100%)",
+          height: 60,
+          left: 0,
+          right: 0,
+          position: "absolute",
+          zIndex: 2,
+        }}
+      ></div>
       <Carousel
         afterChange={onChange}
         dots={{ className: "dot" }}
