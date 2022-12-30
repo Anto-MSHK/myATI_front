@@ -30,9 +30,7 @@ const App: React.FC = () => {
           <Content style={{ margin: "0 16px" }}>
             <Router />
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
+          <Footer style={{ textAlign: "center" }}>©TI DSTU, 2022</Footer>
         </Layout>
       </Layout>
     </BrowserRouter>

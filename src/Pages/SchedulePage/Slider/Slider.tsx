@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 import { Weekend } from "src/Components/Weekend/Weekend";
 import { useAppSelector } from "src/State/hooks";
+import { useScroll } from "src/Hooks/useScroll";
 
 interface SliderI {
   groupSchedule: DayT[] | undefined;
@@ -40,9 +41,20 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
     (carousel as any).goTo(slideNumber, dontAnimate);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
-      <div style={{ position: "absolute", zIndex: 25, right: 22, top: 15 }}>
+      <div
+        style={{
+          position: "absolute",
+          zIndex: 15,
+          right: 22,
+          top: 15,
+        }}
+      >
         <Button
           style={{ margin: "0 10px 0 0" }}
           shape="circle"
