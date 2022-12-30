@@ -1,11 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import { Layout } from "antd";
 import { Routes, Route } from "react-router-dom";
 import { GroupPage } from "src/Pages/GroupPage/GroupPage";
 import { SchedulePage } from "src/Pages/SchedulePage/SchedulePage";
 const { Content } = Layout;
 
-export const Router = () => {
+interface RouterI {}
+export const Router: FC<RouterI> = ({}) => {
   return (
     <Content>
       <Routes>

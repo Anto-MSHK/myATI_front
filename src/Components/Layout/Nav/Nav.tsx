@@ -46,6 +46,15 @@ export const Nav = () => {
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
+      // breakpoint="lg"
+      // collapsedWidth="0"
+      style={{
+        overflow: "auto",
+        height: "100vh",
+        position: "sticky",
+        top: 0,
+        left: 0,
+      }}
     >
       <div
         style={{

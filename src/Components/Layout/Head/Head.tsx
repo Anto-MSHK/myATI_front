@@ -13,7 +13,15 @@ export const Head = () => {
   return (
     <Header
       title="My ATI"
-      style={{ marginBottom: 15, padding: 0, background: colorBgContainer }}
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 20,
+        width: "100%",
+        marginBottom: 15,
+        padding: 0,
+        background: colorBgContainer,
+      }}
     >
       <div
         style={{

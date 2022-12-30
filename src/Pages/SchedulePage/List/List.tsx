@@ -23,26 +23,19 @@ export const List: FC<ListI> = ({ groupSchedule }) => {
   }, [elRefs, curDayIndex]); // Runs after component mounts
   return (
     <div>
-      {groupSchedule?.map((day, index) =>
-        !day.lessons.length ? (
-          <div
-            key={`${day.lessons} + ${index}`}
-            ref={elRefs[day.dayOfWeek][1]}
-          ></div>
-        ) : (
-          <div
-            key={`${day.lessons} + ${index}`}
-            style={{ marginBottom: "10px" }}
-            ref={elRefs[day.dayOfWeek][1]}
-          >
-            <DayCard
-              dayOfWeek={day.dayOfWeek}
-              isWeekend={day.isWeekend}
-              lessons={day.lessons}
-            />
-          </div>
-        )
-      )}
+      {groupSchedule?.map((day, index) => (
+        <div
+          key={`${day.lessons} + ${index}`}
+          style={+day.dayOfWeek !== 5 ? { marginBottom: "10px" } : {}}
+          ref={elRefs[day.dayOfWeek][1]}
+        >
+          <DayCard
+            dayOfWeek={day.dayOfWeek}
+            isWeekend={day.isWeekend}
+            lessons={day.lessons}
+          />
+        </div>
+      ))}
     </div>
   );
 };
