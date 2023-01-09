@@ -1,0 +1,30 @@
+.sider {
+    overflow: auto;
+    height: 100vh;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+
+.Nav-container {
+    height: 35px;
+    margin: 16px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        width: 75px;
+        top: -18px;
+        left: -14px;
+        position: absolute;
+    }
+
+    h1 {
+        font-size: 22px;
+        color: white;
+        position: absolute;
+        display: inline;
+        left: 50px;
+        top: 6px;
+    }
+}

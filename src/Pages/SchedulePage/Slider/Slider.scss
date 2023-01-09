@@ -1,0 +1,68 @@
+.dot {
+    background-color: rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    width: fit-content;
+
+    /* height: 10px; */
+    padding: 10px 10px 10px 0;
+    margin: -3px auto auto auto;
+    /* width: fit-content; */
+}
+
+/* .dot li {
+    background-color: blue;
+    height: 100px;
+  }
+  
+  .dot li.slick-active {
+    background-color: red;
+  } */
+.ant-carousel .slick-dots li button {
+    background: rgba(255, 255, 255, 0.3);
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+    opacity: 0.4;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.text {
+    font-weight: 500;
+    text-align: center;
+    width: 25px;
+    margin: 0 5px;
+    padding: 5px 0 0 0;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    opacity: 1;
+    height: 2px;
+    width: 25px;
+    margin: 20px 5px;
+    border-radius: 1px;
+
+    /* background: #ff4ef6; */
+}
+
+.ant-carousel .slick-dots li.slick-active {
+    opacity: 1;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+    padding: 0;
+    border-radius: 50%;
+
+    /* background: #ff4ef6; */
+}
+
+.ant-carousel .slick-dots li {
+    opacity: 1;
+    height: 25px;
+    width: 25px;
+    margin: 0 5px;
+    padding: 0;
+    border-radius: 50%;
+
+    /* background: #ff4ef6; */
+}
