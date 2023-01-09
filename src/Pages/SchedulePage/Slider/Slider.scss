@@ -9,6 +9,30 @@
     /* width: fit-content; */
 }
 
+.div-container {
+    position: absolute;
+    z-index: 15;
+    right: 22px;
+    top: 15px;
+}
+
+.days-div {
+    display: inline-flex;
+    justify-content: center;
+    right: 0;
+    left: 0;
+    margin: 14px 0 0 0;
+    position: absolute;
+    color: white;
+    z-index: 10;
+}
+
+/* .carousel {
+    border-color: #001529;
+    border-radius: 10px;
+    overflow: hidden;
+} */
+
 /* .dot li {
     background-color: blue;
     height: 100px;

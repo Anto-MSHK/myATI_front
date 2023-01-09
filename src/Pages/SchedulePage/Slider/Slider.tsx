@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { DayT } from "src/Types/GroupScheduleTypes";
-
-import "./Slider.scss";
 import {
     OrderedListOutlined,
     PicCenterOutlined,
@@ -13,6 +11,7 @@ import {
 import { Weekend } from "src/Components/Weekend/Weekend";
 import { useAppSelector } from "src/State/hooks";
 import { useScroll } from "src/Hooks/useScroll";
+import "./Slider.scss";
 
 interface SliderI {
     groupSchedule: DayT[] | undefined;
@@ -47,14 +46,7 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
 
     return (
         <div>
-            <div
-                style={{
-                    position: "absolute",
-                    zIndex: 15,
-                    right: 22,
-                    top: 15,
-                }}
-            >
+            <div className="div-container">
                 <Button
                     style={{ margin: "0 10px 0 0" }}
                     shape="circle"
@@ -73,18 +65,7 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
                     }}
                 />
             </div>
-            <div
-                style={{
-                    display: "inline-flex",
-                    justifyContent: "center",
-                    right: 0,
-                    left: 0,
-                    margin: "14px 0 0 0",
-                    position: "absolute",
-                    color: "white",
-                    zIndex: 10,
-                }}
-            >
+            <div className="days-div">
                 <h3 className="text">пн</h3>
                 <h3 className="text">вт</h3>
                 <h3 className="text">ср</h3>
@@ -107,6 +88,7 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule }) => {
             <Carousel
                 afterChange={onChange}
                 dots={{ className: "dot" }}
+                className="carousel"
                 style={{
                     backgroundColor: "#001529",
                     borderRadius: "10px",
