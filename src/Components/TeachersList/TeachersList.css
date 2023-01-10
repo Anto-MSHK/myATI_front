@@ -1,0 +1,19 @@
+
+
+.scrollable-list {
+  padding: 5px;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+.scrollable-list:-webkit-scrollbar {
+  border-radius: 0px;
+  box-shadow: inset 0 0 5px white;
+  width: 5px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background-color: rgba(24, 144, 255, 0.3);
+}

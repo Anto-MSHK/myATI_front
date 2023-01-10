@@ -3,6 +3,7 @@ import { Layout } from "antd";
 import { Routes, Route } from "react-router-dom";
 import { GroupPage } from "src/Pages/GroupPage/GroupPage";
 import { SchedulePage } from "src/Pages/SchedulePage/SchedulePage";
+import { TeacherInfoPage } from "src/Pages/TeacherInfoPage/TeacherInfoPage";
 const { Content } = Layout;
 
 interface RouterI {}
@@ -13,6 +14,9 @@ export const Router: FC<RouterI> = ({}) => {
         <Route path="/groups/fvo" element={<GroupPage faculty={"FVO"} />} />
         <Route path="/groups/spo" element={<GroupPage faculty={"SPO"} />} />
         <Route path="/schedule/:groupName" element={<SchedulePage />} />
+        <Route path="/edu/teacher" element={<TeacherInfoPage />}>
+          <Route path=":teacherName*" element={<TeacherInfoPage />} />
+        </Route>
       </Routes>
     </Content>
   );
