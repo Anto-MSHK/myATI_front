@@ -28,7 +28,7 @@ export const Drop: React.FC<DropI> = ({ items }) => {
       onOpenChange={handleOpenChange}
       open={open}
     >
-      <a onClick={(e) => e.preventDefault()} style={{ margin: "auto 0" }}>
+      <a onClick={(e) => e.preventDefault()} style={{ margin: "auto" }}>
         <Space>
           Дополнительно
           <DownOutlined />
