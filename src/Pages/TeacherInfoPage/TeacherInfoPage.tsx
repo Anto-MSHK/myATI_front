@@ -67,9 +67,16 @@ export const TeacherInfoPage: React.FC = () => {
       >
         <div className="main-teachers">
           {teachers.length ? (
-            <div className="menu-wrapper-teachers">
-              <TeachersList teachersList={teachers} />
-            </div>
+            <>
+              <div className="menu-wrapper-teachers">
+                <TeachersList teachersList={teachers} />
+              </div>
+              {selectedTeacher && (
+                <div style={{ marginLeft: 10, width: "100%" }}>
+                  <TeacherCard name={selectedTeacher} />
+                </div>
+              )}
+            </>
           ) : (
             <h3
               style={{
@@ -80,11 +87,6 @@ export const TeacherInfoPage: React.FC = () => {
             >
               Преподаватели не найдены
             </h3>
-          )}
-          {selectedTeacher && (
-            <div style={{ marginLeft: 10, width: "100%" }}>
-              <TeacherCard name={selectedTeacher} />
-            </div>
           )}
         </div>
       </Card>
