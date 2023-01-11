@@ -6,7 +6,12 @@ import { TeachersList } from "src/Components/TeachersList/TeachersList";
 import { TeacherCard } from "src/Components/TeacherCard/TeacherCard";
 import { TopDotEdu } from "src/Components/TopDotEdu/TopDotEdu";
 import "./TeacherInfoPage.css";
+import { useParams } from 'react-router-dom';
+
+
 export const TeacherInfoPage: React.FC = () => {
+
+  const {teacherName} = useParams()
   const { data: fetchedTeachers, isLoading } = useFetchTeachersQuery(135);
   const [teachers, setTeachers] = useState<ITeacher[]>([]);
   const [selectedTeacher, setSelectedTeacher] = useState("");
@@ -69,11 +74,16 @@ export const TeacherInfoPage: React.FC = () => {
           {teachers.length ? (
             <>
               <div className="menu-wrapper-teachers">
-                <TeachersList teachersList={teachers} />
+                <TeachersList teachersList={teachers} selectedTeacher = {teacherName}/>
               </div>
               {selectedTeacher && (
                 <div style={{ marginLeft: 10, width: "100%" }}>
-                  <TeacherCard name={selectedTeacher} />
+                
+               {
+                teacherName &&
+                <TeacherCard name={teacherName} />
+ 
+              }                   
                 </div>
               )}
             </>

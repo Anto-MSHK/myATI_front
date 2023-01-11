@@ -3,12 +3,13 @@ import React from "react";
 import { ITeacher } from "src/Types/TeacherTypes";
 
 import { useState, useEffect } from "react";
-
+import { useFetchTeacherQuery } from "src/State/services/TeachersApi";
 import { useAppSelector } from "src/State/hooks";
 import { useFetchTeacherScheduleQuery } from "src/State/services/ScheduleApi";
 import { dayTeacher, lessonTeacher } from "src/Types/TeacherScheduleTypes";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import { MenuProps } from "rc-menu";
+import { useParams } from 'react-router-dom';
 
 export interface TeacherCardI {
   dayOfWeek: any;
@@ -27,32 +28,17 @@ function getItem(
   } as MenuItemType;
 }
 
-const items: MenuProps["items"] = [
-  "Математика",
-  "Методы оптимизации",
-  "Инструментальные средства информационных систем",
-  "Моделирование информационных систем и технологий",
-  "Интелектуальные системы и технологии",
-  "Математический анализ",
-  "Алгебра и аналитическая геометрия",
-  "Теория вероятностей и математическая статитстика",
-  "Численные методы",
-  "Классный час Разговоры о важном",
-  "Математика",
-  "Методы оптимизации",
-  "Инструментальные средства информационных систем",
-  "Моделирование информационных систем и технологий",
-  "Интелектуальные системы и технологии",
-  "Математический анализ",
-  "Алгебра и аналитическая геометрия",
-  "Теория вероятностей и математическая статитстика",
-  "Численные методы",
-  "Классный час Разговоры о важном",
-].map((name) => getItem(name, name, name));
 
-export const TeacherCard: React.FC<ITeacher> = () => {
+export const TeacherCard: React.FC<ITeacher> = ({ name }) => {
+
+  const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name)
+  const items: MenuProps["items"] = teacher?.subjects && teacher?.subjects.map((name) => getItem(name, name, name));
+  
+
+
   return (
     <Card
+      loading={isFetching}
       style={{
         width: "100%",
         backgroundColor: "#001529",
@@ -76,7 +62,15 @@ export const TeacherCard: React.FC<ITeacher> = () => {
           </h3>
           <Card>
             {" "}
-            <h2> Абрамов Д.В.</h2>
+            <div style={{ display: 'flex' }}>
+              <h2 >
+                {name}
+              </h2>
+              <h2 style={{ color: '#7a8187', marginLeft: '5px' }}>
+                {teacher?.degree}
+              </h2>
+            </div>
+
           </Card>
         </div>
       </div>
@@ -96,28 +90,14 @@ export const TeacherCard: React.FC<ITeacher> = () => {
               bodyStyle={{ padding: 15 }}
               style={{ borderRadius: "10px 10px 0 0" }}
             >
+             
               <Row gutter={[5, 5]} style={{ gap: 10 }} justify={"start"}>
                 {" "}
-                {[
-                  "ВИС21",
-                  "ВКТ21",
-                  "ЗИС11",
-                  "ПКС-3-73",
-                  "ВИС21",
-                  "ВКТ21",
-                  "ЗИС11",
-                  "ПКС-3-73",
-                  "ВИС21",
-                  "ВКТ21",
-                  "ЗИС11",
-                  "ПКС-3-73",
-                  "ВИС21",
-                  "ВКТ21",
-                  "ЗИС11",
-                  "ПКС-3-73",
-                ].map((group) => (
-                  <Card size="small">{group}</Card>
-                ))}
+                {
+                  teacher?.groups &&
+                  teacher?.groups.map((group) => (
+                    <Card size="small">{group}</Card>
+                  ))}
               </Row>
             </Card>
           </div>

@@ -5,25 +5,32 @@ import { ITeacher } from "src/Types/TeacherTypes";
 import { useAppDispatch, useAppSelector } from "./../../State/hooks";
 import { setTeacher } from "src/State/Slices/teachersSlice";
 import "./TeachersList.css";
+import { useNavigate } from 'react-router-dom';
+
+
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 interface TeachersListComponent {
   teachersList: ITeacher[];
   isLoading?: boolean;
+  selectedTeacher?: string
 }
 
 export const TeachersList: React.FC<TeachersListComponent> = ({
-  teachersList,
+  teachersList, selectedTeacher
 }) => {
+  const history = useNavigate();
   const [currentTeacher, setCurrentTeacher] = useState("");
   const dispatch = useAppDispatch();
   const teacher = useAppSelector((state) => state.teachers.teacherName);
 
   useEffect(() => {
-    if (teachersList.length) {
-      setCurrentTeacher(teachersList[0].name);
-    }
+    if (selectedTeacher) {
+      setCurrentTeacher(selectedTeacher);
+    } else if (teachersList.length) {
+      setCurrentTeacher(teachersList[0].name)
+    } 
   }, [teachersList]);
 
   useEffect(() => {
@@ -54,17 +61,18 @@ export const TeachersList: React.FC<TeachersListComponent> = ({
     <div className="menu-subjects-wrapper">
       <Menu
         id="menu"
+        
         onClick={(e) => {
           if (e.domEvent.currentTarget.textContent) {
             let teacher = e.domEvent.currentTarget.textContent;
             dispatch(setTeacher(teacher));
             setCurrentTeacher(e.key);
-            console.log(currentTeacher);
-            window.history.pushState(
+          /*   window.history.pushState(
               "edu",
               `teacher`,
               `/edu/teacher/${teacher}`
-            );
+            ); */
+            history(`${teacher}`)
           }
         }}
         selectable
