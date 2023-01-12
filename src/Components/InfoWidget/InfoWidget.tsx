@@ -20,9 +20,17 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
             {" "}
             <div style={{ display: "flex" }}>
               <h2>{teacher.name}</h2>
-              <h2 style={{ color: "#7a8187", marginLeft: "5px" }}>
-                {teacher.degree}
-              </h2>
+              {teacher.degree && (
+                <h2
+                  style={{
+                    color: "#7a8187",
+                    marginLeft: "5px",
+                    fontWeight: 500,
+                  }}
+                >
+                  ({teacher.degree})
+                </h2>
+              )}
             </div>
           </Card>
         </div>

@@ -29,6 +29,11 @@ export const Breadcrumbs = () => {
       else if (tab === "spo") return { name: "СПО" };
       else if (tab === "groups") return { name: "Группы" };
       else if (tab === "edu") return { name: "Структура" };
+      else if (
+        index === tabs_eng.length - 1 &&
+        tabs_eng[index - 2] === "schedule"
+      )
+        return { name: decodeURIComponent(tab), href: `/edu/teacher/${tab}` };
       else if (index === tabs_eng.length - 1)
         return { name: decodeURIComponent(tab) };
     });
@@ -36,9 +41,15 @@ export const Breadcrumbs = () => {
   }, [location.pathname]);
   return (
     <Breadcrumb separator=">" style={{ fontSize: 18 }}>
-      {tabs.map((tab) => (
-        <Breadcrumb.Item href={tab?.href}>{tab?.name}</Breadcrumb.Item>
-      ))}
+      {tabs.map((tab) => {
+        if (tab?.href)
+          return (
+            <Breadcrumb.Item href={tab?.href} className={"activeBreadCrumb"}>
+              {tab?.name}
+            </Breadcrumb.Item>
+          );
+        else return <Breadcrumb.Item>{tab?.name}</Breadcrumb.Item>;
+      })}
     </Breadcrumb>
   );
 };

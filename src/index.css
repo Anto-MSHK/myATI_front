@@ -44,3 +44,13 @@ h4 {
   height: 22px;
   margin: 20px;
 }
+
+:where(.css-dev-only-do-not-override-acm2ia).ant-breadcrumb a {
+  padding: 4px 4px;
+  height: 30px;
+  color: #3175e0;
+}
+
+.activeBreadCrumb {
+  background-color: #f5f5f5;
+}

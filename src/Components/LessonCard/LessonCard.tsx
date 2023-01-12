@@ -134,12 +134,6 @@ export const LessonCard: FC<LessonCardI> = ({
                     }}
                   >
                     {data[curWeek]?.subject && data[curWeek]?.subject.title}
-                    <br />
-                    {group && (
-                      <Link to={`/schedule/${group}`}>
-                        <Tag color="blue">{group}</Tag>
-                      </Link>
-                    )}
                   </div>
                 ) : (
                   <div
@@ -185,8 +179,15 @@ export const LessonCard: FC<LessonCardI> = ({
                         }}
                       >
                         {data[curWeek]?.teacher?.degree &&
-                          ", " + data[curWeek]?.teacher?.degree}
+                          " (" + data[curWeek]?.teacher?.degree + ")"}
                       </i>
+                    </Tag>
+                  </Link>
+                )}
+                {group && (
+                  <Link to={`/schedule/${group}`}>
+                    <Tag color="blue" style={{ fontSize: 16, fontWeight: 600 }}>
+                      {group}
                     </Tag>
                   </Link>
                 )}
