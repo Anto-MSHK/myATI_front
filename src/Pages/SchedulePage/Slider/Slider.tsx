@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
-import { DayT } from "src/Types/GroupScheduleTypes";
+import { DayT } from "src/Types/ScheduleTypes";
 
 import "./Slider.css";
 import {
@@ -13,16 +13,13 @@ import {
 import { Weekend } from "src/Components/Weekend/Weekend";
 import { useAppSelector } from "src/State/hooks";
 import { useScroll } from "src/Hooks/useScroll";
-import { dayTeacher } from 'src/Types/TeacherScheduleTypes';
-import { TeacherDayCard } from 'src/Components/TeacherSchedule/TeacherDayCard';
+import { dayTeacher } from "src/Types/TeacherScheduleTypes";
 
 interface SliderI {
-  groupSchedule?: DayT[] | undefined;
-  teacherSchedule?: dayTeacher[] | undefined;
-  scheduleType: 'teacher' | 'group'
+  schedule: DayT[] | undefined;
 }
 
-export const Slider: React.FC<SliderI> = ({ groupSchedule, teacherSchedule, scheduleType }) => {
+export const Slider: React.FC<SliderI> = ({ schedule }) => {
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -119,31 +116,14 @@ export const Slider: React.FC<SliderI> = ({ groupSchedule, teacherSchedule, sche
         dotPosition="top"
         ref={(node) => (carousel = node as any)}
       >
-
-
-        {
-          scheduleType === 'group' ?
-            groupSchedule?.map((day, index) => (
-              <div
-                key={`${day.lessons} + ${index}`}
-                style={{ marginBottom: "10px" }}
-              >
-                <DayCard
-                  dayOfWeek={day.dayOfWeek}
-                  isWeekend={day.isWeekend}
-                  lessons={day.lessons}
-                />
-              </div>
-            ))
-            :
-            teacherSchedule?.map((day, index) => (
-
-              <TeacherDayCard key={(`${day.lessons} +${index}`)}
-                {...day}
-              />))
-
-        }
-
+        {schedule?.map((day, index) => (
+          <div
+            key={`${day.lessons} + ${index}`}
+            style={{ marginBottom: "10px" }}
+          >
+            <DayCard dayOfWeek={day.dayOfWeek} lessons={day.lessons} />
+          </div>
+        ))}
       </Carousel>
     </div>
   );

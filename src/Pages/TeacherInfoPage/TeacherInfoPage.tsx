@@ -6,22 +6,21 @@ import { TeachersList } from "src/Components/TeachersList/TeachersList";
 import { TeacherCard } from "src/Components/TeacherCard/TeacherCard";
 import { TopDotEdu } from "src/Components/TopDotEdu/TopDotEdu";
 import "./TeacherInfoPage.css";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import { TopDot } from "src/Components/TopDot/TopDot";
-
-
+import { UserOutlined } from "@ant-design/icons";
 
 export const TeacherInfoPage: React.FC = () => {
-
-  const { teacherName } = useParams()
-  const { data: fetchedTeachers, isLoading } = useFetchTeachersQuery(135);
+  const { teacherName } = useParams();
+  const { data: fetchedTeachers, isLoading } = useFetchTeachersQuery();
   const [teachers, setTeachers] = useState<ITeacher[]>([]);
   const [selectedTeacher, setSelectedTeacher] = useState("");
-  const [valueView, setValueView] = useState('info')
+  const [valueView, setValueView] = useState("info");
 
   useEffect(() => {
-    if (teachers.length) setSelectedTeacher(teachers[0].name);
-  }, [teachers]);
+    console.log(teacherName);
+    if (teachers.length && teacherName) setSelectedTeacher(teacherName);
+  }, []);
 
   useEffect(() => {
     if (fetchedTeachers?.length) {
@@ -61,7 +60,7 @@ export const TeacherInfoPage: React.FC = () => {
         sortTeachers={sortTeachers}
         onSearch={onSearch}
       />
-      
+
       <Card
         loading={isLoading}
         style={{
@@ -78,20 +77,47 @@ export const TeacherInfoPage: React.FC = () => {
           {teachers.length ? (
             <>
               <div className="menu-wrapper-teachers">
-                <TeachersList teachersList={teachers} selectedTeacher={teacherName} />
+                <TeachersList
+                  teachersList={teachers}
+                  selectedTeacher={teacherName}
+                />
               </div>
               {selectedTeacher && (
                 <div style={{ marginLeft: 10, width: "100%" }}>
-
-                  {
-                    teacherName &&
-                     
-                      <TeacherCard name={teacherName}
-                        valueView={valueView}
-                        setValueView={setValueView}
-                      />
-
-                  }
+                  {teacherName ? (
+                    <TeacherCard
+                      name={teacherName}
+                      valueView={valueView}
+                      setValueView={setValueView}
+                    />
+                  ) : (
+                    <Card
+                      style={{
+                        width: "100%",
+                        backgroundColor: "#001529",
+                        borderWidth: 0,
+                        height: "100%",
+                      }}
+                      bodyStyle={{
+                        height: "100%",
+                        display: "flex",
+                      }}
+                    >
+                      <h2
+                        style={{
+                          fontWeight: 400,
+                          fontSize: 24,
+                          color: "white",
+                          width: "100%",
+                          textAlign: "center",
+                          margin: "auto",
+                        }}
+                      >
+                        <UserOutlined style={{ fontSize: 45 }} />
+                        <p style={{ margin: 0 }}>выберите из списка</p>
+                      </h2>
+                    </Card>
+                  )}
                 </div>
               )}
             </>

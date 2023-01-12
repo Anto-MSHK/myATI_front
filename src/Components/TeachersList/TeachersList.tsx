@@ -5,41 +5,40 @@ import { ITeacher } from "src/Types/TeacherTypes";
 import { useAppDispatch, useAppSelector } from "./../../State/hooks";
 import { setTeacher } from "src/State/Slices/teachersSlice";
 import "./TeachersList.css";
-import { useNavigate } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 interface TeachersListComponent {
   teachersList: ITeacher[];
   isLoading?: boolean;
-  selectedTeacher?: string
+  selectedTeacher?: string;
 }
 
 export const TeachersList: React.FC<TeachersListComponent> = ({
-  teachersList, selectedTeacher
+  teachersList,
+  selectedTeacher,
 }) => {
   const history = useNavigate();
   const [currentTeacher, setCurrentTeacher] = useState("");
   const dispatch = useAppDispatch();
-  const teacher = useAppSelector((state) => state.teachers.teacherName);
+  //   const teacher = useAppSelector((state) => state.teachers.teacherName);
 
   useEffect(() => {
     if (selectedTeacher) {
       setCurrentTeacher(selectedTeacher);
     } else if (teachersList.length) {
-      setCurrentTeacher(teachersList[0].name)
-    } 
+      setCurrentTeacher(teachersList[0].name);
+    }
   }, [teachersList]);
 
   useEffect(() => {
-    let element = document.getElementById(teacher);
-    setCurrentTeacher(teacher);
+    let element = document.getElementById(selectedTeacher as string);
+    setCurrentTeacher(selectedTeacher as string);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-  }, [teacher]);
+  }, [selectedTeacher]);
 
   function getItem(
     label: React.ReactNode,
@@ -61,18 +60,17 @@ export const TeachersList: React.FC<TeachersListComponent> = ({
     <div className="menu-subjects-wrapper">
       <Menu
         id="menu"
-        
         onClick={(e) => {
           if (e.domEvent.currentTarget.textContent) {
             let teacher = e.domEvent.currentTarget.textContent;
             dispatch(setTeacher(teacher));
             setCurrentTeacher(e.key);
-          /*   window.history.pushState(
+            /*   window.history.pushState(
               "edu",
               `teacher`,
               `/edu/teacher/${teacher}`
             ); */
-            history(`${teacher}`)
+            history(`${teacher}`);
           }
         }}
         selectable

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { Button, Card, Checkbox, Space, Switch } from "antd";
 import { useParams } from "react-router-dom";
-import { useFetchGroupScheduleQuery } from "src/State/services/ScheduleApi";
+import { useFetchScheduleQuery } from "src/State/services/ScheduleApi";
 import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { ViewSwitch } from "src/Components/ViewSwitch/ViewSwitch";
 import {
@@ -22,15 +22,23 @@ import {
 } from "src/State/Slices/scheduleSettingsSlice";
 import { TopDot } from "src/Components/TopDot/TopDot";
 
-interface SchedulePageI {}
+interface SchedulePageI {
+  type: "group" | "teacher";
+}
 /* const [timetable, setTimetable] = useState<any>(); */
-export const SchedulePage: React.FC<SchedulePageI> = ({}) => {
-  const { groupName } = useParams();
+export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
+  const { name } = useParams();
   const [valueView, setValueView] = useState("slider");
 
-  const { data: groupSchedule, isLoading } = useFetchGroupScheduleQuery(
-    groupName as string
-  );
+  const {
+    data: schedule,
+    isLoading,
+    isFetching,
+  } = useFetchScheduleQuery({
+    name: name as string,
+    type,
+  });
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getWeek());
@@ -38,9 +46,13 @@ export const SchedulePage: React.FC<SchedulePageI> = ({}) => {
 
   return (
     <>
-      <TopDot itemName={groupName as string} valueView={valueView} setValueView={setValueView} />
+      <TopDot
+        itemName={name as string}
+        valueView={valueView}
+        setValueView={setValueView}
+      />
       <Card
-        loading={isLoading}
+        loading={isLoading || isFetching}
         style={{
           //  width: "100%",
           position: "relative",
@@ -52,10 +64,10 @@ export const SchedulePage: React.FC<SchedulePageI> = ({}) => {
         bodyStyle={{ padding: "10px 10px 10px 10px" }}
       >
         {valueView === "list" ? (
-          <List groupSchedule={groupSchedule} listType = 'group' />
+          <List schedule={schedule} />
         ) : (
           <div style={{ position: "relative" }}>
-            <Slider scheduleType="group" groupSchedule={groupSchedule} />
+            <Slider schedule={schedule} />
           </div>
         )}
       </Card>

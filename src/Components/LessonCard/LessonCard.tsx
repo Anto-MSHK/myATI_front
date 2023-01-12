@@ -5,6 +5,8 @@ import checkIsLessonActive from "src/Functions/CheckIsWeekAndLessonActive";
 import { lessonDataTeacher, subject } from "src/Types/TeacherScheduleTypes";
 import "./LessonCard.css";
 import { useAppDispatch, useAppSelector } from "src/State/hooks";
+import { dataT } from "src/Types/ScheduleTypes";
+import { Link } from "react-router-dom";
 type subjectData = {
   subject: subject;
   teacher?: {
@@ -34,7 +36,7 @@ export type byWeek = {
 export interface LessonCardI {
   count: any;
   time: { from: string; to: string };
-  data: byWeek;
+  data: dataT;
   group?: string;
 
   dayOfWeek: number;
@@ -132,7 +134,12 @@ export const LessonCard: FC<LessonCardI> = ({
                     }}
                   >
                     {data[curWeek]?.subject && data[curWeek]?.subject.title}
-                    <h3>{group}</h3>
+                    <br />
+                    {group && (
+                      <Link to={`/schedule/${group}`}>
+                        <Tag color="blue">{group}</Tag>
+                      </Link>
+                    )}
                   </div>
                 ) : (
                   <div
@@ -160,10 +167,29 @@ export const LessonCard: FC<LessonCardI> = ({
           {data[curWeek]?.subject && (
             <div className="secondary__info">
               <div className="secondary__info-tc">
-                <h3 style={{ fontWeight: 600, fontSize: 16 }}>
-                  {data[curWeek]?.teacher?.name},{" "}
-                  {data[curWeek]?.teacher?.degree}
-                </h3>
+                {data[curWeek]?.teacher && (
+                  <Link to={`/edu/teacher/${data[curWeek]?.teacher?.name}`}>
+                    <Tag
+                      color="blue"
+                      style={{
+                        fontWeight: 600,
+                        fontSize: 16,
+                        padding: "2px 4px",
+                      }}
+                    >
+                      {data[curWeek]?.teacher?.name}
+                      <i
+                        style={{
+                          fontWeight: 500,
+                          fontSize: 14,
+                        }}
+                      >
+                        {data[curWeek]?.teacher?.degree &&
+                          ", " + data[curWeek]?.teacher?.degree}
+                      </i>
+                    </Tag>
+                  </Link>
+                )}
                 <h3 style={{ fontWeight: 600, fontSize: 16 }}>
                   {data[curWeek]?.cabinet} каб.
                 </h3>
@@ -174,9 +200,6 @@ export const LessonCard: FC<LessonCardI> = ({
                 style={{ fontWeight: 600, fontSize: 18 }}
               >
                 {data[curWeek]?.subject.type}
-                {/*  {
-                  JSON.stringify(console.log(data.topWeek))
-                } */}
               </h2>
             </div>
           )}

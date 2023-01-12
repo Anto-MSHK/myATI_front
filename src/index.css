@@ -38,3 +38,9 @@ h4 {
   position: absolute;
   z-index: 1;
 }
+
+:where(.css-dev-only-do-not-override-acm2ia).ant-spin-lg .ant-spin-dot i {
+  width: 22px;
+  height: 22px;
+  margin: 20px;
+}

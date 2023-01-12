@@ -1,15 +1,14 @@
 import { Button, Card } from "antd";
 import React, { FC } from "react";
 import { LessonCard, LessonCardI } from "src/Components/LessonCard/LessonCard";
-import { LessonT } from "src/Types/GroupScheduleTypes";
+import { LessonT } from "src/Types/ScheduleTypes";
 import { Weekend } from "../Weekend/Weekend";
 import { LeftCircleFilled } from "@ant-design/icons";
 import { useAppSelector } from "src/State/hooks";
+import { lessonTeacher } from "src/Types/TeacherScheduleTypes";
 export interface DayCardI {
   dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5;
-  isWeekend: boolean;
   lessons: LessonT[];
-  children?: any;
 }
 
 const week = {
