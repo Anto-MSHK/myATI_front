@@ -8,19 +8,13 @@ interface ListI {
 }
 export const List: React.FC<ListI> = ({ schedule }) => {
   const curDayIndex = useAppSelector((state) => state.scheduleSettings.curDay);
-  let elRefs: any[] = [];
-  elRefs[0] = useScroll();
-  elRefs[1] = useScroll();
-  elRefs[2] = useScroll();
-  elRefs[3] = useScroll();
-  elRefs[4] = useScroll();
-  elRefs[5] = useScroll();
 
   useEffect(() => {
-    elRefs.map((el, index) => {
-      if (el[1].current !== null && index === curDayIndex) el[0]();
-    });
-  }, [elRefs, curDayIndex]); // Runs after component mounts
+    let element = document.getElementById("scroll");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, []);
 
   return (
     <div>
@@ -28,7 +22,7 @@ export const List: React.FC<ListI> = ({ schedule }) => {
         <div
           key={`${day.lessons} + ${index}`}
           style={+day.dayOfWeek !== 5 ? { marginBottom: "10px" } : {}}
-          ref={elRefs[day.dayOfWeek][1]}
+          id={+day.dayOfWeek === curDayIndex ? "scroll" : ""}
         >
           <DayCard
             key={`${day.lessons} +${index}`}

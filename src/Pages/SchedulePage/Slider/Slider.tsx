@@ -43,7 +43,10 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    let element = document.getElementById("scroll");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
   }, []);
 
   return (
@@ -94,6 +97,7 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
         <h3 className="text">сб</h3>
       </div>
       <div
+        id={"scroll"}
         style={{
           background:
             "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 22%, rgba(0,21,41,1) 38%, rgba(0,21,41,1) 100%)",

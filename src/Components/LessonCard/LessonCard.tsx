@@ -167,7 +167,7 @@ export const LessonCard: FC<LessonCardI> = ({
           {data[curWeek]?.subject && (
             <div className="secondary__info">
               <div className="secondary__info-tc">
-                {data[curWeek]?.teacher && (
+                {data[curWeek]?.teacher && data[curWeek]?.teacher?.name && (
                   <Link to={`/edu/teacher/${data[curWeek]?.teacher?.name}`}>
                     <Tag
                       color="blue"

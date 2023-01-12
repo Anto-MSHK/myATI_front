@@ -9,6 +9,7 @@ import { lessonTeacher } from "src/Types/TeacherScheduleTypes";
 export interface DayCardI {
   dayOfWeek: 0 | 1 | 2 | 3 | 4 | 5;
   lessons: LessonT[];
+  ref?: any;
 }
 
 const week = {
@@ -20,11 +21,12 @@ const week = {
   5: "суббота",
 };
 
-export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
+export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons, ref }) => {
   const curDayIndex = useAppSelector((state) => state.scheduleSettings.curDay);
 
   return (
     <Card
+      ref={ref}
       style={{
         width: "100%",
         backgroundColor: "#001529",
@@ -37,14 +39,15 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
         style={{
           display: "flex",
           margin: "0 10px 0 0",
-          //  alignItems: "center",
+          alignItems: "center",
+          marginLeft: 10,
+          marginBottom: 20,
         }}
       >
         <h1
           style={{
-            marginLeft: 10,
             color: "white",
-            marginBottom: 16,
+
             fontWeight: 500,
           }}
         >
@@ -55,9 +58,8 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons }) => {
             size={100}
             style={{
               color: "#4096FF",
-              width: 30,
-              height: 30,
-              margin: "8px 0 0 0",
+              margin: "8px 0 0 10px",
+              fontSize: 24,
             }}
           />
         ) : (
