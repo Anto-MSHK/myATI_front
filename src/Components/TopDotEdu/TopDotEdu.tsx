@@ -23,19 +23,47 @@ import {
 import { MenuProps } from "rc-menu";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import styles from "./TopDotEdu.module.css";
+
+
 interface TopDotEduI {
   onSearch: (searchQuery: string) => any;
   sortTeachers: (sort: string) => any;
   title: string;
+  valueView: string;
+  setValueView: any;
 }
+
+
 
 export const TopDotEdu: FC<TopDotEduI> = ({
   onSearch,
   sortTeachers,
   title,
+  valueView,
+  setValueView,
+  
 }) => {
+ 
   const { groupName } = useParams();
   const dispatch = useAppDispatch();
+  const [value, setValue] = useState('Сведения')
+
+  useEffect(()=>{
+    if (valueView === 'info') {
+      setValue('Сведения')
+    } else
+    setValue('Расписание')
+  }, [valueView])
+
+
+  const optionsView: CheckboxOptionType[] = [
+    { label: <PicCenterOutlined />, value: "info" },
+    { label: <ProfileOutlined />, value: "schedule" },
+  ];
+
+  const onChangeView = ({ target: { value } }: RadioChangeEvent) => {
+    setValueView(value);
+  };
 
   const hideSwitch = useAppSelector(
     (state) => state.scheduleSettings.hideSwitch
@@ -57,7 +85,10 @@ export const TopDotEdu: FC<TopDotEduI> = ({
         </Checkbox>
       ),
       key: "1",
+      
     },
+
+   
   ];
   return (
     <div
@@ -106,6 +137,14 @@ export const TopDotEdu: FC<TopDotEduI> = ({
               Обратный порядок
             </Select.Option>
           </Select>
+          <ViewSwitch
+            title={`${value}:`}
+            value={valueView}
+            onChange={onChangeView}
+            options={optionsView}
+            style = {{flexDirection: 'row'}}
+           
+          />
         </div>
         <Drop items={items} />
       </div>

@@ -1,20 +1,13 @@
 import { Card, Menu, Spin, Switch, Space, Row, Button } from "antd";
 import React from "react";
 import { ITeacher } from "src/Types/TeacherTypes";
-
 import { useState, useEffect } from "react";
 import { useFetchTeacherQuery } from "src/State/services/TeachersApi";
-import { useAppSelector } from "src/State/hooks";
 import { useFetchTeacherScheduleQuery } from "src/State/services/ScheduleApi";
-import { dayTeacher, lessonTeacher } from "src/Types/TeacherScheduleTypes";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import { MenuProps } from "rc-menu";
-import { useParams } from 'react-router-dom';
 
-export interface TeacherCardI {
-  dayOfWeek: any;
-  lessons: any;
-}
+
 
 function getItem(
   label: React.ReactNode,
@@ -27,15 +20,20 @@ function getItem(
     id,
   } as MenuItemType;
 }
+interface ITeacherCard {
+  name: string,
+  valueView: string,
+  setValueView: React.Dispatch<React.SetStateAction<string>>
+}
 
 
-export const TeacherCard: React.FC<ITeacher> = ({ name }) => {
+export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView}) => {
 
   const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name)
   const items: MenuProps["items"] = teacher?.subjects && teacher?.subjects.map((name) => getItem(name, name, name));
+  const [isSheduleActive, setIsScheduleActive] = useState(false)  
+  const { data: teacherSchedule} = useFetchTeacherScheduleQuery(name)
   
-
-
   return (
     <Card
       loading={isFetching}
@@ -101,7 +99,7 @@ export const TeacherCard: React.FC<ITeacher> = ({ name }) => {
               </Row>
             </Card>
           </div>
-          <Button type="primary" style={{ borderRadius: "0 0 10px 10px " }}>
+          <Button onClick={()=>setValueView('schedule')} type="primary" style={{ borderRadius: "0 0 10px 10px " }}>
             Открыть расписание
           </Button>
         </div>

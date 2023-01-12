@@ -19,13 +19,14 @@ export const ViewSwitch: React.FC<ViewSwitchI> = ({
   return (
     <div style={{ display: "flex", alignItems: "center", ...style }}>
       <h3 style={{ margin: "0 10px 0 0" }}>{title}</h3>
-      <Radio.Group
-        options={options}
-        onChange={onChange}
-        value={value}
-        optionType={"button"}
-        buttonStyle="solid"
-      />
+        <Radio.Group
+          style={{display: 'flex'}}
+          options={options}
+          onChange={onChange}
+          value={value}
+          optionType={"button"}
+          buttonStyle="solid"
+        />
     </div>
   );
 };

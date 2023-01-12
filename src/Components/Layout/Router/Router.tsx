@@ -4,7 +4,7 @@ import { Routes, Route, useParams } from 'react-router-dom';
 import { GroupPage } from "src/Pages/GroupPage/GroupPage";
 import { SchedulePage } from "src/Pages/SchedulePage/SchedulePage";
 import { TeacherInfoPage } from "src/Pages/TeacherInfoPage/TeacherInfoPage";
-import { TeacherCard } from 'src/Components/TeacherCard/TeacherCard';
+import { TeacherCard} from 'src/Components/TeacherCard/TeacherCard';
 const { Content } = Layout;
 
 interface RouterI {}
