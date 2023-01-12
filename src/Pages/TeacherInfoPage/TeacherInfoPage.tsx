@@ -7,14 +7,16 @@ import { TeacherCard } from "src/Components/TeacherCard/TeacherCard";
 import { TopDotEdu } from "src/Components/TopDotEdu/TopDotEdu";
 import "./TeacherInfoPage.css";
 import { useParams } from 'react-router-dom';
+import TeacherSchedule from "src/Components/TeacherCard/TeacherSchedule";
 
 
 export const TeacherInfoPage: React.FC = () => {
 
-  const {teacherName} = useParams()
+  const { teacherName } = useParams()
   const { data: fetchedTeachers, isLoading } = useFetchTeachersQuery(135);
   const [teachers, setTeachers] = useState<ITeacher[]>([]);
   const [selectedTeacher, setSelectedTeacher] = useState("");
+  const [valueView, setValueView] = useState('info')
 
   useEffect(() => {
     if (teachers.length) setSelectedTeacher(teachers[0].name);
@@ -54,9 +56,12 @@ export const TeacherInfoPage: React.FC = () => {
   return (
     <>
       <TopDotEdu
+        title={"Преподаватели"}
         sortTeachers={sortTeachers}
         onSearch={onSearch}
-        title={"Преподаватели"}
+        valueView={valueView}
+        setValueView={setValueView}
+
       />
       <Card
         loading={isLoading}
@@ -74,16 +79,27 @@ export const TeacherInfoPage: React.FC = () => {
           {teachers.length ? (
             <>
               <div className="menu-wrapper-teachers">
-                <TeachersList teachersList={teachers} selectedTeacher = {teacherName}/>
+                <TeachersList teachersList={teachers} selectedTeacher={teacherName} />
               </div>
               {selectedTeacher && (
                 <div style={{ marginLeft: 10, width: "100%" }}>
-                
-               {
-                teacherName &&
-                <TeacherCard name={teacherName} />
- 
-              }                   
+
+                  {
+                    teacherName && valueView === 'info'
+                      ?
+                      <TeacherCard name={teacherName}
+                        valueView={valueView}
+                        setValueView={setValueView}
+                      />
+                      :
+                      teacherName &&
+                      <TeacherSchedule
+                        name={teacherName}
+                        setValueView={setValueView}
+                        valueView={valueView}
+                      />
+
+                  }
                 </div>
               )}
             </>
