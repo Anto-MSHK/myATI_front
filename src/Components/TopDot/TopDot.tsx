@@ -20,10 +20,11 @@ import styles from "./TopDot.module.css";
 interface TopDotI {
   valueView: string;
   setValueView: any;
+  itemName: string;
 }
 
-export const TopDot: FC<TopDotI> = ({ valueView, setValueView }) => {
-  const { groupName } = useParams();
+export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
+
   const week = useAppSelector((state) => state.scheduleSettings.switchWeek);
   const dispatch = useAppDispatch();
 
@@ -135,7 +136,7 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView }) => {
           justifyContent: "space-between",
         }}
       >
-        <h1>{groupName}</h1>
+        <h1>{itemName}</h1>
         <div style={{ display: "flex" }}>
           <Drop items={items} />
           <ViewSwitch

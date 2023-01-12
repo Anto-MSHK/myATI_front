@@ -7,7 +7,8 @@ import { TeacherCard } from "src/Components/TeacherCard/TeacherCard";
 import { TopDotEdu } from "src/Components/TopDotEdu/TopDotEdu";
 import "./TeacherInfoPage.css";
 import { useParams } from 'react-router-dom';
-import TeacherSchedule from "src/Components/TeacherCard/TeacherSchedule";
+import { TopDot } from "src/Components/TopDot/TopDot";
+
 
 
 export const TeacherInfoPage: React.FC = () => {
@@ -59,10 +60,8 @@ export const TeacherInfoPage: React.FC = () => {
         title={"Преподаватели"}
         sortTeachers={sortTeachers}
         onSearch={onSearch}
-        valueView={valueView}
-        setValueView={setValueView}
-
       />
+      
       <Card
         loading={isLoading}
         style={{
@@ -85,18 +84,11 @@ export const TeacherInfoPage: React.FC = () => {
                 <div style={{ marginLeft: 10, width: "100%" }}>
 
                   {
-                    teacherName && valueView === 'info'
-                      ?
+                    teacherName &&
+                     
                       <TeacherCard name={teacherName}
                         valueView={valueView}
                         setValueView={setValueView}
-                      />
-                      :
-                      teacherName &&
-                      <TeacherSchedule
-                        name={teacherName}
-                        setValueView={setValueView}
-                        valueView={valueView}
                       />
 
                   }

@@ -1,7 +1,12 @@
 import React from 'react';
 import {Button, Card, Row} from "antd";
+import { Link } from 'react-router-dom';
+import { ITeacher } from 'src/Types/TeacherTypes';
 
-export const GroupsWidget = (props: any) => {
+export interface IWidget{
+    teacher: ITeacher
+}
+export const GroupsWidget: React.FC<IWidget> = ({teacher}) => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -23,16 +28,18 @@ export const GroupsWidget = (props: any) => {
                     <Row gutter={[5, 5]} style={{ gap: 10 }} justify={"start"}>
                         {" "}
                         {
-                            props.data?.groups &&
-                            props.data?.groups.map((group: any) => (
+                            teacher.groups &&
+                            teacher.groups.map((group: any) => (
                                 <Card size="small">{group}</Card>
                             ))}
                     </Row>
                 </Card>
             </div>
-            <Button type="primary" style={{ borderRadius: "0 0 10px 10px " }}>
+            <Link to ={`/teacher/schedule/${teacher.name}`}>
+            <Button type="primary" style={{ borderRadius: "0 0 10px 10px ", width: '100%' }}>
                 Открыть расписание
             </Button>
+            </Link>
         </div>
     );
 };

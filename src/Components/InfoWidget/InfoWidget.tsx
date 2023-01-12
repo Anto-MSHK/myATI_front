@@ -1,7 +1,8 @@
 import React from 'react';
 import {Card} from "antd";
+import { IWidget } from 'src/Components/GroupsWidget/GroupsWidget';
 
-export const InfoWidget = (props: any) => {
+export const InfoWidget: React.FC<IWidget>= ({teacher}) => {
     return (
         <div>
             <div>
@@ -19,10 +20,10 @@ export const InfoWidget = (props: any) => {
                         {" "}
                         <div style={{ display: 'flex' }}>
                             <h2 >
-                                {props.name}
+                                {teacher.name}
                             </h2>
                             <h2 style={{ color: '#7a8187', marginLeft: '5px' }}>
-                                {props.degree}
+                                {teacher.degree}
                             </h2>
                         </div>
                     </Card>

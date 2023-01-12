@@ -1,11 +1,10 @@
 import { Card } from "antd";
 import React from "react";
-import { useState } from "react";
 import { useFetchTeacherQuery } from "src/State/services/TeachersApi";
-import { useFetchTeacherScheduleQuery } from "src/State/services/ScheduleApi";
-import {GroupsWidget} from "../GroupsWidget/GroupsWidget";
+import { GroupsWidget } from "../GroupsWidget/GroupsWidget";
 import { InfoWidget } from "../InfoWidget/InfoWidget";
-import {SubjectsWidget} from "../SubjectsWidget/SubjectsWidget";
+import { SubjectsWidget } from "../SubjectsWidget/SubjectsWidget";
+import { ITeacher } from 'src/Types/TeacherTypes';
 
 
 interface ITeacherCard {
@@ -15,12 +14,10 @@ interface ITeacherCard {
 }
 
 
-export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView}) => {
+export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView }) => {
 
   const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name)
-  const [isSheduleActive, setIsScheduleActive] = useState(false)  
-  const { data: teacherSchedule} = useFetchTeacherScheduleQuery(name)
-  
+
   return (
     <Card
       loading={isFetching}
@@ -34,11 +31,16 @@ export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView}) => {
         padding: 15,
       }}
     >
-        <InfoWidget name={name} degree={teacher?.degree}/>
-        <div style={{display: "flex", gap: 15, height: "100%"}}>
-            <GroupsWidget data={teacher}/>
-            <SubjectsWidget data={teacher}/>
-        </div>
+      {
+        teacher &&
+        <>
+          <InfoWidget teacher={teacher} />
+          <div style={{ display: "flex", gap: 15, height: "100%" }}>
+            <GroupsWidget teacher={teacher} />
+            <SubjectsWidget teacher={teacher} />
+          </div>
+        </>
+      }
     </Card>
   );
 };

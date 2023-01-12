@@ -29,8 +29,8 @@ interface TopDotEduI {
   onSearch: (searchQuery: string) => any;
   sortTeachers: (sort: string) => any;
   title: string;
-  valueView: string;
-  setValueView: any;
+  valueView?: string;
+  setValueView?: any;
 }
 
 
@@ -137,14 +137,7 @@ export const TopDotEdu: FC<TopDotEduI> = ({
               Обратный порядок
             </Select.Option>
           </Select>
-          <ViewSwitch
-            title={`${value}:`}
-            value={valueView}
-            onChange={onChangeView}
-            options={optionsView}
-            style = {{flexDirection: 'row'}}
-           
-          />
+        
         </div>
         <Drop items={items} />
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Menu} from "antd";
 import {MenuItemType} from "antd/es/menu/hooks/useItems";
 import {MenuProps} from "rc-menu";
+import { IWidget } from 'src/Components/GroupsWidget/GroupsWidget';
 
 function getItem(
     label: React.ReactNode,
@@ -16,9 +17,9 @@ function getItem(
 }
 
 
-export const SubjectsWidget = (props: any) => {
+export const SubjectsWidget: React.FC<IWidget> = ({teacher}) => {
 
-    const items: MenuProps["items"] = props.data?.subjects && props.data?.subjects.map((name: any) => getItem(name, name, name));
+    const items: MenuProps["items"] = teacher.subjects && teacher.subjects.map((name: any) => getItem(name, name, name));
 
     return (
         <div>

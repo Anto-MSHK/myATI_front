@@ -99,7 +99,7 @@ export const TeacherCoupleCard: FC<TeacherCoupleCardI> = ({ count, time, data, g
                           groupsName.map((currentGroup, index = 0) => {
                             return (
                             <div key={currentGroup + index} onClick={() => dispatch(setGroup(currentGroup))}>
-                              <Link to={`/group/${currentGroup}`}>{currentGroup}</Link>
+                              <Link to={`schedule/${currentGroup}`}>{currentGroup}</Link>
                               <>ㅤ</>
                             </div>
                           )})
