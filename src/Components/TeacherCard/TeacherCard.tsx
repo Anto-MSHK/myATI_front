@@ -1,25 +1,13 @@
-import { Card, Menu, Spin, Switch, Space, Row, Button } from "antd";
+import { Card } from "antd";
 import React from "react";
-import { ITeacher } from "src/Types/TeacherTypes";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useFetchTeacherQuery } from "src/State/services/TeachersApi";
 import { useFetchTeacherScheduleQuery } from "src/State/services/ScheduleApi";
-import { MenuItemType } from "antd/es/menu/hooks/useItems";
-import { MenuProps } from "rc-menu";
+import {GroupsWidget} from "../GroupsWidget/GroupsWidget";
+import { InfoWidget } from "../InfoWidget/InfoWidget";
+import {SubjectsWidget} from "../SubjectsWidget/SubjectsWidget";
 
 
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  id: string
-): MenuItemType {
-  return {
-    key,
-    label,
-    id,
-  } as MenuItemType;
-}
 interface ITeacherCard {
   name: string,
   valueView: string,
@@ -30,7 +18,6 @@ interface ITeacherCard {
 export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView}) => {
 
   const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name)
-  const items: MenuProps["items"] = teacher?.subjects && teacher?.subjects.map((name) => getItem(name, name, name));
   const [isSheduleActive, setIsScheduleActive] = useState(false)  
   const { data: teacherSchedule} = useFetchTeacherScheduleQuery(name)
   
@@ -47,90 +34,11 @@ export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView}) => {
         padding: 15,
       }}
     >
-      <div>
-        <div style={{ width: "100%", marginBottom: 10 }}>
-          <h3
-            style={{
-              padding: "5px 0 5px 10px",
-              color: "white",
-              fontWeight: 500,
-            }}
-          >
-            Сведения
-          </h3>
-          <Card>
-            {" "}
-            <div style={{ display: 'flex' }}>
-              <h2 >
-                {name}
-              </h2>
-              <h2 style={{ color: '#7a8187', marginLeft: '5px' }}>
-                {teacher?.degree}
-              </h2>
-            </div>
-
-          </Card>
+        <InfoWidget name={name} degree={teacher?.degree}/>
+        <div style={{display: "flex", gap: 15, height: "100%"}}>
+            <GroupsWidget data={teacher}/>
+            <SubjectsWidget data={teacher}/>
         </div>
-      </div>
-      <div style={{ display: "flex", gap: 15, height: "100%" }}>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div>
-            <h3
-              style={{
-                padding: "5px 0 5px 10px",
-                color: "white",
-                fontWeight: 500,
-              }}
-            >
-              Группы
-            </h3>
-            <Card
-              bodyStyle={{ padding: 15 }}
-              style={{ borderRadius: "10px 10px 0 0" }}
-            >
-             
-              <Row gutter={[5, 5]} style={{ gap: 10 }} justify={"start"}>
-                {" "}
-                {
-                  teacher?.groups &&
-                  teacher?.groups.map((group) => (
-                    <Card size="small">{group}</Card>
-                  ))}
-              </Row>
-            </Card>
-          </div>
-          <Button onClick={()=>setValueView('schedule')} type="primary" style={{ borderRadius: "0 0 10px 10px " }}>
-            Открыть расписание
-          </Button>
-        </div>
-        <div>
-          <h3
-            style={{
-              padding: "5px 0 5px 10px",
-              color: "white",
-              fontWeight: 500,
-            }}
-          >
-            Предметы
-          </h3>
-          <Card bodyStyle={{ padding: 10 }}>
-            <Menu
-              id="menu"
-              //  selectable
-              inlineIndent={10}
-              className="scrollable-list"
-              mode="vertical"
-              items={items}
-              style={{
-                maxWidth: 300,
-                height: 300,
-                padding: 0,
-                overflowY: "auto",
-              }}
-            />
-          </Card>
-        </div>
-      </div>
     </Card>
   );
 };
