@@ -40,7 +40,7 @@ export const Head = () => {
           <PushpinOutlined style={{ margin: "0 5px" }} />
           <Tabs />
         </Card>
-        <Awatar />
+        {/* <Awatar /> */}
       </div>
     </Header>
   );
