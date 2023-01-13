@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback, createRef, WheelEvent } from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { DayT } from "src/Types/ScheduleTypes";
+
 
 import "./Slider.css";
 import {
@@ -14,6 +15,7 @@ import { Weekend } from "src/Components/Weekend/Weekend";
 import { useAppSelector } from "src/State/hooks";
 import { useScroll } from "src/Hooks/useScroll";
 import { dayTeacher } from "src/Types/TeacherScheduleTypes";
+
 
 interface SliderI {
   schedule: DayT[] | undefined;
@@ -49,8 +51,20 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
     }
   }, []);
 
+
+
+  function scrollSlide(event: WheelEvent) {
+    event.deltaY < 0
+      ? (
+        next()
+      ) : (
+        prev()
+      );
+  };
+
+
   return (
-    <div>
+    <div onWheel={e => scrollSlide(e)} >
       <div
         style={{
           position: "absolute",
