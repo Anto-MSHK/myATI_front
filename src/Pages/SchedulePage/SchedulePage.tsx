@@ -51,15 +51,15 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
 
     schedule?.forEach(day => {
       day.lessons.forEach((lesson) => {
-       if (!lesson.group) {
-         return
-       }
+        if (!lesson.group) {
+          return
+        }
       })
-     })
-    
-     setMergedSchedule([])
-     console.log('schedule');
-     console.log(schedule);
+    })
+
+    setMergedSchedule([])
+    console.log('schedule');
+    console.log(schedule);
 
     if (schedule) {
       let tempolarMerdgedSchedule: DayT[] = schedule.map((day, index) => {
@@ -75,17 +75,22 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
 
         }
         else prevLesson = undefined
-        day.lessons.sort((a, b) => (a.count+1) - (b.count+1))
-        if (day.lessons.length) {
+
+        let sortedDay: DayT = structuredClone(day)
+        sortedDay.lessons.sort((a, b) => (a.count) - (b.count))
+     
+        if (sortedDay.lessons.length) {
           return {
-            ...day,
-            lessons: day.lessons.reduce(function (accum: LessonT[], lesson: LessonT, index) {
+            ...sortedDay,
+            lessons: sortedDay.lessons.reduce(function (accum: LessonT[], lesson: LessonT, index) {
+             
 
               if (prevLesson?.count !== lesson.count) {
                 prevLesson = { ...lesson, groups: prevLesson?.groups }
                 accum.push(lesson)
                 return accum
               }
+           
               if (prevLesson.group === lesson.group) {
                 accum.push(lesson)
                 return accum
@@ -109,7 +114,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
             }, [])
           }
         }
-        return day
+        return sortedDay
       })
       setMergedSchedule(tempolarMerdgedSchedule)
     }
