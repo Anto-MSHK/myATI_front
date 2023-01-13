@@ -27,6 +27,7 @@ export type LessonT = {
   time: { from: string; to: string };
   data: dataT;
   group?: string;
+  groups?: string[];
 };
 
 export type DayT = {

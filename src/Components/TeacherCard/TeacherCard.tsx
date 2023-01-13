@@ -1,10 +1,11 @@
 import { Card, Spin } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useFetchTeacherQuery } from "src/State/services/TeachersApi";
 import { GroupsWidget } from "../GroupsWidget/GroupsWidget";
 import { InfoWidget } from "../InfoWidget/InfoWidget";
 import { SubjectsWidget } from "../SubjectsWidget/SubjectsWidget";
 import { ITeacher } from "src/Types/TeacherTypes";
+import { DayT } from 'src/Types/ScheduleTypes';
 
 interface ITeacherCard {
   name: string;
@@ -14,6 +15,10 @@ interface ITeacherCard {
 
 export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView }) => {
   const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name);
+  const [mergedTeacherSchedule, setMergedTeacherSchedule] = useState<DayT[]>([])
+
+  
+
 
   return (
     <Card

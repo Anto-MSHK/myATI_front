@@ -29,8 +29,8 @@ export type byWeek = {
   topWeek: subjectData;
   lowerWeek?: subjectData;
   [key: string | "topWeek" | "lowerWeek"]:
-    | subjectData
-    | (subjectData | undefined);
+  | subjectData
+  | (subjectData | undefined);
 };
 
 export interface LessonCardI {
@@ -38,6 +38,7 @@ export interface LessonCardI {
   time: { from: string; to: string };
   data: dataT;
   group?: string;
+  groups?: string[];
 
   dayOfWeek: number;
 }
@@ -58,6 +59,7 @@ export const LessonCard: FC<LessonCardI> = ({
   data,
   group,
   dayOfWeek,
+  groups
 }) => {
   const week = useAppSelector((state) => state.scheduleSettings.switchWeek);
   const hideSwitch = useAppSelector(
@@ -184,14 +186,26 @@ export const LessonCard: FC<LessonCardI> = ({
                     </Tag>
                   </Link>
                 )}
-                {group && (
-                  <Link to={`/schedule/${group}`}>
-                    <Tag color="blue" style={{ fontSize: 16, fontWeight: 600 }}>
-                      {group}
-                    </Tag>
-                  </Link>
-                )}
                 <h3 style={{ fontWeight: 600, fontSize: 16 }}>
+               
+                  {
+                    groups
+                      ?
+                      groups.map(curGroup => (
+                        <Link to={`/schedule/${curGroup}`}>
+                          <Tag color="blue" style={{ fontSize: 16, fontWeight: 600 }}>
+                            {curGroup}
+                          </Tag>
+                        </Link>
+                      ))
+                      :
+                      group && (
+                        <Link to={`/schedule/${group}`}>
+                          <Tag color="blue" style={{ fontSize: 16, fontWeight: 600 }}>
+                            {group}
+                          </Tag>
+                        </Link>
+                      )}
                   {data[curWeek]?.cabinet} каб.
                 </h3>
               </div>

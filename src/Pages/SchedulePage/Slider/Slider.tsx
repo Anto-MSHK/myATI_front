@@ -22,6 +22,7 @@ interface SliderI {
 }
 
 export const Slider: React.FC<SliderI> = ({ schedule }) => {
+  
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
