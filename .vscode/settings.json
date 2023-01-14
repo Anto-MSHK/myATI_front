@@ -1,4 +1,4 @@
-{
+/* {
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#9720ab",
 		"activityBar.background": "#9720ab",
@@ -18,7 +18,7 @@
 		"titleBar.inactiveBackground": "#71188099",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	}
-}/*{
+}{
 	"workbench.colorCustomizations": {
 		"activityBar.activeBackground": "#9720ab",
 		"activityBar.background": "#9720ab",
@@ -38,4 +38,5 @@
 		"titleBar.inactiveBackground": "#71188099",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	}
-}*/
+}
+ */

@@ -1,0 +1,16 @@
+.container {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.space_antd {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container h1 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    opacity: 0.7;
+}
