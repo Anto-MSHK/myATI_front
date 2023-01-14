@@ -7,73 +7,73 @@ import { useFetchFacultyGroupsQuery } from "src/State/services/GroupsApi";
 import styles from "./GroupPage.module.css";
 
 export const GroupPage: FC<any> = ({ faculty }) => {
-    const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery({
-        faculty,
+  const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery({
+    faculty,
+  });
+  const [courses, setCourses] = useState<GroupStateT[][]>([]);
+
+  useEffect(() => {
+    let firstCourse: GroupStateT[] = [];
+    let secondCourse: GroupStateT[] = [];
+    let thirdCourse: GroupStateT[] = [];
+    let forthCourse: GroupStateT[] = [];
+
+    facultyGroups?.map((group) => {
+      let course = group.name.match(/[1-4]/);
+
+      switch (course && course[0]) {
+        case "1":
+          firstCourse.push(group);
+          break;
+        case "2":
+          secondCourse.push(group);
+          break;
+        case "3":
+          thirdCourse.push(group);
+          break;
+        case "4":
+          forthCourse.push(group);
+          break;
+      }
     });
-    const [courses, setCourses] = useState<GroupStateT[][]>([]);
+    setCourses([firstCourse, secondCourse, thirdCourse, forthCourse]);
+  }, [facultyGroups]);
 
-    useEffect(() => {
-        let firstCourse: GroupStateT[] = [];
-        let secondCourse: GroupStateT[] = [];
-        let thirdCourse: GroupStateT[] = [];
-        let forthCourse: GroupStateT[] = [];
-
-        facultyGroups?.map((group) => {
-            let course = group.name.match(/[1-4]/);
-
-            switch (course && course[0]) {
-                case "1":
-                    firstCourse.push(group);
-                    break;
-                case "2":
-                    secondCourse.push(group);
-                    break;
-                case "3":
-                    thirdCourse.push(group);
-                    break;
-                case "4":
-                    forthCourse.push(group);
-                    break;
-            }
-        });
-        setCourses([firstCourse, secondCourse, thirdCourse, forthCourse]);
-    }, [facultyGroups]);
-
-    return (
+  return (
+    <div>
+      {isLoading ? (
+        <Card loading={true} />
+      ) : (
         <div>
-            {isLoading ? (
-                <Card loading={true} />
-            ) : (
-                <div>
-                    {courses.map((course, index: number) => {
-                        return (
-                            <Card
-                                title={<h2 style={{ margin: "0px" }}>{++index} курс</h2>}
-                                size={"small"}
-                                style={{
-                                    padding: "10px",
-                                    borderRadius: "10px",
-                                    marginBottom: "10px",
-                                    width: "fit-content",
-                                }}
-                            >
-                                <Row gutter={[16, 16]} className={styles.row_antd}>
-                                    {course.map((group, index) => {
-                                        return (
-                                            /* Залить данные для elder с сервера по мере их появления */
-                                            <GroupCard
-                                                key={group._id + index}
-                                                {...group}
-                                                faculty={faculty}
-                                            />
-                                        );
-                                    })}
-                                </Row>
-                            </Card>
-                        );
-                    })}
-                </div>
-            )}
+          {courses.map((course, index: number) => {
+            return (
+              <Card
+                title={<h2 style={{ margin: "0px" }}>{++index} курс</h2>}
+                size={"small"}
+                style={{
+                  padding: "5px",
+                  borderRadius: "10px",
+                  marginBottom: "10px",
+                  width: "fit-content",
+                }}
+              >
+                <Row gutter={[16, 16]} className={styles.row_antd}>
+                  {course.map((group, index) => {
+                    return (
+                      /* Залить данные для elder с сервера по мере их появления */
+                      <GroupCard
+                        key={group._id + index}
+                        {...group}
+                        faculty={faculty}
+                      />
+                    );
+                  })}
+                </Row>
+              </Card>
+            );
+          })}
         </div>
-    );
+      )}
+    </div>
+  );
 };

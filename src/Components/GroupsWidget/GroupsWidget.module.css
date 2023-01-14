@@ -1,24 +1,24 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    max-width: 40%;
-    max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  min-width: 40%;
+  max-width: 50%;
 }
 
 .container h3 {
-    padding: 5px 0 5px 10px;
-    color: white;
-    font-weight: 500;
+  padding: 5px 0 5px 10px;
+  color: white;
+  font-weight: 500;
 }
 
 .tag_antd {
-    padding: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 5px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
 .button_antd {
-    border-radius: 0 0 10px 10px;
-    width: 100%;
+  border-radius: 0 0 10px 10px;
+  width: 100%;
 }
