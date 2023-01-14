@@ -45,17 +45,8 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
   useEffect(() => {
     dispatch(getWeek());
   }, []);
-
-
-  useEffect(() => {
-
-    schedule?.forEach(day => {
-      day.lessons.forEach((lesson) => {
-        if (!lesson.group) {
-          return
-        }
-      })
-    })
+  
+  const MergeTeacherSchedule = () => {
 
     setMergedSchedule([])
     console.log('schedule');
@@ -66,9 +57,9 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
         var prevLesson: LessonT | undefined
         if (day.lessons.length) {
 
-
           prevLesson = structuredClone(day.lessons[index])
           let group = prevLesson?.group
+
           if (prevLesson && prevLesson.groups === undefined) {
             prevLesson.groups = new Array<string>(group as string)
           }
@@ -76,25 +67,27 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
         }
         else prevLesson = undefined
 
-        let sortedDay: DayT = structuredClone(day)
+        const sortedDay: DayT = structuredClone(day)
         sortedDay.lessons.sort((a, b) => (a.count) - (b.count))
-     
+
+
+
         if (sortedDay.lessons.length) {
           return {
             ...sortedDay,
             lessons: sortedDay.lessons.reduce(function (accum: LessonT[], lesson: LessonT, index) {
-             
 
               if (prevLesson?.count !== lesson.count) {
                 prevLesson = { ...lesson, groups: prevLesson?.groups }
                 accum.push(lesson)
                 return accum
               }
-           
+
               if (prevLesson.group === lesson.group) {
                 accum.push(lesson)
                 return accum
               }
+
               if (prevLesson.groups && lesson.group && !prevLesson.groups.includes(lesson.group)) {
                 prevLesson = { ...prevLesson, groups: [...prevLesson.groups, lesson.group] }
 
@@ -103,7 +96,6 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
                 console.log('Брух');
                 console.log(prevLesson.groups);
               }
-
               return accum
 
               /* .filter((value, index, self) => {
@@ -118,6 +110,21 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
       })
       setMergedSchedule(tempolarMerdgedSchedule)
     }
+  }
+  const CheckScheduleRelation = () => {
+    if (schedule?.some(day => {
+      return day.lessons.some((lesson) => {
+        return !lesson.group
+      })
+    })) return 'group'
+    return 'teacher'
+  }
+
+  useEffect(() => {
+    const scheduleType = CheckScheduleRelation()
+    if (scheduleType === 'teacher') {
+      MergeTeacherSchedule()
+    } else setMergedSchedule(schedule as DayT[])
   }, [schedule])
 
 
