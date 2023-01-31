@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Breadcrumb } from "antd";
 import { useLocation } from "react-router-dom";
+import useScreenWidth from "src/Hooks/useScreenSize";
 
 export const Breadcrumbs = () => {
   const [tabs, setTabs] = useState<
@@ -10,6 +11,9 @@ export const Breadcrumbs = () => {
 
   const [path, setPath] = useState("");
   const [previousPath, setPreviousPath] = useState("");
+
+  const widthSize = useScreenWidth();
+  const mobileWidth = 600;
 
   useEffect(() => {
     console.log(path);
@@ -40,7 +44,13 @@ export const Breadcrumbs = () => {
     setTabs(result_tabs as any);
   }, [location.pathname]);
   return (
-    <Breadcrumb separator=">" style={{ fontSize: 18 }}>
+    <Breadcrumb
+      separator=">"
+      style={{
+        fontSize: widthSize < mobileWidth ? 14 : 18,
+        marginLeft: widthSize < mobileWidth ? 45 : 0,
+      }}
+    >
       {tabs.map((tab) => {
         if (tab?.href)
           return (

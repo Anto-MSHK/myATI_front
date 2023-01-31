@@ -1,22 +1,38 @@
 .container {
-    height: 35px;
-    margin: 16px;
-    overflow: hidden;
-    position: relative;
+  height: 35px;
+  margin: 16px;
+  overflow: hidden;
+  position: relative;
 }
 
 .container img {
-    width: 75px;
-    top: -18px;
-    left: -14px;
-    position: absolute;
+  width: 75px;
+  top: -18px;
+  left: -14px;
+  position: absolute;
 }
 
 .container h1 {
-    font-size: 22px;
-    color: white;
-    position: absolute;
-    display: inline;
-    left: 50px;
-    top: 6px;
+  font-size: 22px;
+  color: white;
+  position: absolute;
+  display: inline;
+  left: 50px;
+  top: 6px;
+}
+
+.mobile img {
+  width: 75px;
+  top: -19px;
+  left: 110px;
+  position: absolute;
+}
+
+.mobile h1 {
+  font-size: 22px;
+  color: white;
+  position: absolute;
+  display: inline;
+  left: 50px;
+  top: 6px;
 }

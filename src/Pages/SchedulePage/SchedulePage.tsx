@@ -21,7 +21,8 @@ import {
   setSwitchWeek,
 } from "src/State/Slices/scheduleSettingsSlice";
 import { TopDot } from "src/Components/TopDot/TopDot";
-import { LessonT, DayT } from 'src/Types/ScheduleTypes';
+import { LessonT, DayT } from "src/Types/ScheduleTypes";
+import useScreenWidth from "src/Hooks/useScreenSize";
 
 interface SchedulePageI {
   type: "group" | "teacher";
@@ -30,7 +31,7 @@ interface SchedulePageI {
 export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
   const { name } = useParams();
   const [valueView, setValueView] = useState("slider");
-  const [mergedSchedule, setMergedSchedule] = useState<DayT[]>([])
+  const [mergedSchedule, setMergedSchedule] = useState<DayT[]>([]);
 
   const {
     data: schedule,
@@ -45,89 +46,96 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
   useEffect(() => {
     dispatch(getWeek());
   }, []);
-  
-  const MergeTeacherSchedule = () => {
 
-    setMergedSchedule([])
-    console.log('schedule');
+  const MergeTeacherSchedule = () => {
+    setMergedSchedule([]);
+    console.log("schedule");
     console.log(schedule);
 
     if (schedule) {
       let tempolarMerdgedSchedule: DayT[] = schedule.map((day, index) => {
-        var prevLesson: LessonT | undefined
+        var prevLesson: LessonT | undefined;
         if (day.lessons.length) {
-
-          prevLesson = structuredClone(day.lessons[index])
-          let group = prevLesson?.group
+          prevLesson = structuredClone(day.lessons[index]);
+          let group = prevLesson?.group;
 
           if (prevLesson && prevLesson.groups === undefined) {
-            prevLesson.groups = new Array<string>(group as string)
+            prevLesson.groups = new Array<string>(group as string);
           }
+        } else prevLesson = undefined;
 
-        }
-        else prevLesson = undefined
-
-        const sortedDay: DayT = structuredClone(day)
-        sortedDay.lessons.sort((a, b) => (a.count) - (b.count))
-
-
+        const sortedDay: DayT = structuredClone(day);
+        sortedDay.lessons.sort((a, b) => a.count - b.count);
 
         if (sortedDay.lessons.length) {
           return {
             ...sortedDay,
-            lessons: sortedDay.lessons.reduce(function (accum: LessonT[], lesson: LessonT, index) {
-
+            lessons: sortedDay.lessons.reduce(function (
+              accum: LessonT[],
+              lesson: LessonT,
+              index
+            ) {
               if (prevLesson?.count !== lesson.count) {
-                prevLesson = { ...lesson, groups: prevLesson?.groups }
-                accum.push(lesson)
-                return accum
+                prevLesson = { ...lesson, groups: prevLesson?.groups };
+                accum.push(lesson);
+                return accum;
               }
 
               if (prevLesson.group === lesson.group) {
-                accum.push(lesson)
-                return accum
+                accum.push(lesson);
+                return accum;
               }
 
-              if (prevLesson.groups && lesson.group && !prevLesson.groups.includes(lesson.group)) {
-                prevLesson = { ...prevLesson, groups: [...prevLesson.groups, lesson.group] }
+              if (
+                prevLesson.groups &&
+                lesson.group &&
+                !prevLesson.groups.includes(lesson.group)
+              ) {
+                prevLesson = {
+                  ...prevLesson,
+                  groups: [...prevLesson.groups, lesson.group],
+                };
 
-                accum.pop()
-                accum.push(prevLesson)
-                console.log('Брух');
+                accum.pop();
+                accum.push(prevLesson);
+                console.log("Брух");
                 console.log(prevLesson.groups);
               }
-              return accum
+              return accum;
 
               /* .filter((value, index, self) => {
                   return self.findIndex(v => v.count === value.count) === index;
               }) */
-
-
-            }, [])
-          }
+            },
+            []),
+          };
         }
-        return sortedDay
-      })
-      setMergedSchedule(tempolarMerdgedSchedule)
+        return sortedDay;
+      });
+      setMergedSchedule(tempolarMerdgedSchedule);
     }
-  }
+  };
   const CheckScheduleRelation = () => {
-    if (schedule?.some(day => {
-      return day.lessons.some((lesson) => {
-        return !lesson.group
+    if (
+      schedule?.some((day) => {
+        return day.lessons.some((lesson) => {
+          return !lesson.group;
+        });
       })
-    })) return 'group'
-    return 'teacher'
-  }
+    )
+      return "group";
+    return "teacher";
+  };
 
   useEffect(() => {
-    const scheduleType = CheckScheduleRelation()
-    if (scheduleType === 'teacher') {
-      MergeTeacherSchedule()
-    } else setMergedSchedule(schedule as DayT[])
-  }, [schedule])
-
-
+    const scheduleType = CheckScheduleRelation();
+    if (scheduleType === "teacher") {
+      MergeTeacherSchedule();
+    } else setMergedSchedule(schedule as DayT[]);
+  }, [schedule]);
+  const widthSize = useScreenWidth();
+  const cutWidth = 1000;
+  const mobileWidth = 600;
   return (
     <>
       <TopDot
@@ -143,7 +151,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
           borderRadius: "0 0 10px 10px",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
           paddingTop: 6,
-          margin: "0px 15px",
+          margin: widthSize > mobileWidth ? "0px 15px" : 0,
         }}
         bodyStyle={{ padding: "10px 10px 10px 10px" }}
       >

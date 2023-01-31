@@ -1,8 +1,13 @@
-import React, { useEffect, useRef, useCallback, createRef, WheelEvent } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  createRef,
+  WheelEvent,
+} from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { DayT } from "src/Types/ScheduleTypes";
-
 
 import "./Slider.css";
 import {
@@ -15,14 +20,13 @@ import { Weekend } from "src/Components/Weekend/Weekend";
 import { useAppSelector } from "src/State/hooks";
 import { useScroll } from "src/Hooks/useScroll";
 import { dayTeacher } from "src/Types/TeacherScheduleTypes";
-
+import useScreenWidth from "src/Hooks/useScreenSize";
 
 interface SliderI {
   schedule: DayT[] | undefined;
 }
 
 export const Slider: React.FC<SliderI> = ({ schedule }) => {
-  
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -52,27 +56,26 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
     }
   }, []);
 
-
-
   function scrollSlide(event: WheelEvent) {
-    event.deltaY < 0
-      ? (
-        next()
-      ) : (
-        prev()
-      );
-  };
+    event.deltaY < 0 ? next() : prev();
+  }
 
+  const widthSize = useScreenWidth();
+  const mobileWidth = 1000;
 
   return (
-    <div onWheel={e => scrollSlide(e)} >
+    <div onWheel={(e) => scrollSlide(e)}>
       <div
-        style={{
-          position: "absolute",
-          zIndex: 15,
-          right: 22,
-          top: 15,
-        }}
+        style={
+          widthSize > mobileWidth
+            ? {
+                position: "absolute",
+                zIndex: 15,
+                right: 22,
+                top: 15,
+              }
+            : { position: "absolute", zIndex: 15, right: 22, top: 70 }
+        }
       >
         <Button
           style={{ margin: "0 10px 0 0" }}
@@ -115,13 +118,14 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
         id={"scroll"}
         style={{
           background:
-            "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 22%, rgba(0,21,41,1) 38%, rgba(0,21,41,1) 100%)",
+            "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 22%, rgba(0,21,41,1) 90%, rgba(0,21,41,1) 100%)",
           height: 60,
           left: 0,
           right: 0,
           position: "absolute",
           zIndex: 2,
           borderRadius: "10px",
+          top: widthSize < mobileWidth ? 50 : 0,
         }}
       />
       <Carousel

@@ -12,6 +12,7 @@ import {
   setCurDayAndWeek,
 } from "./State/Slices/scheduleSettingsSlice";
 import { TopDot } from "./Components/TopDot/TopDot";
+import useScreenWidth from "./Hooks/useScreenSize";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -21,13 +22,16 @@ const App: React.FC = () => {
     dispatch(setCurDayAndWeek());
   }, []);
 
+  const widthSize = useScreenWidth();
+  const mobileWidth = 600;
+
   return (
     <BrowserRouter>
       <Layout style={{ minHeight: "100vh" }}>
         <Nav />
         <Layout className="site-layout">
           <Head />
-          <Content style={{ margin: "0 16px" }}>
+          <Content style={{ margin: widthSize > mobileWidth ? "0 16px" : "0" }}>
             <Router />
           </Content>
           <Footer style={{ textAlign: "center" }}>©TI DSTU, 2022</Footer>
