@@ -150,7 +150,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
           position: "relative",
           borderRadius: "0 0 10px 10px",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
-          paddingTop: 6,
+          paddingTop: widthSize > mobileWidth ? 6 : 0,
           margin: widthSize > mobileWidth ? "0px 15px" : 0,
         }}
         bodyStyle={{ padding: "10px 10px 10px 10px" }}

@@ -169,22 +169,25 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
     <div
       style={{
         display: "flex",
-        position: "sticky",
-        height: 62,
+        position: widthSize > mobileWidth ? "sticky" : undefined,
+        height: widthSize > mobileWidth ? 62 : 50,
 
         padding: 20,
         top: 80,
-        background: "white",
+        background: widthSize > mobileWidth ? "white" : "#001529",
         zIndex: 20,
         borderRadius: widthSize > mobileWidth ? "10px" : 0,
         borderColor: "#F0F0F0",
-        border: "solid #F0F0F0 1px",
+        border: widthSize > mobileWidth ? "solid #F0F0F0 1px" : undefined,
         //   overflow: "hidden",
-        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
+        boxShadow:
+          widthSize > mobileWidth ? "0 4px 10px rgba(0, 0, 0, 0.5)" : undefined,
       }}
     >
       <Space className={styles.container}>
-        <h1>{itemName}</h1>
+        <h1 style={{ color: widthSize > mobileWidth ? "black" : "white" }}>
+          {itemName}
+        </h1>
         <div>
           {widthSize > cutWidth ? (
             <div>
@@ -204,11 +207,17 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
               />
             </div>
           ) : (
-            <Dropdown menu={{ items: items_min_menu }}>
-              <Button>
-                <Space>
-                  <MenuOutlined />
-                </Space>
+            <Dropdown menu={{ items: items_min_menu }} trigger={["click"]}>
+              <Button
+                style={{
+                  background: widthSize > mobileWidth ? undefined : "#001529",
+                }}
+              >
+                <MenuOutlined
+                  style={{
+                    color: widthSize > mobileWidth ? undefined : "white",
+                  }}
+                />
               </Button>
             </Dropdown>
           )}

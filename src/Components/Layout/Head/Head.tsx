@@ -20,12 +20,13 @@ export const Head = () => {
       title="My ATI"
       style={{
         position: "sticky",
-        top: 0,
+        top: -1,
         zIndex: 20,
         width: "100%",
-        marginBottom: 15,
+        marginBottom: widthSize > mobileWidth ? 15 : 0,
         padding: 0,
         background: colorBgContainer,
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       }}
     >
       <div className={styles.container}>

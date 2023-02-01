@@ -178,9 +178,9 @@ export const LessonCard: FC<LessonCardI> = ({
                 </h3>
               </div>
 
-              <h2 className={"secondary__info_type"}>
+              <h3 className={"secondary__info_type"}>
                 {data[curWeek]?.subject.type}
-              </h2>
+              </h3>
             </div>
           )}
         </div>

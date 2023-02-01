@@ -9,6 +9,7 @@ import {
   SettingOutlined,
   ExperimentOutlined,
   MenuOutlined,
+  CloseOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import logo from "./adaptive-icon.png";
@@ -38,12 +39,65 @@ export const Nav = () => {
 
   const items: MenuItem[] = [
     getItem("Расписание", "1", <UnorderedListOutlined />, [
-      getItem(<Link to="/groups/fvo">ФВО</Link>, "11"),
-      getItem(<Link to="/groups/spo">СПО</Link>, "12"),
+      //!!!
+      getItem(
+        <Link
+          to="/groups/fvo"
+          onClick={() => {
+            if (widthSize < mobileWidth) {
+              setCollapsed((prev) => !prev);
+              document.body.style.overflow = "auto";
+            }
+          }}
+        >
+          ФВО
+        </Link>,
+        "11"
+      ),
+      getItem(
+        <Link
+          to="/groups/spo"
+          onClick={() => {
+            if (widthSize < mobileWidth) {
+              setCollapsed((prev) => !prev);
+              document.body.style.overflow = "auto";
+            }
+          }}
+        >
+          СПО
+        </Link>,
+        "12"
+      ),
     ]),
     getItem("Структура", "2", <ApartmentOutlined />, [
-      getItem(<Link to="/edu/teacher">Преподаватели</Link>, "22"),
-      getItem(<Link to="/edu/subjects">Предметы</Link>, "23"),
+      getItem(
+        <Link
+          to="/edu/teacher"
+          onClick={() => {
+            if (widthSize < mobileWidth) {
+              setCollapsed((prev) => !prev);
+              document.body.style.overflow = "auto";
+            }
+          }}
+        >
+          Преподаватели
+        </Link>,
+        "22"
+      ),
+      getItem(
+        <Link
+          to="/edu/subjects"
+          onClick={() => {
+            if (widthSize < mobileWidth) {
+              setCollapsed((prev) => !prev);
+              document.body.style.overflow = "auto";
+            }
+          }}
+        >
+          Предметы
+        </Link>,
+        "23"
+      ),
     ]),
   ];
   return (
@@ -65,7 +119,7 @@ export const Nav = () => {
             else document.body.style.overflow = "auto";
           }}
         >
-          <MenuOutlined />
+          {collapsed ? <MenuOutlined /> : <CloseOutlined />}
         </Button>
       )}
       <Sider
@@ -113,6 +167,11 @@ export const Nav = () => {
             height: "100vh",
             zIndex: 50,
             position: "fixed",
+          }}
+          onClick={() => {
+            setCollapsed((prev) => !prev);
+            if (collapsed) document.body.style.overflow = "hidden";
+            else document.body.style.overflow = "auto";
           }}
         />
       )}

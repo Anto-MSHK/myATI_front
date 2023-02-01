@@ -118,9 +118,9 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
         id={"scroll"}
         style={{
           background:
-            "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 22%, rgba(0,21,41,1) 90%, rgba(0,21,41,1) 100%)",
+            "linear-gradient(90deg, rgba(0,21,41,0) 0%, rgba(0,21,41,0) 0%, rgba(0,21,41,1) 10%, rgba(0,21,41,1) 100%)",
           height: 60,
-          left: 0,
+          left: "240px",
           right: 0,
           position: "absolute",
           zIndex: 2,

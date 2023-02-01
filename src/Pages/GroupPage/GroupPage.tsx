@@ -5,6 +5,7 @@ import { GroupCard } from "src/Components/GroupCard/GroupCard";
 import { GroupStateT } from "src/Types/GroupTypes";
 import { useFetchFacultyGroupsQuery } from "src/State/services/GroupsApi";
 import styles from "./GroupPage.module.css";
+import useScreenWidth from "src/Hooks/useScreenSize";
 
 export const GroupPage: FC<any> = ({ faculty }) => {
   const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery({
@@ -39,8 +40,20 @@ export const GroupPage: FC<any> = ({ faculty }) => {
     setCourses([firstCourse, secondCourse, thirdCourse, forthCourse]);
   }, [facultyGroups]);
 
+  const widthSize = useScreenWidth();
+  const mobileWidth = 600;
+
   return (
-    <div>
+    <div
+      style={
+        widthSize < mobileWidth
+          ? {
+              marginTop: "10px",
+              padding: "0 10px",
+            }
+          : {}
+      }
+    >
       {isLoading ? (
         <Card loading={true} />
       ) : (
