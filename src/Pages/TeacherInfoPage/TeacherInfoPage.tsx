@@ -101,7 +101,7 @@ export const TeacherInfoPage: React.FC = () => {
           borderRadius: "0 0 10px 10px",
           paddingTop: "3px",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
-          margin: "0px 15px",
+          margin: widthSize > mobileWidth ? "0px 15px" : 0,
         }}
         bodyStyle={{ padding: "10px 10px 10px 10px" }}
       >
@@ -116,7 +116,7 @@ export const TeacherInfoPage: React.FC = () => {
             >
               <Button
                 style={{
-                  background: widthSize > cutWidth ? undefined : "#001529",
+                  background: widthSize > cutWidth ? undefined : "#4096FF",
                   color: "white",
                   width: "100%",
                   height: 50,
@@ -157,7 +157,7 @@ export const TeacherInfoPage: React.FC = () => {
                       marginRight: 5,
                     }}
                   />{" "}
-                  <h2>{!inputIsActive ? "Преподаватели" : "Поиск"}</h2>
+                  <h2>{!inputIsActive ? "Найти" : "Поиск"}</h2>
                 </div>
               </Button>
             </Dropdown>

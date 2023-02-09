@@ -7,9 +7,13 @@ import {
   ProfileOutlined,
   DownOutlined,
   UpOutlined,
+  MenuOutlined,
 } from "@ant-design/icons";
+
 import {
+  Button,
   CheckboxOptionType,
+  Dropdown,
   Input,
   RadioChangeEvent,
   Select,
@@ -82,37 +86,104 @@ export const TopDotEdu: FC<TopDotEduI> = ({
     },
   ];
 
+  const items_min_menu: MenuProps["items"] = [
+    {
+      label: (
+        <Select
+          className={styles.select_antd}
+          showArrow
+          defaultValue={"По алфавиту"}
+          onSelect={sortTeachers}
+        >
+          <Select.Option value="По алфавиту">По алфавиту</Select.Option>
+          <Select.Option value="Обратный порядок">
+            Обратный порядок
+          </Select.Option>
+        </Select>
+      ),
+      key: "2",
+    },
+    {
+      label: <Drop items={items} />,
+      key: "2",
+    },
+  ];
+
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
+  const mobileWidth = 600;
   return (
-    <div className={styles.main_container}>
-      <h2 style={{ marginTop: 5, marginRight: 20 }}>{title}</h2>
-      <div className={styles.container}>
-        <div>
-          {widthSize > cutWidth && (
-            <Input
-              className={styles.input_antd}
-              placeholder="Поиск..."
-              allowClear
-              size="small"
-              onChange={(e) => onSearch(e.target.value)}
-            />
-          )}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        position: widthSize > mobileWidth ? "sticky" : undefined,
+        height: widthSize > mobileWidth ? 62 : 50,
 
-          <Select
-            className={styles.select_antd}
-            showArrow
-            defaultValue={"По алфавиту"}
-            onSelect={sortTeachers}
-          >
-            <Select.Option value="По алфавиту">По алфавиту</Select.Option>
-            <Select.Option value="Обратный порядок">
-              Обратный порядок
-            </Select.Option>
-          </Select>
+        padding: 20,
+        top: 80,
+        background: widthSize > mobileWidth ? "white" : "#001529",
+        zIndex: 20,
+        borderRadius: widthSize > mobileWidth ? "10px" : 0,
+        borderColor: "#F0F0F0",
+        border: widthSize > mobileWidth ? "solid #F0F0F0 1px" : undefined,
+        //   overflow: "hidden",
+        boxShadow:
+          widthSize > mobileWidth ? "0 4px 10px rgba(0, 0, 0, 0.5)" : undefined,
+      }}
+    >
+      <h2
+        style={{
+          marginTop: widthSize < mobileWidth ? -8 : 0,
+          marginRight: 20,
+          color: widthSize > mobileWidth ? "black" : "white",
+        }}
+      >
+        {title}
+      </h2>
+      {widthSize > mobileWidth ? (
+        <div className={styles.container}>
+          <div>
+            {widthSize > cutWidth && (
+              <Input
+                className={styles.input_antd}
+                placeholder="Поиск..."
+                allowClear
+                size="small"
+                onChange={(e) => onSearch(e.target.value)}
+              />
+            )}
+
+            <Select
+              className={styles.select_antd}
+              showArrow
+              defaultValue={"По алфавиту"}
+              onSelect={sortTeachers}
+            >
+              <Select.Option value="По алфавиту">По алфавиту</Select.Option>
+              <Select.Option value="Обратный порядок">
+                Обратный порядок
+              </Select.Option>
+            </Select>
+          </div>
+          <Drop items={items} />
         </div>
-        <Drop items={items} />
-      </div>
+      ) : (
+        <Dropdown menu={{ items: items_min_menu }} trigger={["click"]}>
+          <Button
+            style={{
+              background: widthSize > mobileWidth ? undefined : "#001529",
+              marginTop: widthSize < mobileWidth ? -12 : 0,
+            }}
+          >
+            <MenuOutlined
+              style={{
+                color: widthSize > mobileWidth ? undefined : "white",
+              }}
+            />
+          </Button>
+        </Dropdown>
+      )}
     </div>
   );
 };

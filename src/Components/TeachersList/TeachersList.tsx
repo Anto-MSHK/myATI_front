@@ -61,11 +61,17 @@ export const TeachersList: React.FC<TeachersListComponent> = ({
   );
 
   return (
-    <div className={styles.menu_subjects_wrapper}>
+    <div
+      className={styles.menu_subjects_wrapper}
+      // onClick={(e) => e?.stopPropagation()}
+    >
       <Menu
+        onBlur={() => {
+          onClick && onClick();
+        }}
         id="menu"
         onClick={(e) => {
-          onClick && onClick();
+          //  onClick && onClick();
           if (e.domEvent.currentTarget.textContent) {
             let teacher = e.domEvent.currentTarget.textContent;
             dispatch(setTeacher(teacher));

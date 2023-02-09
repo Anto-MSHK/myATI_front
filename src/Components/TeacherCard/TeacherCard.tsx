@@ -60,6 +60,7 @@ export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView }) => {
           size="large"
           style={{
             margin: "auto 0",
+            padding: 30,
             width: "100%",
           }}
         />
