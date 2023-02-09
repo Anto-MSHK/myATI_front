@@ -10,75 +10,81 @@ import { useNavigate } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 
 interface TeachersListComponent {
-    teachersList: ITeacher[];
-    isLoading?: boolean;
-    selectedTeacher?: string;
+  teachersList: ITeacher[];
+  isLoading?: boolean;
+  selectedTeacher?: string;
+  style?: React.CSSProperties;
+  onClick?: () => any;
 }
 
 export const TeachersList: React.FC<TeachersListComponent> = ({
-    teachersList,
-    selectedTeacher,
+  teachersList,
+  selectedTeacher,
+  style,
+  onClick,
 }) => {
-    const history = useNavigate();
-    const [currentTeacher, setCurrentTeacher] = useState("");
-    const dispatch = useAppDispatch();
-    //   const teacher = useAppSelector((state) => state.teachers.teacherName);
+  const history = useNavigate();
+  const [currentTeacher, setCurrentTeacher] = useState("");
+  const dispatch = useAppDispatch();
+  //   const teacher = useAppSelector((state) => state.teachers.teacherName);
 
-    useEffect(() => {
-        if (selectedTeacher) {
-            setCurrentTeacher(selectedTeacher);
-        } else if (teachersList.length) {
-            setCurrentTeacher(teachersList[0].name);
-        }
-    }, [teachersList]);
-
-    useEffect(() => {
-        let element = document.getElementById(selectedTeacher as string);
-        setCurrentTeacher(selectedTeacher as string);
-        if (element) {
-            element.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-    }, [selectedTeacher]);
-
-    function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        id: string
-    ): MenuItem {
-        return {
-            key,
-            label,
-            id,
-        } as MenuItem;
+  useEffect(() => {
+    if (selectedTeacher) {
+      setCurrentTeacher(selectedTeacher);
+    } else if (teachersList.length) {
+      setCurrentTeacher(teachersList[0].name);
     }
+  }, [teachersList]);
 
-    const items: MenuProps["items"] = teachersList.map((teacher) =>
-        getItem(teacher.name, teacher.name, teacher.name)
-    );
+  useEffect(() => {
+    let element = document.getElementById(selectedTeacher as string);
+    setCurrentTeacher(selectedTeacher as string);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [selectedTeacher]);
 
-    return (
-        <div className={styles.menu_subjects_wrapper}>
-            <Menu
-                id="menu"
-                onClick={(e) => {
-                    if (e.domEvent.currentTarget.textContent) {
-                        let teacher = e.domEvent.currentTarget.textContent;
-                        dispatch(setTeacher(teacher));
-                        setCurrentTeacher(e.key);
-                        /*   window.history.pushState(
+  function getItem(
+    label: React.ReactNode,
+    key: React.Key,
+    id: string
+  ): MenuItem {
+    return {
+      key,
+      label,
+      id,
+    } as MenuItem;
+  }
+
+  const items: MenuProps["items"] = teachersList.map((teacher) =>
+    getItem(teacher.name, teacher.name, teacher.name)
+  );
+
+  return (
+    <div className={styles.menu_subjects_wrapper}>
+      <Menu
+        id="menu"
+        onClick={(e) => {
+          onClick && onClick();
+          if (e.domEvent.currentTarget.textContent) {
+            let teacher = e.domEvent.currentTarget.textContent;
+            dispatch(setTeacher(teacher));
+            setCurrentTeacher(e.key);
+            /*   window.history.pushState(
                           "edu",
                           `teacher`,
                           `/edu/teacher/${teacher}`
                         ); */
-                        history(`${teacher}`);
-                    }
-                }}
-                selectable
-                className={styles.scrollable_list}
-                mode="inline"
-                selectedKeys={[currentTeacher]}
-                items={items}
-            />
-        </div>
-    );
+            history(`${teacher}`);
+          }
+        }}
+        style={style}
+        selectable
+        className={styles.scrollable_list}
+        mode="inline"
+        selectedKeys={[currentTeacher]}
+        items={items}
+      />
+    </div>
+  );
 };

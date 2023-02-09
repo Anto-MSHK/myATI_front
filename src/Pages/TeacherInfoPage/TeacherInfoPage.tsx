@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Card, Switch, Space, Input, Select } from "antd";
+import {
+  Card,
+  Switch,
+  Space,
+  Input,
+  Select,
+  Dropdown,
+  MenuProps,
+  Button,
+} from "antd";
 import { ITeacher } from "src/Types/TeacherTypes";
 import { useFetchTeachersQuery } from "src/State/services/TeachersApi";
 import { TeachersList } from "src/Components/TeachersList/TeachersList";
@@ -9,6 +18,8 @@ import styles from "./TeacherInfoPage.module.css";
 import { useParams } from "react-router-dom";
 import { TopDot } from "src/Components/TopDot/TopDot";
 import { UserOutlined } from "@ant-design/icons";
+import useScreenWidth from "src/Hooks/useScreenSize";
+import { IdcardFilled } from "@ant-design/icons";
 
 export const TeacherInfoPage: React.FC = () => {
   const { teacherName } = useParams();
@@ -16,6 +27,10 @@ export const TeacherInfoPage: React.FC = () => {
   const [teachers, setTeachers] = useState<ITeacher[]>([]);
   const [selectedTeacher, setSelectedTeacher] = useState("");
   const [valueView, setValueView] = useState("info");
+
+  const widthSize = useScreenWidth();
+  const cutWidth = 1000;
+  const mobileWidth = 600;
 
   useEffect(() => {
     console.log(teacherName);
@@ -53,6 +68,23 @@ export const TeacherInfoPage: React.FC = () => {
     [teachers]
   );
 
+  const items_min_menu: MenuProps["items"] = [
+    {
+      label: (
+        <TeachersList
+          teachersList={teachers}
+          selectedTeacher={teacherName}
+          style={{ width: "100%" }}
+          onClick={() => {
+            setInputIsActive((prev) => !prev);
+          }}
+        />
+      ),
+      key: "2",
+    },
+  ];
+
+  const [inputIsActive, setInputIsActive] = useState(false);
   return (
     <>
       <TopDotEdu
@@ -73,17 +105,83 @@ export const TeacherInfoPage: React.FC = () => {
         }}
         bodyStyle={{ padding: "10px 10px 10px 10px" }}
       >
-        <div className={styles.main_teachers}>
+        {widthSize < cutWidth && (
+          <div className={styles.main_teachers} style={{ display: "block" }}>
+            <Dropdown
+              menu={{ items: items_min_menu }}
+              trigger={["click"]}
+              onOpenChange={() => {
+                setInputIsActive((prev) => !prev);
+              }}
+            >
+              <Button
+                style={{
+                  background: widthSize > cutWidth ? undefined : "#001529",
+                  color: "white",
+                  width: "100%",
+                  height: 50,
+                  marginBottom: 10,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                {inputIsActive && (
+                  <div
+                    onClick={(e) => e?.stopPropagation()}
+                    style={{ width: "100%" }}
+                  >
+                    <Input
+                      className={styles.input_antd}
+                      placeholder="Поиск..."
+                      allowClear
+                      size="small"
+                      onChange={(e) => {
+                        onSearch(e.target.value);
+                      }}
+                    />
+                  </div>
+                )}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginLeft: inputIsActive ? 10 : 0,
+                  }}
+                >
+                  <IdcardFilled
+                    style={{
+                      color: widthSize > cutWidth ? undefined : "white",
+                      fontSize: 22,
+                      marginRight: 5,
+                    }}
+                  />{" "}
+                  <h2>{!inputIsActive ? "Преподаватели" : "Поиск"}</h2>
+                </div>
+              </Button>
+            </Dropdown>
+          </div>
+        )}
+        <div
+          className={styles.main_teachers}
+          style={{ display: widthSize > cutWidth ? "flex" : "block" }}
+        >
           {teachers.length ? (
             <>
-              <div className={styles.menu_wrapper_teachers}>
-                <TeachersList
-                  teachersList={teachers}
-                  selectedTeacher={teacherName}
-                />
-              </div>
+              {widthSize > cutWidth && (
+                <div className={styles.menu_wrapper_teachers}>
+                  <TeachersList
+                    teachersList={teachers}
+                    selectedTeacher={teacherName}
+                  />
+                </div>
+              )}
               {selectedTeacher && (
-                <div className={styles.container}>
+                <div
+                  className={styles.container}
+                  style={{ marginLeft: widthSize > cutWidth ? 10 : 0 }}
+                >
                   {teacherName ? (
                     <TeacherCard
                       name={teacherName}

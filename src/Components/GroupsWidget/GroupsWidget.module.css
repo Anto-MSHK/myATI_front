@@ -5,7 +5,14 @@
   max-width: 50%;
 }
 
-.container h3 {
+.containerAdapt {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.container h3,
+.containerAdapt h3 {
   padding: 5px 0 5px 10px;
   color: white;
   font-weight: 500;
