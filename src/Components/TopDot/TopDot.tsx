@@ -25,6 +25,7 @@ import { MenuProps } from "rc-menu";
 import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import styles from "./TopDot.module.css";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { PinButton } from "../PinButton/PinButton";
 interface TopDotI {
   valueView: string;
   setValueView: any;
@@ -205,6 +206,7 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
                 onChange={onChangeView}
                 options={optionsView}
               />
+              <PinButton style={{ margin: "0 0 0 10px" }} />
             </div>
           ) : (
             <Dropdown menu={{ items: items_min_menu }} trigger={["click"]}>
