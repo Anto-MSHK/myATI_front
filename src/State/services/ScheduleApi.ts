@@ -8,7 +8,7 @@ import {
 export const scheduleApi = createApi({
   reducerPath: "scheduleApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://myati.onrender.com/schedule/",
+    baseUrl: "http://194.67.121.107:3000/schedule/",
   }),
   endpoints: (builder) => ({
     fetchSchedule: builder.query<

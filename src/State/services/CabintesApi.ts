@@ -1,11 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ISubject, ISubjectsResponse, ISubjectResponse } from 'src/Types/SubjectTypes';
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  ISubject,
+  ISubjectsResponse,
+  ISubjectResponse,
+} from "src/Types/SubjectTypes";
 
 /* 
 export const subjectsApi = createApi({
     reducerPath: 'subjectsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://myati.onrender.com/edu' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://194.67.121.107:3000/edu' }),
     endpoints: (builder) => ({
         fetchAllSubject: builder.query<string[], number>({
             query: (limit: number = 135) => ({

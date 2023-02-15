@@ -7,7 +7,7 @@ import {
 
 export const groupsApi = createApi({
   reducerPath: "groupsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://myati.onrender.com/group" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://194.67.121.107:3000/group" }),
   endpoints: (builder) => ({
     fetchAllGroups: builder.query<GroupStateT[], undefined>({
       query: (limit: number = 135) => ({
