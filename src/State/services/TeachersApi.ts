@@ -1,3 +1,4 @@
+import { API_URL } from './../../API/http';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   ITeacher,
@@ -7,7 +8,7 @@ import {
 
 export const teachersApi = createApi({
   reducerPath: "teachersApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://194.67.121.107:3000/edu" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/edu` }),
   tagTypes: ["Teacher"],
   endpoints: (builder) => ({
     fetchTeachers: builder.query<ITeacher[], void>({

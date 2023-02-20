@@ -1,3 +1,4 @@
+import { API_URL } from './../../API/http';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { DayT, ScheduleStateResponseT } from "src/Types/ScheduleTypes";
 import {
@@ -8,7 +9,7 @@ import {
 export const scheduleApi = createApi({
   reducerPath: "scheduleApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://194.67.121.107:3000/schedule/",
+    baseUrl: `${API_URL}/schedule/`,
   }),
   endpoints: (builder) => ({
     fetchSchedule: builder.query<

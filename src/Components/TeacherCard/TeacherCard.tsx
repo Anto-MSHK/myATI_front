@@ -7,6 +7,7 @@ import { SubjectsWidget } from "../SubjectsWidget/SubjectsWidget";
 import { ITeacher } from "src/Types/TeacherTypes";
 import { DayT } from "src/Types/ScheduleTypes";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { useAppDispatch } from 'src/State/hooks';
 
 interface ITeacherCard {
   name: string;
@@ -16,9 +17,13 @@ interface ITeacherCard {
 
 export const TeacherCard: React.FC<ITeacherCard> = ({ name, setValueView }) => {
   const { data: teacher, isLoading, isFetching } = useFetchTeacherQuery(name);
+
   const [mergedTeacherSchedule, setMergedTeacherSchedule] = useState<DayT[]>(
     []
   );
+
+
+
 
   const widthSize = useScreenWidth();
   const cutWidth = 1000;

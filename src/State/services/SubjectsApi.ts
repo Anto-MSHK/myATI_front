@@ -1,3 +1,4 @@
+import { API_URL } from './../../API/http';
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   ISubject,
@@ -7,7 +8,7 @@ import {
 
 export const subjectsApi = createApi({
   reducerPath: "subjectsApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://194.67.121.107:3000/edu" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/edu` }),
   endpoints: (builder) => ({
     fetchAllSubject: builder.query<string[], number>({
       query: (limit: number = 135) => ({

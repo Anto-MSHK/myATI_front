@@ -3,8 +3,18 @@ import { Card } from "antd";
 import { IWidget } from "src/Components/GroupsWidget/GroupsWidget";
 import styles from "./InfoWidget.module.css";
 import { PinButton } from "../PinButton/PinButton";
+import { useAppDispatch } from 'src/State/hooks';
+import { addPin } from 'src/State/Slices/pinsSlice';
 
 export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
+  const dispatch = useAppDispatch()
+  const pinTeacher = () => {
+    dispatch(addPin({
+      key: 'teachers',
+      item: teacher.name
+    }))
+  }
+
   return (
     <div>
       <div>
@@ -46,7 +56,9 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                   </h2>
                 )}
               </div>
-              <PinButton />
+             <div onClick={()=> pinTeacher()}>
+                <PinButton />
+              </div> 
             </div>
           </Card>
         </div>

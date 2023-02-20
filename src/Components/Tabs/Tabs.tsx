@@ -3,9 +3,15 @@ import { PlusOutlined } from "@ant-design/icons";
 import type { InputRef } from "antd";
 import { Input, Tag, Tooltip } from "antd";
 import styles from "./Tabs.module.css";
+import { useAppSelector, useAppDispatch } from 'src/State/hooks';
+import { removePin } from "src/State/Slices/pinsSlice";
+
 
 export const Tabs: React.FC = () => {
-    const [tags, setTags] = useState<string[]>(["ВИС-21", "Чумак И.В."]);
+    const dipatch = useAppDispatch()
+    const pins = useAppSelector(state => state.pins)
+    const tags = [...pins.groups, ...pins.teachers]
+    /* const [tags, setTags] = useState<string[]>(["ВИС-21", "Чумак И.В."]); */
     const [inputVisible, setInputVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [editInputIndex, setEditInputIndex] = useState(-1);
@@ -24,9 +30,10 @@ export const Tabs: React.FC = () => {
     }, [inputValue]);
 
     const handleClose = (removedTag: string) => {
+        dipatch(removePin(removedTag))
         const newTags = tags.filter((tag) => tag !== removedTag);
-        console.log(newTags);
-        setTags(newTags);
+       
+        /* setTags(newTags); */
     };
 
     const showInput = () => {
@@ -39,7 +46,7 @@ export const Tabs: React.FC = () => {
 
     const handleInputConfirm = () => {
         if (inputValue && tags.indexOf(inputValue) === -1) {
-            setTags([...tags, inputValue]);
+           /*  setTags([...tags, inputValue]); */
         }
         setInputVisible(false);
         setInputValue("");
@@ -52,14 +59,14 @@ export const Tabs: React.FC = () => {
     const handleEditInputConfirm = () => {
         const newTags = [...tags];
         newTags[editInputIndex] = editInputValue;
-        setTags(newTags);
+       /*  setTags(newTags); */
         setEditInputIndex(-1);
         setInputValue("");
     };
 
     return (
         <>
-            {tags.map((tag, index) => {
+            {tags && tags.map((tag, index) => {
                 if (editInputIndex === index) {
                     return (
                         <Input
