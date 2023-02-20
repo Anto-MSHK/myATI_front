@@ -5,17 +5,18 @@ import { Input, Tag, Tooltip } from "antd";
 import styles from "./Tabs.module.css";
 import { useAppSelector, useAppDispatch } from 'src/State/hooks';
 import { removePin } from "src/State/Slices/pinsSlice";
+import { Link } from 'react-router-dom';
 
 
 export const Tabs: React.FC = () => {
     const dipatch = useAppDispatch()
-    const pins = useAppSelector(state => state.pins)
-    const tags = [...pins.groups, ...pins.teachers]
+    const items = Object.entries(useAppSelector(state => state.pins))
+    /* const tags = [...pins.groups, ...pins.teachers] */
     /* const [tags, setTags] = useState<string[]>(["ВИС-21", "Чумак И.В."]); */
     const [inputVisible, setInputVisible] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    const [editInputIndex, setEditInputIndex] = useState(-1);
-    const [editInputValue, setEditInputValue] = useState("");
+    /* const [editInputIndex, setEditInputIndex] = useState(-1);
+    const [editInputValue, setEditInputValue] = useState(""); */
     const inputRef = useRef<InputRef>(null);
     const editInputRef = useRef<InputRef>(null);
 
@@ -31,7 +32,7 @@ export const Tabs: React.FC = () => {
 
     const handleClose = (removedTag: string) => {
         dipatch(removePin(removedTag))
-        const newTags = tags.filter((tag) => tag !== removedTag);
+       /*  const newTags = tags.filter((tag) => tag !== removedTag); */
        
         /* setTags(newTags); */
     };
@@ -45,29 +46,34 @@ export const Tabs: React.FC = () => {
     };
 
     const handleInputConfirm = () => {
-        if (inputValue && tags.indexOf(inputValue) === -1) {
+        /* if (inputValue && tags.indexOf(inputValue) === -1) { */
            /*  setTags([...tags, inputValue]); */
-        }
+       /*  } */
         setInputVisible(false);
         setInputValue("");
     };
 
-    const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+   /*  const handleEditInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditInputValue(e.target.value);
-    };
+    }; */
 
-    const handleEditInputConfirm = () => {
+   /*  const handleEditInputConfirm = () => {
         const newTags = [...tags];
         newTags[editInputIndex] = editInputValue;
-       /*  setTags(newTags); */
+        setTags(newTags);
         setEditInputIndex(-1);
         setInputValue("");
-    };
+    }; */
 
     return (
         <>
-            {tags && tags.map((tag, index) => {
-                if (editInputIndex === index) {
+            {
+            items && items.map(([key, tags]) => 
+               tags && tags.map((tag,index) => {
+                    
+                
+
+              /*   if (editInputIndex === index) {
                     return (
                         <Input
                             ref={editInputRef}
@@ -80,30 +86,35 @@ export const Tabs: React.FC = () => {
                             onPressEnter={handleEditInputConfirm}
                         />
                     );
-                }
-
+                } */
+            
                 const isLongTag = tag.length > 20;
 
                 const tagElem = (
-                    <Tag
+                  <Link to={`/schedule/${key.slice(0,-1)}/${tag}`}>
+                    <Tag 
                         className={styles.edit_tag}
                         key={tag}
                         closable={true}
                         onClose={() => handleClose(tag)}
                     >
                         <span
+                            
                             onDoubleClick={(e) => {
                                 if (index !== 0) {
-                                    setEditInputIndex(index);
-                                    setEditInputValue(tag);
+                                    /* setEditInputIndex(index);
+                                    setEditInputValue(tag); */
                                     e.preventDefault();
                                 }
                             }}
                         >
+                            
                             {isLongTag ? `${tag.slice(0, 20)}...` : tag}
                         </span>
                     </Tag>
+                  </Link>
                 );
+              
                 return isLongTag ? (
                     <Tooltip title={tag} key={tag}>
                         {tagElem}
@@ -111,7 +122,8 @@ export const Tabs: React.FC = () => {
                 ) : (
                     tagElem
                 );
-            })}
+                }))
+            }
         </>
     );
 };

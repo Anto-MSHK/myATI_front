@@ -15,7 +15,7 @@ export const Router: FC<RouterI> = ({}) => {
         <Route path="/groups/spo" element={<GroupPage faculty={"SPO"} />} />
 
         <Route
-          path="/schedule/:name"
+          path="/schedule/group/:name"
           element={<SchedulePage type={"group"} />}
         />
         <Route

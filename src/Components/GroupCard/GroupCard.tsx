@@ -34,7 +34,7 @@ export const GroupCard: FC<GroupCardI> = ({ name, faculty, elder }) => {
       <Col span={80}>
         <Card
           title={
-            <Link to={`/schedule/${name}`}>
+            <Link to={`/schedule/group/${name}`}>
               <h2
                 className={styles.groupName_title}
                 //  onClick={() => dispatch(handleGroupName)}
