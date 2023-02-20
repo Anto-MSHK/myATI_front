@@ -142,6 +142,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
         itemName={name as string}
         valueView={valueView}
         setValueView={setValueView}
+        itemType = {type}
       />
       <Card
         loading={isLoading || isFetching}

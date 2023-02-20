@@ -26,19 +26,36 @@ import Checkbox, { CheckboxChangeEvent } from "antd/es/checkbox";
 import styles from "./TopDot.module.css";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import { PinButton } from "../PinButton/PinButton";
+import { addPin } from 'src/State/Slices/pinsSlice';
 interface TopDotI {
   valueView: string;
   setValueView: any;
   itemName: string;
+  itemType: string
 }
 
-export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
+export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName, itemType }) => {
+
+
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
   const mobileWidth = 600;
 
+
   const week = useAppSelector((state) => state.scheduleSettings.switchWeek);
   const dispatch = useAppDispatch();
+
+  const pinItem = () => {
+    const pinObj = {
+      item: itemName,
+      key: '',
+    }
+    if (itemType === 'group') {
+      pinObj.key = 'groups'
+    } else pinObj.key = 'teachers'
+
+    dispatch(addPin(pinObj))
+  }
 
   const hideSwitch = useAppSelector(
     (state) => state.scheduleSettings.hideSwitch
@@ -132,7 +149,7 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
           value={valueWeek}
           onChange={onChangeWeek}
           options={optionsWeek}
-          //  style={{ marginRight: 25, marginLeft: 25 }}
+        //  style={{ marginRight: 25, marginLeft: 25 }}
         />
       ),
       key: "2",
@@ -206,7 +223,9 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName }) => {
                 onChange={onChangeView}
                 options={optionsView}
               />
-              <PinButton style={{ margin: "0 0 0 10px" }} />
+              <div onClick={() => pinItem()}>
+                <PinButton style={{ margin: "0 0 0 10px" }} />
+              </div>
             </div>
           ) : (
             <Dropdown menu={{ items: items_min_menu }} trigger={["click"]}>
