@@ -56,8 +56,8 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                   </h2>
                 )}
               </div>
-             <div onClick={()=> pinTeacher()}>
-                <PinButton />
+             <div /* onClick={()=> pinTeacher()} */>
+                <PinButton type="teachers" curItem={teacher.name} style={{ margin: "0 0 0 10px" }} />
               </div> 
             </div>
           </Card>

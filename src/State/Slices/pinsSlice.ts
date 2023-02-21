@@ -1,5 +1,6 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import Item from 'antd/es/list/Item';
 
 
 type pinsSliceStateT = {
@@ -26,17 +27,24 @@ const pinsSlice = createSlice({
         addPin(state, action: PayloadAction<IPinPayLoad>) {
             const key = action.payload.key
             if (!state[key as keyof pinsSliceStateT].includes(action.payload.item)) {
-                state[key as keyof pinsSliceStateT].push(action.payload.item)
+                state[key as keyof pinsSliceStateT].unshift(action.payload.item)
             }
         },
 
         removePin(state, action: PayloadAction<string>) {
-            if (state.groups.includes(action.payload)) {
-                state.groups = state.groups.filter(item => item != action.payload)
-            }
-            if (state.teachers.includes(action.payload)) {
-                state.teachers = state.teachers.filter(item => item != action.payload)
-            }
+           
+            const items = Object.entries(state)
+            items.forEach(([key, pins]) => {
+                if (pins.includes(action.payload)) {
+                    state[key as keyof pinsSliceStateT] = state[key as keyof pinsSliceStateT].filter(item => item !== action.payload)
+                }
+            })
+           /*  if (state[key as keyof pinsSliceStateT].includes(action.payload.item)) {
+               
+                state[key as keyof pinsSliceStateT] = state[key as keyof pinsSliceStateT].filter(item => item !== action.payload.key)
+                console.log('item removed');
+                console.log(state[key as keyof pinsSliceStateT]);
+            } */
         }
     },
 })

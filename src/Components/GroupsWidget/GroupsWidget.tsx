@@ -28,7 +28,7 @@ export const GroupsWidget: React.FC<IWidget> = ({ teacher }) => {
             {" "}
             {teacher.groups &&
               teacher.groups.map((group: any) => (
-                <Link to={`/schedule/${group}`}>
+                <Link to={`/schedule/group/${group}`}>
                   <Tag className={styles.tag_antd} color="blue">
                     {group}
                   </Tag>

@@ -32,9 +32,6 @@ export const Tabs: React.FC = () => {
 
   const handleClose = (removedTag: string) => {
     dipatch(removePin(removedTag));
-    /*  const newTags = tags.filter((tag) => tag !== removedTag); */
-
-    /* setTags(newTags); */
   };
 
   const showInput = () => {

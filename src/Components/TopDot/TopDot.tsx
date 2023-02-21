@@ -223,8 +223,8 @@ export const TopDot: FC<TopDotI> = ({ valueView, setValueView, itemName, itemTyp
                 onChange={onChangeView}
                 options={optionsView}
               />
-              <div onClick={() => pinItem()}>
-                <PinButton style={{ margin: "0 0 0 10px" }} />
+              <div /* onClick={() => pinItem()} */>
+                <PinButton type={itemType + 's'} curItem={itemName} style={{ margin: "0 0 0 10px" }} />
               </div>
             </div>
           ) : (

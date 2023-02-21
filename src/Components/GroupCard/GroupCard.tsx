@@ -43,7 +43,7 @@ export const GroupCard: FC<GroupCardI> = ({ name, faculty, elder }) => {
               </h2>{" "}
             </Link>
           }
-          extra={<div onClick={() => pinGroup()}><PinButton  /></div>}
+          extra={<div /* onClick={() => pinGroup()} */><PinButton type="groups" curItem={name}/></div>}
         >
           Староста: {elder ? elder : <span>Неизвестен</span>}
         </Card>
