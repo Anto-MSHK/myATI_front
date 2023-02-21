@@ -47,6 +47,7 @@ export const Breadcrumbs = () => {
     <Breadcrumb
       separator=">"
       style={{
+        alignContent: "center",
         fontSize: widthSize < mobileWidth ? 14 : 18,
         marginLeft: widthSize < mobileWidth ? 45 : 0,
       }}

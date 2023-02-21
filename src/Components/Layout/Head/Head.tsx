@@ -8,8 +8,10 @@ import { PushpinOutlined } from "@ant-design/icons";
 import styles from "./Head.module.css";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import TabsMobile from "src/Components/Tabs/TabsMobile";
+import { useAppSelector } from "src/State/hooks";
 
 export const Head = () => {
+  const items = useAppSelector((state) => state.pins);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -35,9 +37,23 @@ export const Head = () => {
         </div>
 
         {widthSize > mobileWidth ? (
-          <Card size="small" bodyStyle={{ padding: 5 }} color={""}>
+          <Card
+            size="small"
+            bodyStyle={{
+              margin: "0 5px 0 5px",
+              padding: "5px 0px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+            color={""}
+          >
             <PushpinOutlined style={{ margin: "0 5px" }} />
-            <Tabs />
+            {items.groups.length > 0 || items.teachers.length > 0 ? (
+              <Tabs />
+            ) : (
+              <h4 style={{ fontWeight: 600 }}>нет закреплённых</h4>
+            )}
           </Card>
         ) : (
           <TabsMobile />
