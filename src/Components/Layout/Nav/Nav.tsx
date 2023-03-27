@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Layout, Image, Button } from "antd";
+import { Menu, Layout, Image, Button, Tag } from "antd";
 import type { MenuProps } from "antd";
 import {
   UnorderedListOutlined,
@@ -80,23 +80,9 @@ export const Nav = () => {
             }
           }}
         >
-          Преподаватели
+          Преподаватели <Tag style={{ color: "white" }}>beta</Tag>
         </Link>,
         "22"
-      ),
-      getItem(
-        <Link
-          to="/edu/subjects"
-          onClick={() => {
-            if (widthSize < mobileWidth) {
-              setCollapsed((prev) => !prev);
-              document.body.style.overflow = "auto";
-            }
-          }}
-        >
-          Предметы
-        </Link>,
-        "23"
       ),
     ]),
   ];
@@ -125,6 +111,7 @@ export const Nav = () => {
       <Sider
         collapsible
         // reverseArrow
+        width={230}
         collapsed={collapsed}
         onCollapse={(value) => {
           if (widthSize > mobileWidth) setCollapsed(value);
