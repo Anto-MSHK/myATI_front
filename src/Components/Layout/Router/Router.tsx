@@ -4,6 +4,7 @@ import { Routes, Route, useParams } from "react-router-dom";
 import { GroupPage } from "src/Pages/GroupPage/GroupPage";
 import { SchedulePage } from "src/Pages/SchedulePage/SchedulePage";
 import { TeacherInfoPage } from "src/Pages/TeacherInfoPage/TeacherInfoPage";
+import { MainPage } from "src/Pages/MainPage/MainPage";
 const { Content } = Layout;
 
 interface RouterI {}
@@ -11,6 +12,7 @@ export const Router: FC<RouterI> = ({}) => {
   return (
     <Content>
       <Routes>
+        <Route path="/" element={<MainPage />} />
         <Route path="/groups/fvo" element={<GroupPage faculty={"FVO"} />} />
         <Route path="/groups/spo" element={<GroupPage faculty={"SPO"} />} />
 

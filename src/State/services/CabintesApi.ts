@@ -8,7 +8,7 @@ import {
 /* 
 export const subjectsApi = createApi({
     reducerPath: 'subjectsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://194.67.121.107:3000/edu' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://back-my-ati.anto-mshk.ru/edu' }),
     endpoints: (builder) => ({
         fetchAllSubject: builder.query<string[], number>({
             query: (limit: number = 135) => ({

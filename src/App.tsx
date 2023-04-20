@@ -34,7 +34,7 @@ const App: React.FC = () => {
           <Content style={{ margin: widthSize > mobileWidth ? "0 16px" : "0" }}>
             <Router />
           </Content>
-          <Footer style={{ textAlign: "center" }}>©TI DSTU, 2022</Footer>
+          <Footer style={{ textAlign: "center" }}>©TI DSTU, 2023</Footer>
         </Layout>
       </Layout>
     </BrowserRouter>
