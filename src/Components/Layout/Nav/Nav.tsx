@@ -3,13 +3,10 @@ import { Menu, Layout, Image, Button, Tag } from "antd";
 import type { MenuProps } from "antd";
 import {
   UnorderedListOutlined,
-  PieChartOutlined,
   ApartmentOutlined,
-  UserOutlined,
-  SettingOutlined,
-  ExperimentOutlined,
   MenuOutlined,
   CloseOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 import { Link, NavLink } from "react-router-dom";
 import logo from "./adaptive-icon.png";
@@ -85,6 +82,13 @@ export const Nav = () => {
         "22"
       ),
     ]),
+    getItem(
+      "Разработчики",
+      "3",
+      <Link to="/respect">
+        <TeamOutlined />
+      </Link>
+    ),
   ];
   return (
     <div style={{}}>

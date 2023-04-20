@@ -5,6 +5,7 @@ import { GroupPage } from "src/Pages/GroupPage/GroupPage";
 import { SchedulePage } from "src/Pages/SchedulePage/SchedulePage";
 import { TeacherInfoPage } from "src/Pages/TeacherInfoPage/TeacherInfoPage";
 import { MainPage } from "src/Pages/MainPage/MainPage";
+import { RespectPage } from "src/Pages/RespectPage/RespectPage";
 const { Content } = Layout;
 
 interface RouterI {}
@@ -13,6 +14,7 @@ export const Router: FC<RouterI> = ({}) => {
     <Content>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/respect" element={<RespectPage />} />
         <Route path="/groups/fvo" element={<GroupPage faculty={"FVO"} />} />
         <Route path="/groups/spo" element={<GroupPage faculty={"SPO"} />} />
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { TeamOutlined, GithubOutlined } from "@ant-design/icons";
 import { Button, Collapse } from "antd";
 import DevelopersList from "src/Components/DevelopersList/DevelopersList";
@@ -6,7 +6,10 @@ import styles from "./Banner.module.css";
 import logo from "../../../icons/fulllogo.png";
 import useScreenWidth from "src/Hooks/useScreenSize";
 
-export const Banner = () => {
+interface BannerI {
+  collapsible?: boolean;
+}
+export const Banner: FC<BannerI> = ({ collapsible = true }) => {
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
   const mobileWidth = 400;
@@ -48,34 +51,42 @@ export const Banner = () => {
         }}
         alt=""
       />
-      <Collapse
-        ghost
-        onChange={() => {
-          setIsCollapse((prev) => !prev);
-        }}
-      >
-        <Collapse.Panel
-          style={{ textAlign: "center" }}
-          header={
-            <p
-              style={{
-                margin: 0,
-                position: "relative",
-                zIndex: 10,
-              }}
-            >
-              <TeamOutlined style={{ color: "#969696", fontSize: 25 }} />
-              <h3 style={{ color: "#969696", marginBottom: 0, marginTop: -5 }}>
-                {!isCollapse ? "увидеть" : "скрыть"} разработчиков
-              </h3>
-            </p>
-          }
-          key="1"
-          showArrow={false}
+      {collapsible ? (
+        <Collapse
+          ghost
+          onChange={() => {
+            setIsCollapse((prev) => !prev);
+          }}
         >
+          <Collapse.Panel
+            style={{ textAlign: "center" }}
+            header={
+              <p
+                style={{
+                  margin: 0,
+                  position: "relative",
+                  zIndex: 10,
+                }}
+              >
+                <TeamOutlined style={{ color: "#969696", fontSize: 25 }} />
+                <h3
+                  style={{ color: "#969696", marginBottom: 0, marginTop: -5 }}
+                >
+                  {!isCollapse ? "увидеть" : "скрыть"} разработчиков
+                </h3>
+              </p>
+            }
+            key="1"
+            showArrow={false}
+          >
+            <DevelopersList />
+          </Collapse.Panel>
+        </Collapse>
+      ) : (
+        <div style={{ marginTop: widthSize > cutWidth ? -15 : 55 }}>
           <DevelopersList />
-        </Collapse.Panel>
-      </Collapse>
+        </div>
+      )}
     </div>
   );
 };
