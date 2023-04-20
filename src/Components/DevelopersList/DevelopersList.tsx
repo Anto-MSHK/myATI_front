@@ -75,8 +75,10 @@ export const DevelopersList = () => {
     <div
       className={styles.developers_list}
       style={{
+        flexDirection: widthSize > 350 ? undefined : "column",
         flexWrap: widthSize > cutWidth ? undefined : "wrap",
         marginBottom: 15,
+        width: "100%",
       }}
     >
       {developers.map((developer, index) => (

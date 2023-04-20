@@ -98,8 +98,6 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
 
                 accum.pop();
                 accum.push(prevLesson);
-                console.log("Брух");
-                console.log(prevLesson.groups);
               }
               return accum;
 
@@ -142,7 +140,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
         itemName={name as string}
         valueView={valueView}
         setValueView={setValueView}
-        itemType = {type}
+        itemType={type}
       />
       <Card
         loading={isLoading || isFetching}

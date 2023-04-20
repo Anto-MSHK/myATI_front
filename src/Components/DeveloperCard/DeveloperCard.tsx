@@ -6,6 +6,7 @@ import {
   TwitterOutlined,
 } from "@ant-design/icons";
 import iconVK from "../../icons/iconVK.svg";
+import useScreenWidth from "src/Hooks/useScreenSize";
 interface DeveloperCardProps {
   name: string;
   role: string;
@@ -22,13 +23,17 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
   avatar,
   social,
 }) => {
+  const widthSize = useScreenWidth();
+  const cutWidth = 1000;
+  const mobileWidth = 450;
   return (
     <Card
       hoverable
       size="small"
       style={{
-        width: "fit-content",
+        //   width: "fit-content",
         cursor: "default",
+        width: widthSize > mobileWidth ? "fit-content" : "100%",
       }}
       className="dev-card"
       cover={

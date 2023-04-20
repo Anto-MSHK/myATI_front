@@ -7,6 +7,7 @@ import "./LessonCard.css";
 import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { dataT } from "src/Types/ScheduleTypes";
 import { Link } from "react-router-dom";
+import useScreenWidth from "src/Hooks/useScreenSize";
 type subjectData = {
   subject: subject;
   teacher?: {
@@ -93,6 +94,10 @@ export const LessonCard: FC<LessonCardI> = ({
     } else setIsLessonActive({ backroundColor: "blue", color: "black" });
   }, [time, dayOfWeek]);
 
+  const widthSize = useScreenWidth();
+  const cutWidth = 900;
+  const mobileWidth = 600;
+
   return (
     <div className={"lesson"}>
       {data.lowerWeek && !hideSwitch && (
@@ -115,6 +120,9 @@ export const LessonCard: FC<LessonCardI> = ({
           <div className={"lesson_card__main"}>
             <Tag
               className={"main__count"}
+              style={{
+                width: widthSize < mobileWidth ? 50 : undefined,
+              }}
               color={isLessonActive.backroundColor}
             >
               <h2
@@ -125,9 +133,18 @@ export const LessonCard: FC<LessonCardI> = ({
               </h2>
             </Tag>
             <div className={"first_container"}>
-              <h1 className={"main__title"}>
+              <h1
+                className={"main__title"}
+                style={{
+                  margin: widthSize < mobileWidth ? " 0 0 0 50px" : undefined,
+                }}
+              >
                 {data[curWeek]?.subject ? (
-                  <div>
+                  <div
+                    style={{
+                      fontSize: widthSize < mobileWidth ? 18 : undefined,
+                    }}
+                  >
                     {data[curWeek]?.subject && data[curWeek]?.subject.title}
                   </div>
                 ) : (
@@ -139,10 +156,27 @@ export const LessonCard: FC<LessonCardI> = ({
         }
       >
         <div className={"secondary"}>
-          <div className={"secondary__time"}>
-            <h3>{time.from}</h3>
+          <div
+            className={"secondary__time"}
+            style={{
+              margin: widthSize < mobileWidth ? 0 : undefined,
+            }}
+          >
+            <h3
+              style={{
+                fontSize: widthSize < mobileWidth ? 10 : undefined,
+              }}
+            >
+              {time.from}
+            </h3>
             <p className={"secondary__time_line"} />
-            <h3>{time.to}</h3>
+            <h3
+              style={{
+                fontSize: widthSize < mobileWidth ? 10 : undefined,
+              }}
+            >
+              {time.to}
+            </h3>
           </div>
           {data[curWeek]?.subject && (
             <div className={"secondary__info"}>

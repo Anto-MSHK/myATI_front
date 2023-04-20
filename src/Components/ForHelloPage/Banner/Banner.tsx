@@ -12,7 +12,7 @@ interface BannerI {
 export const Banner: FC<BannerI> = ({ collapsible = true }) => {
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
-  const mobileWidth = 400;
+  const mobileWidth = 450;
   const [isCollapse, setIsCollapse] = useState(false);
   return (
     <div
@@ -57,6 +57,7 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
           onChange={() => {
             setIsCollapse((prev) => !prev);
           }}
+          style={{ width: "100%" }}
         >
           <Collapse.Panel
             style={{ textAlign: "center" }}
@@ -83,7 +84,13 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
           </Collapse.Panel>
         </Collapse>
       ) : (
-        <div style={{ marginTop: widthSize > cutWidth ? -15 : 55 }}>
+        <div
+          style={{
+            marginTop: widthSize > cutWidth ? -15 : 55,
+            width: "100%",
+            padding: 10,
+          }}
+        >
           <DevelopersList />
         </div>
       )}
