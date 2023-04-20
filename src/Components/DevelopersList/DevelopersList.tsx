@@ -2,6 +2,7 @@
 import React from "react";
 import DeveloperCard from "../DeveloperCard/DeveloperCard";
 import styles from "./DevelopersList.module.css";
+import useScreenWidth from "src/Hooks/useScreenSize";
 interface Developer {
   name: string;
   role: string;
@@ -13,6 +14,10 @@ interface Developer {
 }
 
 export const DevelopersList = () => {
+  const widthSize = useScreenWidth();
+  const cutWidth = 1000;
+  const mobileWidth = 600;
+
   const developers: Developer[] = [
     {
       name: "Антон Мащенко",
@@ -55,7 +60,7 @@ export const DevelopersList = () => {
       },
     },
     {
-      name: "Андрей Артёмнко",
+      name: "Андрей Артёменко",
       role: "frontend",
       avatar:
         "https://sun6-23.userapi.com/impg/B26vAN3BpiLjX6Lphr-FzZPNaas1aVARoIZ3JQ/ax_Jh9BGky8.jpg?size=1624x2160&quality=96&sign=6c3634b7ae735c5a88ee1c97953a1383&type=album",
@@ -67,7 +72,13 @@ export const DevelopersList = () => {
   ];
 
   return (
-    <div className={styles.developers_list}>
+    <div
+      className={styles.developers_list}
+      style={{
+        flexWrap: widthSize > cutWidth ? undefined : "wrap",
+        marginBottom: 15,
+      }}
+    >
       {developers.map((developer, index) => (
         <DeveloperCard key={index} {...developer} />
       ))}

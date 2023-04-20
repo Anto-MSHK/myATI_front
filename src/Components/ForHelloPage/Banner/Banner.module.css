@@ -1,0 +1,21 @@
+.banner {
+  background-position: 0 -100px;
+  object-fit: fill;
+  margin-top: -15px;
+  padding: 0 -10px;
+  overflow: hidden;
+}
+.banner::before {
+  content: "";
+  background: url("../../../icons/backGround.svg") no-repeat center center fixed;
+  background-position: 0px -5vh;
+  background-size: cover;
+  clear: both;
+  display: table;
+  object-fit: fill;
+  padding: 0 -10px;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}

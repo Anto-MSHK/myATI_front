@@ -28,7 +28,6 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
       size="small"
       style={{
         width: "fit-content",
-        marginBottom: 20,
         cursor: "default",
       }}
       className="dev-card"
@@ -45,10 +44,13 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
         description={<div style={{ marginTop: -12 }}>{role}</div>}
         style={{ textAlign: "start" }}
       />
-      <Space size="middle" style={{ marginTop: 8, width: "100%", gap: 4 }}>
+      <Space size="middle" style={{ marginTop: 8, width: "100%" }}>
         {social.vk && (
           <a href={social.vk} target="_blank" rel="noopener noreferrer">
-            <img src={iconVK} style={{ width: 27, marginTop: 5 }} />
+            <img
+              src={iconVK}
+              style={{ width: 27, marginTop: 5, marginRight: -10 }}
+            />
           </a>
         )}
         {social.github && (

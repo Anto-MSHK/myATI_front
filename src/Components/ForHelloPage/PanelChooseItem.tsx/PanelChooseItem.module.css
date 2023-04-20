@@ -1,0 +1,12 @@
+.main {
+  box-shadow: 0px 6px 8px 0px rgba(34, 60, 80, 0.2);
+}
+.cards_container {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+  gap: 10px;
+  background-color: #ebebeb;
+}
