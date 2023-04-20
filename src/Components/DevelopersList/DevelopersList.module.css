@@ -1,0 +1,9 @@
+.developers_list {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  height: fit-content;
+  position: relative;
+  z-index: 10;
+}

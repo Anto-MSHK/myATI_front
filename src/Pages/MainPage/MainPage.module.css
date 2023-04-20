@@ -1,10 +1,23 @@
 .backgr {
-  background: url("../../icons/backGround.svg") no-repeat center center fixed;
   background-position: 0 -100px;
   object-fit: fill;
   margin-top: -15px;
-
-  height: 400px;
+  padding: 0 -10px;
+  overflow: hidden;
+}
+.backgr::before {
+  content: "";
+  background: url("../../icons/backGround.svg") no-repeat center center fixed;
+  background-position: 0px -5vh;
+  background-size: cover;
+  clear: both;
+  display: table;
+  object-fit: fill;
+  padding: 0 -10px;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
 }
 
 .info {
@@ -12,4 +25,15 @@
   -moz-box-shadow: 0px -6px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 0px -6px 8px 0px rgba(34, 60, 80, 0.2);
   margin: 0 -15px;
+  background: rgb(245, 245, 245);
+  background: linear-gradient(
+    0deg,
+    rgba(245, 245, 245, 1) 80%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  position: relative;
+  z-index: 2;
+}
+.theme {
+  box-shadow: 0px 6px 8px 0px rgba(34, 60, 80, 0.2);
 }

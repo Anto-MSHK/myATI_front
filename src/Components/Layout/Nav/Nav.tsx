@@ -11,7 +11,7 @@ import {
   MenuOutlined,
   CloseOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "./adaptive-icon.png";
 import styles from "./Nav.module.css";
 import useScreenWidth from "src/Hooks/useScreenSize";
@@ -136,8 +136,10 @@ export const Nav = () => {
             widthSize < mobileWidth ? styles.mobile : ""
           }`}
         >
-          <h1>My ATI</h1>
-          <img src={logo} alt={"logo"} />
+          <NavLink to="/">
+            <h1>My ATI</h1>
+            <img src={logo} alt={"logo"} />
+          </NavLink>
         </div>
         <Menu
           theme="dark"
