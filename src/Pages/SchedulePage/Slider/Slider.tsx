@@ -137,6 +137,7 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
           overflow: "hidden",
         }}
         dotPosition="top"
+        initialSlide={curDayIndex}
         ref={(node) => (carousel = node as any)}
       >
         {schedule?.map((day, index) => (

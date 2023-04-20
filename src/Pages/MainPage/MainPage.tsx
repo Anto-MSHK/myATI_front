@@ -1,4 +1,4 @@
-import { Card, Row, Select, Tag } from "antd";
+import { Alert, Button, Card, Row, Select, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -90,7 +90,7 @@ export const MainPage = () => {
           cover={
             <div className={styles.cards_container}>
               <Row gutter={[5, 5]} style={{ gap: 5 }} justify={"start"}>
-                {pins.teachers.length > 1 ? (
+                {pins.teachers.length > 0 ? (
                   pins.teachers?.map((teacher) => (
                     <Link to={`/edu/teacher/${teacher}`}>
                       <Card
@@ -126,9 +126,9 @@ export const MainPage = () => {
           />
         </Card>
       </div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", marginTop: 25 }}>
         <h1 style={{ marginTop: 20, marginBottom: 20, marginRight: 20 }}>
-          Расписание по группам
+          Расписание по важным группам
         </h1>
         {pins.groups.length > 0 && (
           <Select
@@ -141,6 +141,24 @@ export const MainPage = () => {
           />
         )}
       </div>
+      <Alert
+        closable
+        style={{ marginTop: -5, marginBottom: 10 }}
+        message={
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <p style={{ margin: 0 }}>
+              Здесь доступна только часть функционала!
+            </p>
+            <Link to={`/schedule/group/${curGroup}`}>
+              <Button type="link" size="small" style={{ color: "#FAAD14" }}>
+                Открыть полную версию.
+              </Button>
+            </Link>
+          </div>
+        }
+        type="warning"
+        showIcon
+      />
       {schedule && (
         <div style={{ position: "relative" }}>
           <Slider schedule={schedule} />

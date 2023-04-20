@@ -19,7 +19,7 @@ import teachersReducer from "./Slices/teachersSlice";
 import groupReducer from "./Slices/groupSlice";
 import subjectsReducer from "./Slices/subjectsSlice";
 import scheduleSettingsReducer from "./Slices/scheduleSettingsSlice";
-import pinsReducer from 'src/State/Slices/pinsSlice';
+import pinsReducer from "src/State/Slices/pinsSlice";
 
 const rootReducer = combineReducers({
   [teachersApi.reducerPath]: teachersApi.reducer,
@@ -31,7 +31,7 @@ const rootReducer = combineReducers({
   teachers: teachersReducer,
   groups: groupReducer,
   subjects: subjectsReducer,
-  pins: pinsReducer
+  pins: pinsReducer,
 });
 
 const persisConfig = {

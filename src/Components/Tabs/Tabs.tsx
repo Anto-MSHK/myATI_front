@@ -101,7 +101,11 @@ export const Tabs: React.FC = () => {
                       : { height: 40, alignContent: "center" }
                   }
                 >
-                  <Link to={`/schedule/${key.slice(0, -1)}/${tag}`}>
+                  <Link
+                    to={`/${
+                      key.slice(0, -1) === "group" ? "schedule" : "edu"
+                    }/${key.slice(0, -1)}/${tag}`}
+                  >
                     <span
                       onDoubleClick={(e) => {
                         if (index !== 0) {
