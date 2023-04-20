@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TeamOutlined, GithubOutlined } from "@ant-design/icons";
 import { Button, Collapse } from "antd";
 import DevelopersList from "src/Components/DevelopersList/DevelopersList";
@@ -10,6 +10,7 @@ export const Banner = () => {
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
   const mobileWidth = 400;
+  const [isCollapse, setIsCollapse] = useState(false);
   return (
     <div
       style={{
@@ -47,7 +48,12 @@ export const Banner = () => {
         }}
         alt=""
       />
-      <Collapse ghost>
+      <Collapse
+        ghost
+        onChange={() => {
+          setIsCollapse((prev) => !prev);
+        }}
+      >
         <Collapse.Panel
           style={{ textAlign: "center" }}
           header={
@@ -60,7 +66,7 @@ export const Banner = () => {
             >
               <TeamOutlined style={{ color: "#969696", fontSize: 25 }} />
               <h3 style={{ color: "#969696", marginBottom: 0, marginTop: -5 }}>
-                увидеть разработчиков
+                {!isCollapse ? "увидеть" : "скрыть"} разработчиков
               </h3>
             </p>
           }

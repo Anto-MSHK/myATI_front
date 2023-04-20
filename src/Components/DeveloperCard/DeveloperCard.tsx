@@ -44,20 +44,31 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
         description={<div style={{ marginTop: -12 }}>{role}</div>}
         style={{ textAlign: "start" }}
       />
-      <Space size="middle" style={{ marginTop: 8, width: "100%" }}>
-        {social.vk && (
-          <a href={social.vk} target="_blank" rel="noopener noreferrer">
-            <img
-              src={iconVK}
-              style={{ width: 27, marginTop: 5, marginRight: -10 }}
-            />
-          </a>
-        )}
-        {social.github && (
-          <a href={social.github} target="_blank" rel="noopener noreferrer">
-            <GithubOutlined style={{ fontSize: 20 }} />
-          </a>
-        )}
+      <Space
+        size="middle"
+        style={{ marginTop: 8, width: "100%", justifyContent: "space-between" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            marginTop: 8,
+
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          {social.vk && (
+            <a href={social.vk} target="_blank" rel="noopener noreferrer">
+              <img src={iconVK} style={{ width: 27 }} />
+            </a>
+          )}
+          {social.github && (
+            <a href={social.github} target="_blank" rel="noopener noreferrer">
+              <GithubOutlined style={{ fontSize: 20, marginBottom: 7 }} />
+            </a>
+          )}
+        </div>
+        <p style={{ fontWeight: 600, color: "#1677FF", margin: 0 }}>ВИС-21</p>
       </Space>
     </Card>
   );
