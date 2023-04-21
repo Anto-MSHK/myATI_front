@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { Button, Card, Checkbox, Space, Switch } from "antd";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useFetchScheduleQuery } from "src/State/services/ScheduleApi";
 import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { ViewSwitch } from "src/Components/ViewSwitch/ViewSwitch";
@@ -32,7 +32,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
   const { name } = useParams();
   const [valueView, setValueView] = useState("slider");
   const [mergedSchedule, setMergedSchedule] = useState<DayT[]>([]);
-
+  const location = useLocation();
   const {
     data: schedule,
     isLoading,
@@ -65,6 +65,10 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
         } else prevLesson = undefined;
 
         const sortedDay: DayT = structuredClone(day);
+
+        sortedDay.lessons = sortedDay.lessons.map((lesson) => {
+          return { ...lesson, count: lesson.count + 1 };
+        });
         sortedDay.lessons.sort((a, b) => a.count - b.count);
 
         if (sortedDay.lessons.length) {
@@ -114,14 +118,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
     }
   };
   const CheckScheduleRelation = () => {
-    if (
-      schedule?.some((day) => {
-        return day.lessons.some((lesson) => {
-          return !lesson.group;
-        });
-      })
-    )
-      return "group";
+    if (location.pathname.includes("group")) return "group";
     return "teacher";
   };
 
