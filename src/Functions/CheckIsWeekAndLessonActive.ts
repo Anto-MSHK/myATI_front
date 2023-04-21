@@ -1,12 +1,15 @@
 function dateObj(d: string) {
-  var parts = d.split(":");
-  console.log(parts[0]);
+  let parts;
+
+  if (d) {
+    parts = d.split(":");
+  }
 
   let date = new Date();
-
-  date.setHours(Number(parts[0]));
-  date.setMinutes(Number(parts[1]));
-
+  if (parts) {
+    date.setHours(Number(parts[0]));
+    date.setMinutes(Number(parts[1]));
+  }
   return date;
 }
 

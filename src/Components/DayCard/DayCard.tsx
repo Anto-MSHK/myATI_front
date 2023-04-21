@@ -62,14 +62,18 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons, ref, style }) => {
       </div>
       {lessons.map((lesson, index) => (
         <div key={`${lesson.time} +${index}`}>
-          <LessonCard
-            count={lesson.count}
-            time={lesson.time}
-            data={lesson.data}
-            group={lesson.group}
-            groups={lesson.groups}
-            dayOfWeek={dayOfWeek}
-          />
+          {!(lesson as any).special ? (
+            <LessonCard
+              count={lesson.count}
+              time={lesson.time}
+              data={lesson.data}
+              group={lesson.group}
+              groups={lesson.groups}
+              dayOfWeek={dayOfWeek}
+            />
+          ) : (
+            <Weekend reason={(lesson as any).special} />
+          )}
         </div>
       ))}
       {lessons.length === 0 && <Weekend />}

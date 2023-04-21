@@ -140,7 +140,6 @@ export const MainPage = () => {
                 display: "flex",
                 alignItems: "center",
                 marginTop: 25,
-                padding: widthSize > mobileWidth ? 0 : "0 20px",
               }}
             >
               <h1

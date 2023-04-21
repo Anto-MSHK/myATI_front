@@ -3,24 +3,26 @@ import { Card, Space } from "antd";
 import styles from "./Weekend.module.css";
 
 interface IWeekendCard {
-    dayOfWeek?: string;
+  dayOfWeek?: string;
+  reason?: string;
 }
 
-export const Weekend: React.FC<IWeekendCard> = ({ dayOfWeek }) => {
-    return (
-        <div className={styles.container}>
-            <Card
-                title={
-                    <Space className={styles.space_antd}>
-                        <span>{dayOfWeek}</span>
-                        <span>Выходной</span>
-                    </Space>
-                }
-            >
-                <h1>
-                    Нет пар
-                </h1>
-            </Card>
-        </div>
-    );
+export const Weekend: React.FC<IWeekendCard> = ({
+  dayOfWeek,
+  reason = "Нет пар",
+}) => {
+  return (
+    <div className={styles.container}>
+      <Card
+        title={
+          <Space className={styles.space_antd}>
+            <span>{dayOfWeek}</span>
+            <span>{reason === "Нет пар" ? "Выходной" : "Вместо пар"}</span>
+          </Space>
+        }
+      >
+        <h1>{reason}</h1>
+      </Card>
+    </div>
+  );
 };
