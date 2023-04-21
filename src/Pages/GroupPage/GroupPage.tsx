@@ -67,7 +67,7 @@ export const GroupPage: FC<any> = ({ faculty }) => {
                   padding: "5px",
                   borderRadius: "10px",
                   marginBottom: "10px",
-                  width: "fit-content",
+                  width: "100%",
                 }}
               >
                 <Row gutter={[16, 16]} className={styles.row_antd}>

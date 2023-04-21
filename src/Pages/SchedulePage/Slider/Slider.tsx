@@ -24,9 +24,13 @@ import useScreenWidth from "src/Hooks/useScreenSize";
 
 interface SliderI {
   schedule: DayT[] | undefined;
+  withScrollTo?: boolean;
 }
 
-export const Slider: React.FC<SliderI> = ({ schedule }) => {
+export const Slider: React.FC<SliderI> = ({
+  schedule,
+  withScrollTo = true,
+}) => {
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -51,7 +55,7 @@ export const Slider: React.FC<SliderI> = ({ schedule }) => {
 
   useEffect(() => {
     let element = document.getElementById("scroll");
-    if (element) {
+    if (element && withScrollTo) {
       element.scrollIntoView({ behavior: "smooth", block: "end" });
     }
   }, []);

@@ -1,4 +1,4 @@
-import { Alert, Button, Card, Row, Select, Tag } from "antd";
+import { Alert, Button, Card, Row, Select, Spin, Tag } from "antd";
 import Meta from "antd/es/card/Meta";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -197,10 +197,19 @@ export const MainPage = () => {
               showIcon
             />
           </div>
-          {schedule && (
+          {schedule ? (
             <div style={{ position: "relative" }}>
-              <Slider schedule={schedule} />
+              <Slider schedule={schedule} withScrollTo={false} />
             </div>
+          ) : (
+            <Spin
+              size="large"
+              style={{
+                margin: "auto 0",
+                padding: 30,
+                width: "100%",
+              }}
+            />
           )}
         </div>
       ) : (
