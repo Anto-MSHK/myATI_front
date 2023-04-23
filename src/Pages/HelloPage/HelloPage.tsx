@@ -56,8 +56,8 @@ export const HelloPage = () => {
         <Result
           className={styles.info}
           icon={<SmileOutlined />}
-          style={{ height: widthSize > cutWidth ? "80vh" : "100vh" }}
-          title="Привет, выбери режим"
+          style={{ height: widthSize > cutWidth ? "85vh" : undefined }}
+          title="Привет, выбери роль"
           extra={
             <div
               style={{

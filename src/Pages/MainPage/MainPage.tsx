@@ -128,7 +128,7 @@ export const MainPage = () => {
           </Card>
         </div>
       </div>
-      {pins.groups.length > 1 ? (
+      {pins.groups.length > 0 ? (
         <div>
           <div
             style={{

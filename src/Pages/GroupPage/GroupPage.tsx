@@ -59,7 +59,7 @@ export const GroupPage: FC<any> = ({ faculty }) => {
       <Alert
         closable
         style={{
-          marginTop: -5,
+          marginTop: 5,
           marginBottom: 10,
         }}
         message={
