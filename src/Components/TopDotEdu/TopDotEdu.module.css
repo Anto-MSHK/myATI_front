@@ -1,47 +1,47 @@
 .container::after {
-    content: "";
-    background-color: #f5f5f5;
-    right: -16px;
-    left: -16px;
-    top: -20px;
-    height: 20px;
-    position: absolute;
-    z-index: 1;
+  content: "";
+  background-color: #f5f5f5;
+  right: -16px;
+  left: -16px;
+  top: -20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
 }
 
 .container {
-    display: flex;
-    width: 100%;
-    justify-content: end;
+  display: flex;
+  width: 100%;
+  justify-content: end;
 }
 
 .container div {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .main_container {
-    display: flex;
-    position: sticky;
-    height: 62px;
-    padding: 12px;
-    top: 80px;
-    background: white;
-    z-index: 20;
-    border-radius: 10px;
-    border-color: #F0F0F0;
-    border: solid #F0F0F0 1px;
-    /* //   overflow: "hidden", */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  position: sticky;
+  height: 62px;
+  padding: 12px;
+  top: 80px;
+  background: white;
+  z-index: 20;
+  border-radius: 10px;
+  border-color: #f0f0f0;
+  border: solid #f0f0f0 1px;
+  /* //   overflow: "hidden", */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .input_antd {
-    max-width: 200px;
-    height: 100%;
+  max-width: 400px;
+  height: 31px;
 }
 
 .select_antd {
-    margin-left: 10px;
-    margin-right: 10px;
-    width: max-content;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: max-content;
 }

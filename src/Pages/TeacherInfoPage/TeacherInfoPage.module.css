@@ -1,36 +1,36 @@
 .main_teachers {
-    display: flex;
+  display: flex;
 }
 
 .main_teachers h3 {
-    text-align: center;
-    align-items: center;
-    margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .menu_wrapper_teachers {
-    display: flex;
-    height: fit-content;
+  display: flex;
+  height: fit-content;
 }
 
 .container {
-    margin-left: 10px;
-    width: 100%;
+  margin-left: 10px;
+  width: 100%;
 }
 
 .container p {
-    margin: 0;
+  margin: 0;
 }
 
 .container h2 {
-    font-weight: 400;
-    font-size: 24px;
-    /* color: white; */
-    width: 100%;
-    text-align: center;
-    margin: auto;
+  font-weight: 400;
+  font-size: 24px;
+  /* color: white; */
+  width: 100%;
+  text-align: center;
+  margin: auto;
 }
 
 .userOutlined_antd {
-    font-size: 45px;
+  font-size: 45px;
 }

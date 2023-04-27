@@ -69,7 +69,10 @@ export const PinButton: FC<PinButtonI> = ({
   };
   return (
     <Button
-      onClick={() => handlePin()}
+      onClick={(e) => {
+        e.preventDefault();
+        handlePin();
+      }}
       style={{ width: 32, ...style }}
       icon={icon}
     />

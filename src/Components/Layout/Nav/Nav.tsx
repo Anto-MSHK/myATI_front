@@ -85,7 +85,7 @@ export const Nav = () => {
     getItem(
       "Разработчики",
       "3",
-      <Link to="/respect">
+      <Link to="/respect" onClick={() => setCollapsed((prev) => !prev)}>
         <TeamOutlined />
       </Link>
     ),
@@ -140,7 +140,7 @@ export const Nav = () => {
             widthSize < mobileWidth ? styles.mobile : ""
           }`}
         >
-          <NavLink to="/">
+          <NavLink to="/" onClick={() => setCollapsed((prev) => !prev)}>
             <h1>My ATI</h1>
             <img src={logo} alt={"logo"} />
           </NavLink>

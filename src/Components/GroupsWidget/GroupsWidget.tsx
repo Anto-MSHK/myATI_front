@@ -29,9 +29,18 @@ export const GroupsWidget: React.FC<IWidget> = ({ teacher }) => {
             {teacher.groups &&
               teacher.groups.map((group: any) => (
                 <Link to={`/schedule/group/${group}`}>
-                  <Tag className={styles.tag_antd} color="blue">
+                  <Card
+                    hoverable
+                    size="small"
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 500,
+                      backgroundColor: "#E6F4FF",
+                      border: "2px solid #91CAFF",
+                    }}
+                  >
                     {group}
-                  </Tag>
+                  </Card>
                 </Link>
               ))}
           </Row>
@@ -39,7 +48,7 @@ export const GroupsWidget: React.FC<IWidget> = ({ teacher }) => {
       </div>
       <Link to={`/schedule/teacher/${teacher.name}`}>
         <Button className={styles.button_antd} type="primary">
-          Открыть расписание
+          Открыть расписание преподавателя
         </Button>
       </Link>
     </div>

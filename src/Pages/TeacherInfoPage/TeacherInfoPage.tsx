@@ -119,10 +119,10 @@ export const TeacherInfoPage: React.FC = () => {
                   background: widthSize > cutWidth ? undefined : "#4096FF",
                   color: "white",
                   width: "100%",
-                  height: 50,
+                  height: 60,
                   marginBottom: 10,
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                   alignItems: "center",
                 }}
               >
@@ -153,11 +153,11 @@ export const TeacherInfoPage: React.FC = () => {
                   <IdcardFilled
                     style={{
                       color: widthSize > cutWidth ? undefined : "white",
-                      fontSize: 22,
+                      fontSize: 35,
                       marginRight: 5,
                     }}
                   />{" "}
-                  <h2>{!inputIsActive ? "Найти" : "Поиск"}</h2>
+                  <h1>{!inputIsActive ? "Найти" : "Поиск"}</h1>
                 </div>
               </Button>
             </Dropdown>
@@ -202,8 +202,11 @@ export const TeacherInfoPage: React.FC = () => {
                         color: "white",
                       }}
                     >
-                      <h2>
-                        <UserOutlined className={styles.userOutlined_antd} />
+                      <h2 style={{ fontSize: widthSize > cutWidth ? 20 : 16 }}>
+                        <UserOutlined
+                          style={{ fontSize: widthSize > cutWidth ? 50 : 35 }}
+                          className={styles.userOutlined_antd}
+                        />
                         <p>выберите из списка</p>
                       </h2>
                     </Card>

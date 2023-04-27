@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import useScreenWidth from "src/Hooks/useScreenSize";
 
 export const Tabs: React.FC = () => {
-  const dipatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const items = Object.entries(useAppSelector((state) => state.pins));
   /* const tags = [...pins.groups, ...pins.teachers] */
   /* const [tags, setTags] = useState<string[]>(["ВИС-21", "Чумак И.В."]); */
@@ -31,7 +31,7 @@ export const Tabs: React.FC = () => {
   }, [inputValue]);
 
   const handleClose = (removedTag: string) => {
-    dipatch(removePin(removedTag));
+    dispatch(removePin(removedTag));
   };
 
   const showInput = () => {

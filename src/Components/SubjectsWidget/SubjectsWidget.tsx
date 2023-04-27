@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Menu } from "antd";
+import { Card, List, Menu } from "antd";
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import { MenuProps } from "rc-menu";
 import { IWidget } from "src/Components/GroupsWidget/GroupsWidget";
@@ -19,7 +19,7 @@ function getItem(
 }
 
 export const SubjectsWidget: React.FC<IWidget> = ({ teacher }) => {
-  const items: MenuProps["items"] =
+  const items: MenuItemType[] | undefined =
     teacher.subjects &&
     teacher.subjects.map((name: any) => getItem(name, name, name));
 
@@ -31,17 +31,9 @@ export const SubjectsWidget: React.FC<IWidget> = ({ teacher }) => {
     <div className={styles.container}>
       <h3>Предметы</h3>
       <Card bodyStyle={{ padding: 10 }}>
-        <Menu
-          className={
-            widthSize > cutWidth
-              ? styles.scrollable_list
-              : styles.scrollable_list_adapt
-          }
-          id="menu"
-          //  selectable
-          inlineIndent={10}
-          mode="vertical"
-          items={items}
+        <List
+          dataSource={items}
+          renderItem={(item) => <List.Item>{item.label}</List.Item>}
         />
       </Card>
     </div>

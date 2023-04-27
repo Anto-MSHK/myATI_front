@@ -31,10 +31,17 @@ export const Head = () => {
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <div className={styles.container}>
-        <div>
-          <Breadcrumbs />
-        </div>
+      <div
+        className={styles.container}
+        style={{
+          justifyContent: widthSize < mobileWidth ? "flex-end" : undefined,
+        }}
+      >
+        {widthSize > mobileWidth && (
+          <div>
+            <Breadcrumbs />
+          </div>
+        )}
 
         {widthSize > mobileWidth ? (
           <Card

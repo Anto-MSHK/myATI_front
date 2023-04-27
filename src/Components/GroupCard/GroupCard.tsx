@@ -39,34 +39,34 @@ export const GroupCard: FC<GroupCardI> = ({ name, faculty, elder }) => {
       style={{ width: widthSize < mobileWidth ? "100%" : 220 }}
     >
       <Col span={80}>
-        <Card
-          title={
-            <Link to={`/schedule/group/${name}`}>
-              <h2
-                className={styles.groupName_title}
-                //  onClick={() => dispatch(handleGroupName)}
-              >
-                {name}
-              </h2>{" "}
-            </Link>
-          }
-          extra={
-            <div /* onClick={() => pinGroup()} */>
-              <PinButton type="groups" curItem={name} />
-            </div>
-          }
-        >
-          Факультет:{" "}
-          {faculty ? (
-            faculty === "FVO" ? (
-              "ФВО"
+        <Link to={`/schedule/group/${name}`}>
+          <Card
+            style={{ position: "relative" }}
+            hoverable
+            title={
+              <a>
+                <h2
+                  className={styles.groupName_title}
+                  //  onClick={() => dispatch(handleGroupName)}
+                >
+                  {name}
+                </h2>{" "}
+              </a>
+            }
+            extra={<PinButton type="groups" curItem={name} />}
+          >
+            Факультет:{" "}
+            {faculty ? (
+              faculty === "FVO" ? (
+                "ФВО"
+              ) : (
+                "СПО"
+              )
             ) : (
-              "СПО"
-            )
-          ) : (
-            <span>Неизвестен</span>
-          )}
-        </Card>
+              <span>Неизвестен</span>
+            )}
+          </Card>
+        </Link>
       </Col>
     </div>
   );

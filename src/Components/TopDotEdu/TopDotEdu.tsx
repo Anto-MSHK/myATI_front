@@ -86,29 +86,6 @@ export const TopDotEdu: FC<TopDotEduI> = ({
     },
   ];
 
-  const items_min_menu: MenuProps["items"] = [
-    {
-      label: (
-        <Select
-          className={styles.select_antd}
-          showArrow
-          defaultValue={"По алфавиту"}
-          onSelect={sortTeachers}
-        >
-          <Select.Option value="По алфавиту">По алфавиту</Select.Option>
-          <Select.Option value="Обратный порядок">
-            Обратный порядок
-          </Select.Option>
-        </Select>
-      ),
-      key: "2",
-    },
-    {
-      label: <Drop items={items} />,
-      key: "2",
-    },
-  ];
-
   const widthSize = useScreenWidth();
   const cutWidth = 1000;
   const mobileWidth = 600;
@@ -166,23 +143,9 @@ export const TopDotEdu: FC<TopDotEduI> = ({
               </Select.Option>
             </Select>
           </div>
-          <Drop items={items} />
         </div>
       ) : (
-        <Dropdown menu={{ items: items_min_menu }} trigger={["click"]}>
-          <Button
-            style={{
-              background: widthSize > mobileWidth ? undefined : "#001529",
-              marginTop: widthSize < mobileWidth ? -12 : 0,
-            }}
-          >
-            <MenuOutlined
-              style={{
-                color: widthSize > mobileWidth ? undefined : "white",
-              }}
-            />
-          </Button>
-        </Dropdown>
+        <></>
       )}
     </div>
   );
