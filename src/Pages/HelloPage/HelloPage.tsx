@@ -16,7 +16,7 @@ export const HelloPage = () => {
 
   const cards_list: PanelChooseItemI[] = [
     {
-      title: "Я студент",
+      title: "Ты студент",
       desc: "выбери свой факультет",
       mini_cards: [
         {
@@ -32,7 +32,7 @@ export const HelloPage = () => {
       ],
     },
     {
-      title: "Я преподаватель",
+      title: "Ты преподаватель",
       desc: (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Tag>beta</Tag>
@@ -57,7 +57,7 @@ export const HelloPage = () => {
           className={styles.info}
           icon={<SmileOutlined />}
           style={{ height: widthSize > cutWidth ? "85vh" : undefined }}
-          title="Привет, выбери роль"
+          title="Привет, давай начнём"
           extra={
             <div
               style={{

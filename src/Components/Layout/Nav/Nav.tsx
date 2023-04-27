@@ -34,6 +34,11 @@ export const Nav = () => {
     } as MenuItem;
   }
 
+  const toggleCollapse = () => {
+    setCollapsed((prev) => !prev);
+    document.body.style.overflow = "auto";
+  };
+
   const items: MenuItem[] = [
     getItem("Расписание", "1", <UnorderedListOutlined />, [
       //!!!
@@ -56,8 +61,7 @@ export const Nav = () => {
           to="/groups/spo"
           onClick={() => {
             if (widthSize < mobileWidth) {
-              setCollapsed((prev) => !prev);
-              document.body.style.overflow = "auto";
+              toggleCollapse();
             }
           }}
         >
@@ -72,8 +76,7 @@ export const Nav = () => {
           to="/edu/teacher"
           onClick={() => {
             if (widthSize < mobileWidth) {
-              setCollapsed((prev) => !prev);
-              document.body.style.overflow = "auto";
+              toggleCollapse();
             }
           }}
         >
@@ -85,7 +88,7 @@ export const Nav = () => {
     getItem(
       "Разработчики",
       "3",
-      <Link to="/respect" onClick={() => setCollapsed((prev) => !prev)}>
+      <Link to="/respect" onClick={() => toggleCollapse()}>
         <TeamOutlined />
       </Link>
     ),
@@ -140,7 +143,7 @@ export const Nav = () => {
             widthSize < mobileWidth ? styles.mobile : ""
           }`}
         >
-          <NavLink to="/" onClick={() => setCollapsed((prev) => !prev)}>
+          <NavLink to="/" onClick={() => toggleCollapse()}>
             <h1>My ATI</h1>
             <img src={logo} alt={"logo"} />
           </NavLink>

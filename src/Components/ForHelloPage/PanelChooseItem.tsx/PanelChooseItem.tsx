@@ -28,11 +28,24 @@ export const PanelChooseItem: FC<PanelChooseItemI> = ({
     <Card
       size="small"
       className={styles.main}
-      style={{ width: "100%", maxWidth: 500, overflow: "hidden" }}
+      style={{
+        width: "100%",
+        maxWidth: 500,
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column-reverse",
+      }}
       cover={
         <div className={styles.cards_container}>
           {mini_cards.map((card) => (
-            <Card hoverable style={{ width: "100%", height: 120 }} size="small">
+            <Card
+              hoverable
+              style={{
+                width: "100%",
+                height: 120,
+              }}
+              size="small"
+            >
               <Link to={card.link}>
                 <Statistic
                   style={{ marginTop: 8 }}
