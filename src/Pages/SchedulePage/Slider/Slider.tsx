@@ -1,25 +1,10 @@
-import React, {
-  useEffect,
-  useRef,
-  useCallback,
-  createRef,
-  WheelEvent,
-} from "react";
+import React, { useEffect, useRef } from "react";
 import { Button, Carousel } from "antd";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { DayT } from "src/Types/ScheduleTypes";
-
 import "./Slider.css";
-import {
-  OrderedListOutlined,
-  PicCenterOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
-} from "@ant-design/icons";
-import { Weekend } from "src/Components/Weekend/Weekend";
+import { ArrowRightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import { useAppSelector } from "src/State/hooks";
-import { useScroll } from "src/Hooks/useScroll";
-import { dayTeacher } from "src/Types/TeacherScheduleTypes";
 import useScreenWidth from "src/Hooks/useScreenSize";
 
 interface SliderI {
@@ -27,19 +12,32 @@ interface SliderI {
   withScrollTo?: boolean;
 }
 
+const weakDay = ["пн", "вт", "ср", "чт", "пт", "сб"];
+
 export const Slider: React.FC<SliderI> = ({
   schedule,
   withScrollTo = true,
 }) => {
+  const dayList = schedule?.map((day, index) => (
+    <div key={`${day.lessons} + ${index}`} style={{ marginBottom: "10px" }}>
+      <DayCard dayOfWeek={day.dayOfWeek} lessons={day.lessons} />
+    </div>
+  ));
+
   const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
+
   };
+
   let carousel = useRef<any>();
   const curDayIndex = useAppSelector((state) => state.scheduleSettings.curDay);
 
   useEffect(() => {
     goTo(curDayIndex, true);
-  }, []);
+    let element = document.getElementById("scroll");
+    if (element && withScrollTo) {
+      element.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  });
 
   const next = () => {
     (carousel as any).next();
@@ -53,22 +51,11 @@ export const Slider: React.FC<SliderI> = ({
     (carousel as any).goTo(slideNumber, dontAnimate);
   };
 
-  useEffect(() => {
-    let element = document.getElementById("scroll");
-    if (element && withScrollTo) {
-      element.scrollIntoView({ behavior: "smooth", block: "end" });
-    }
-  }, []);
-
-  function scrollSlide(event: WheelEvent) {
-    event.deltaY < 0 ? next() : prev();
-  }
-
   const widthSize = useScreenWidth();
   const mobileWidth = 1000;
 
   return (
-    <div onWheel={(e) => scrollSlide(e)}>
+    <div>
       <div
         style={
           widthSize > mobileWidth
@@ -111,12 +98,11 @@ export const Slider: React.FC<SliderI> = ({
           zIndex: 10,
         }}
       >
-        <h3 className="text">пн</h3>
-        <h3 className="text">вт</h3>
-        <h3 className="text">ср</h3>
-        <h3 className="text">чт</h3>
-        <h3 className="text">пт</h3>
-        <h3 className="text">сб</h3>
+        {weakDay.map((day, index) => (
+          <h3 className="text" key={day + index}>
+            {day}
+          </h3>
+        ))}
       </div>
       <div
         id={"scroll"}
@@ -132,6 +118,7 @@ export const Slider: React.FC<SliderI> = ({
           top: widthSize < mobileWidth ? 50 : 0,
         }}
       />
+
       <Carousel
         afterChange={onChange}
         dots={{ className: "dot" }}
@@ -143,15 +130,9 @@ export const Slider: React.FC<SliderI> = ({
         dotPosition="top"
         initialSlide={curDayIndex}
         ref={(node) => (carousel = node as any)}
+        draggable
       >
-        {schedule?.map((day, index) => (
-          <div
-            key={`${day.lessons} + ${index}`}
-            style={{ marginBottom: "10px" }}
-          >
-            <DayCard dayOfWeek={day.dayOfWeek} lessons={day.lessons} />
-          </div>
-        ))}
+        {dayList}
       </Carousel>
     </div>
   );
