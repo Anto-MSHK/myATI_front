@@ -80,9 +80,8 @@ export const TabsMobile = () => {
       menu={{
         items,
         style: {
-          border: "2px solid #1677ff",
-          backgroundColor: "#ebebeb",
-          boxShadow: "0px 8px 33px 5px #000000",
+          border: "1px solid #1677ff",
+          boxShadow: "0px 12px 24px 0px rgba(34, 60, 80, 0.2)",
         },
       }}
       overlayStyle={{

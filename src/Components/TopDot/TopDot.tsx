@@ -137,10 +137,6 @@ export const TopDot: FC<TopDotI> = ({
       ),
       key: "1",
     },
-    {
-      label: <Checkbox onChange={onHideWeekend}>Скрыть выходные</Checkbox>,
-      key: "2",
-    },
   ];
 
   const items_min_menu: MenuProps["items"] = [
@@ -239,10 +235,9 @@ export const TopDot: FC<TopDotI> = ({
               menu={{
                 items: items_min_menu,
                 style: {
-                  padding: 15,
-                  backgroundColor: "#ebebeb",
-                  boxShadow: "0px 8px 33px 5px #000000",
-                  border: "2px solid #1677ff",
+                  padding: 10,
+                  boxShadow: "0px 12px 24px 0px rgba(34, 60, 80, 0.2)",
+                  border: "1px solid #1677ff",
                 },
               }}
               trigger={["click"]}

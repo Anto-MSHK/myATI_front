@@ -73,7 +73,7 @@ export const PinButton: FC<PinButtonI> = ({
         e.preventDefault();
         handlePin();
       }}
-      style={{ width: 32, ...style }}
+      style={{ width: 32, ...style, padding: "5px 0 0 2px" }}
       icon={icon}
     />
   );
