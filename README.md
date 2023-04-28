@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+# myATI_front
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## О проекте
+Клиент-серверное приложение для отображения расписания для студентов ТИ (филиала) ДГТУ в г. Азов.
 
-## Available Scripts
+#### Технологический стек
+Клиентская часть - React Native, Redux
+Серверная часть - Node.js, Express.js
+База данных - MongoDB
 
-In the project directory, you can run:
+## Сервер
+Программа скачивает расписание с сайта института (https://www.atidstu.ru/?q=node/189) в формате excel файла, затем парсит расписание и сохраняет ответы в БД.
+> Репозиторий алгоритма парсинга:
+https://github.com/Anto-MSHK/myATI_parser
 
-### `npm start`
+## Клиенты
+1. Мобильное приложение, в котором доступно:
+- расписание всех групп;
+- отслеживание учебных дней по датам и верхней/нижней неделе;
+- возможность закрепления групп и быстрого доступа к ним;
+- хранение расписания своей группы локально на телефоне.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> Приложение в google play: 
+https://play.google.com/store/apps/details?id=com.antomshk.myati
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Сайт, на котором доступно:
+- расписание всех групп;
+- расписание всех преподавателей и информация о преподаваемых дисциплинах; 
+- отслеживание учебных дней по верхней/нижней неделе;
+- возможность закрепления групп и преподавателей и быстрого доступа к ним.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+> Ссылка на сайт:
+https://random-team.ru/
