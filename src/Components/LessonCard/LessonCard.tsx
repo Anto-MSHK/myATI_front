@@ -20,6 +20,7 @@ type subjectData = {
 type teacherData = {
   subject: subject;
   cabinet?: string;
+  groups?: string[];
 };
 
 /* export type lessonDataTeacher = {
@@ -27,18 +28,17 @@ type teacherData = {
   cabinet: string
 } */
 export type byWeek = {
-  topWeek: subjectData;
-  lowerWeek?: subjectData;
+  topWeek: subjectData & teacherData;
+  lowerWeek?: subjectData & teacherData;
   [key: string | "topWeek" | "lowerWeek"]:
-    | subjectData
-    | (subjectData | undefined);
+    | (subjectData & teacherData)
+    | ((subjectData & teacherData) | undefined);
 };
 
 export interface LessonCardI {
   count: any;
   time: { from: string; to: string };
-  data: dataT;
-  group?: string;
+  data: byWeek;
   groups?: string[];
 
   dayOfWeek: number;
@@ -58,7 +58,6 @@ export const LessonCard: FC<LessonCardI> = ({
   count,
   time,
   data,
-  group,
   dayOfWeek,
   groups,
 }) => {
@@ -193,21 +192,14 @@ export const LessonCard: FC<LessonCardI> = ({
                   </Link>
                 )}
                 <h3>
-                  {groups
-                    ? groups.map((curGroup) => (
-                        <Link to={`/schedule/${curGroup}`}>
-                          <Tag className={"tag"} color="blue">
-                            {curGroup}
-                          </Tag>
-                        </Link>
-                      ))
-                    : group && (
-                        <Link to={`/schedule/${group}`}>
-                          <Tag className={"tag"} color="blue">
-                            {group}
-                          </Tag>
-                        </Link>
-                      )}
+                  {data[curWeek]?.groups &&
+                    (data[curWeek]?.groups as string[]).map((curGroup) => (
+                      <Link to={`/schedule/group/${curGroup}`}>
+                        <Tag className={"tag"} color="blue">
+                          {curGroup}
+                        </Tag>
+                      </Link>
+                    ))}
                   {data[curWeek]?.cabinet} каб.
                 </h3>
               </div>

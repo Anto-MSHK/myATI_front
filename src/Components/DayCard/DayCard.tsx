@@ -67,8 +67,6 @@ export const DayCard: FC<DayCardI> = ({ dayOfWeek, lessons, ref, style }) => {
               count={lesson.count}
               time={lesson.time}
               data={lesson.data}
-              group={lesson.group}
-              groups={lesson.groups}
               dayOfWeek={dayOfWeek}
             />
           ) : (
