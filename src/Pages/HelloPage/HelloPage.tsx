@@ -9,6 +9,7 @@ import {
 } from "src/Components/ForHelloPage/PanelChooseItem.tsx/PanelChooseItem";
 import { Banner } from "src/Components/ForHelloPage/Banner/Banner";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { SuperBanner } from "src/Components/ForHelloPage/SuperBanner/SuperBanner";
 export const HelloPage = () => {
   const widthSize = useScreenWidth();
   const cutWidth = 900;
@@ -59,18 +60,22 @@ export const HelloPage = () => {
           style={{ height: widthSize > cutWidth ? "85vh" : undefined }}
           title="Привет, давай начнём"
           extra={
-            <div
-              style={{
-                display: "flex",
-                gap: 20,
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: widthSize > cutWidth ? "row" : "column",
-              }}
-            >
-              {cards_list.map((card) => (
-                <PanelChooseItem {...card} />
-              ))}
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: widthSize > cutWidth ? "row" : "column",
+                  marginBottom: -5,
+                }}
+              >
+                {cards_list.map((card) => (
+                  <PanelChooseItem {...card} />
+                ))}
+              </div>
+              <SuperBanner />
             </div>
           }
         />

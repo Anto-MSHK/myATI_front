@@ -1,6 +1,15 @@
 /* eslint-disable array-callback-return */
 import { useEffect, useState, FC } from "react";
-import { Alert, Button, Card, Menu, Result, Row } from "antd";
+import {
+  Alert,
+  Button,
+  Card,
+  CollapseProps,
+  Menu,
+  Result,
+  Row,
+  theme,
+} from "antd";
 import { GroupCard } from "src/Components/GroupCard/GroupCard";
 import { GroupStateT } from "src/Types/GroupTypes";
 import { useFetchFacultyGroupsQuery } from "src/State/services/GroupsApi";
@@ -8,11 +17,44 @@ import styles from "./GroupPage.module.css";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import { MehOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { GroupsByCourse } from "src/Components/GroupsByCourse/GroupsByCourse";
+import { Collapse } from "antd";
 export const GroupPage: FC<any> = ({ faculty }) => {
   const { data: facultyGroups, isLoading } = useFetchFacultyGroupsQuery({
     faculty,
   });
   const [courses, setCourses] = useState<GroupStateT[][]>([]);
+
+  const { token } = theme.useToken();
+
+  const panelStyle: React.CSSProperties = {};
+
+  const items: CollapseProps["items"] = [
+    {
+      key: "1",
+      label: "1 курс",
+      children: <GroupsByCourse faculty={faculty} course={1} />,
+      style: panelStyle,
+    },
+    {
+      key: "2",
+      label: "2 курс",
+      children: <GroupsByCourse faculty={faculty} course={2} />,
+      style: panelStyle,
+    },
+    {
+      key: "3",
+      label: "3 курс",
+      children: <GroupsByCourse faculty={faculty} course={3} />,
+      style: panelStyle,
+    },
+    {
+      key: "4",
+      label: "4 курс",
+      children: <GroupsByCourse faculty={faculty} course={4} />,
+      style: panelStyle,
+    },
+  ];
 
   useEffect(() => {
     let firstCourse: GroupStateT[] = [];
@@ -86,54 +128,12 @@ export const GroupPage: FC<any> = ({ faculty }) => {
         <Card loading={true} />
       ) : (
         <div>
-          {courses.map((course, index: number) => {
-            return (
-              <Card
-                title={<h2 style={{ margin: "0px" }}>{++index} курс</h2>}
-                size={"small"}
-                style={{
-                  padding: "5px",
-                  borderRadius: "10px",
-                  marginBottom: "10px",
-                  width: "100%",
-                }}
-              >
-                {course.length > 0 ? (
-                  <Row gutter={[16, 16]} className={styles.row_antd}>
-                    {course.map((group, index) => {
-                      return (
-                        /* Залить данные для elder с сервера по мере их появления */
-                        <GroupCard
-                          key={group._id + index}
-                          {...group}
-                          faculty={faculty}
-                        />
-                      );
-                    })}
-                  </Row>
-                ) : (
-                  <Result
-                    style={{ padding: 10 }}
-                    icon={<MehOutlined style={{ fontSize: 60 }} />}
-                    title={
-                      <p
-                        style={{
-                          margin: 0,
-                          fontSize: 20,
-                          marginTop: -15,
-                          marginBottom: -5,
-                        }}
-                      >
-                        К сожалению, пока нет доступа к расписанию групп этого
-                        курса
-                      </p>
-                    }
-                    subTitle="Уже ищем решение проблемы..."
-                  />
-                )}
-              </Card>
-            );
-          })}
+          <Collapse
+            items={items}
+            defaultActiveKey={["1"]}
+            size="large"
+            style={{ background: token.colorBgContainer }}
+          />
         </div>
       )}
     </div>

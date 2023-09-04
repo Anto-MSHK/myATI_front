@@ -55,7 +55,7 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
         >
           GitHub проекта
         </Button>
-        <Button
+        {/* <Button
           href="https://play.google.com/store/apps/details?id=com.antomshk.myati&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
           type="ghost"
           target="_blank"
@@ -68,7 +68,7 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
               src={play}
             />
           }
-        ></Button>
+        ></Button> */}
       </div>
       <img
         src={logo}

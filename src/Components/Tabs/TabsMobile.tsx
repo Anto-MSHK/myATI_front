@@ -85,8 +85,9 @@ export const TabsMobile = () => {
         },
       }}
       overlayStyle={{
-        width: "100%",
-        padding: "5px 10px",
+        right: 10,
+        left: 10,
+        padding: "10px 0",
       }}
       trigger={["click"]}
     >

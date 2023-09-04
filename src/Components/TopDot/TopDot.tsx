@@ -242,8 +242,11 @@ export const TopDot: FC<TopDotI> = ({
               }}
               trigger={["click"]}
               overlayStyle={{
-                width: widthSize > mobileWidth ? undefined : "100%",
-                padding: 10,
+                padding: `${widthSize > mobileWidth ? "25px" : "10px"} ${
+                  widthSize > mobileWidth ? 0 : "10px"
+                }`,
+                left: widthSize < mobileWidth ? 0 : 110,
+                right: widthSize < mobileWidth ? 0 : 30,
               }}
             >
               <Button
