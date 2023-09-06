@@ -39,7 +39,7 @@ h4 {
   z-index: 1;
 }
 
-:where(.css-dev-only-do-not-override-nnuwmp).ant-carousel .slick-dots-top {
+.ant-carousel .slick-dots-top {
   top: 10px;
   bottom: auto;
   margin: auto;

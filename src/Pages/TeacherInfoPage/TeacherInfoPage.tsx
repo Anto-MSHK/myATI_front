@@ -8,6 +8,7 @@ import {
   Dropdown,
   MenuProps,
   Button,
+  Tag,
 } from "antd";
 import { ITeacher } from "src/Types/TeacherTypes";
 import { useFetchTeachersQuery } from "src/State/services/TeachersApi";
@@ -88,7 +89,11 @@ export const TeacherInfoPage: React.FC = () => {
   return (
     <>
       <TopDotEdu
-        title={"Преподаватели"}
+        title={
+          <h2 style={{ display: "flex" }}>
+            Преподаватели <Tag style={{ marginLeft: 10 }}>beta</Tag>
+          </h2>
+        }
         sortTeachers={sortTeachers}
         onSearch={onSearch}
       />

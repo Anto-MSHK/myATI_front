@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, FC } from "react";
+import React, { useState, useEffect, useMemo, FC, ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { ViewSwitch } from "src/Components/ViewSwitch/ViewSwitch";
@@ -32,7 +32,7 @@ import useScreenWidth from "src/Hooks/useScreenSize";
 interface TopDotEduI {
   onSearch: (searchQuery: string) => any;
   sortTeachers: (sort: string) => any;
-  title: string;
+  title: string | ReactNode;
   valueView?: string;
   setValueView?: any;
 }

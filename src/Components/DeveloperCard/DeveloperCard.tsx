@@ -73,7 +73,7 @@ const DeveloperCard: React.FC<DeveloperCardProps> = ({
             </a>
           )}
         </div>
-        <p style={{ fontWeight: 600, color: "#1677FF", margin: 0 }}>ВИС-21</p>
+        <p style={{ fontWeight: 600, color: "#1677FF", margin: 0 }}>ВИС-31</p>
       </Space>
     </Card>
   );

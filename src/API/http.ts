@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = `https://back-my-ati.anto-mshk.ru`;
+export const API_URL = `http://localhost:3000`;
 
 export const $api = axios.create({
   //   withCredentials: true,

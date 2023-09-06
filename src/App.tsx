@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import type { NotificationPlacement } from "antd/es/notification/interface";
-import { Breadcrumb, Layout, Menu, notification, theme } from "antd";
+import { Breadcrumb, Divider, Layout, Menu, notification, theme } from "antd";
 import { BrowserRouter, useParams } from "react-router-dom";
 import { Nav } from "./Components/Layout/Nav/Nav";
 import { Router } from "./Components/Layout/Router/Router";
@@ -32,15 +32,16 @@ const App: React.FC = () => {
       message: `Мы рады обратной связи!`,
       description: (
         <p style={{ margin: 0 }}>
-          Нравится сайт? Или знаешь как сделать лучше? Вступай в IT клуб нашего
-          института и участвуй в проектах и конкурсах вместе с нами! По любым
-          вопросам{" "}
+          Нравится сайт? Знаешь как сделать лучше? Желаешь принять участие в
+          разработке? <br />
+          <Divider style={{ margin: "10px 0" }} />
+          По любым вопросам{" "}
           <a
             href={"https://vk.com/antomshk"}
             target="_blank"
             rel="noopener noreferrer"
           >
-            пиши сюда
+            пиши ему
           </a>
           !
         </p>

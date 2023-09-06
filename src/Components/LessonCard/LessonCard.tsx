@@ -200,7 +200,10 @@ export const LessonCard: FC<LessonCardI> = ({
                         </Tag>
                       </Link>
                     ))}
-                  {data[curWeek]?.cabinet} каб.
+                  {data[curWeek]?.cabinet &&
+                  data[curWeek]?.cabinet !== "нет данных"
+                    ? data[curWeek]?.cabinet + " каб."
+                    : undefined}
                 </h3>
               </div>
 
