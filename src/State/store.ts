@@ -42,6 +42,7 @@ const persisConfig = {
     "groups",
     groupsApi.reducerPath,
     scheduleApi.reducerPath,
+    teachersApi.reducerPath,
   ],
 };
 const persistedReducer = persistReducer(persisConfig, rootReducer);
