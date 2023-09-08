@@ -20,22 +20,20 @@ export const GroupsByCourse: FC<GroupsByCourseI> = ({ faculty, course }) => {
     <div>
       {curGroups && curGroups.length > 0 ? (
         <>
-          {!isLoading ? (
-            <Row gutter={[16, 16]} className={styles.row_antd}>
-              {curGroups.map((group, index) => {
-                return (
-                  <GroupCard
-                    key={group._id + index}
-                    {...group}
-                    faculty={faculty}
-                  />
-                );
-              })}
-            </Row>
-          ) : (
-            <Spin />
-          )}
+          <Row gutter={[16, 16]} className={styles.row_antd}>
+            {curGroups.map((group, index) => {
+              return (
+                <GroupCard
+                  key={group._id + index}
+                  {...group}
+                  faculty={faculty}
+                />
+              );
+            })}
+          </Row>
         </>
+      ) : isLoading ? (
+        <Spin />
       ) : (
         <Result
           style={{ padding: 10 }}

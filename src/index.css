@@ -38,7 +38,12 @@ h4 {
   position: absolute;
   z-index: 1;
 }
-
+.ant-image-preview-operations-operation:not(:first-child) {
+  display: none;
+}
+.ant-image-preview-footer {
+  display: none;
+}
 .ant-carousel .slick-dots-top {
   top: 10px;
   bottom: auto;
