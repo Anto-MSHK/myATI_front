@@ -91,7 +91,15 @@ export const TeacherInfoPage: React.FC = () => {
       <TopDotEdu
         title={
           <h2 style={{ display: "flex" }}>
-            Преподаватели <Tag style={{ marginLeft: 10 }}>beta</Tag>
+            Преподаватели{" "}
+            <Tag
+              style={{
+                marginLeft: 10,
+                color: widthSize < mobileWidth ? "white" : "black",
+              }}
+            >
+              beta
+            </Tag>
           </h2>
         }
         sortTeachers={sortTeachers}

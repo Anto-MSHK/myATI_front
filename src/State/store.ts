@@ -37,7 +37,12 @@ const rootReducer = combineReducers({
 const persisConfig = {
   key: "root",
   storage,
-  blacklist: ["teachers", "groups", groupsApi.reducer.name],
+  blacklist: [
+    "teachers",
+    "groups",
+    groupsApi.reducerPath,
+    scheduleApi.reducerPath,
+  ],
 };
 const persistedReducer = persistReducer(persisConfig, rootReducer);
 

@@ -1,5 +1,6 @@
 import { type } from "@testing-library/user-event/dist/type";
-import { Card, Radio, RadioChangeEvent, Tag } from "antd";
+import { Avatar, Card, Radio, RadioChangeEvent, Space, Tag } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import React, { FC, useState, useEffect } from "react";
 import checkIsLessonActive from "src/Functions/CheckIsWeekAndLessonActive";
 import { lessonDataTeacher, subject } from "src/Types/TeacherScheduleTypes";
@@ -8,11 +9,17 @@ import { useAppDispatch, useAppSelector } from "src/State/hooks";
 import { dataT } from "src/Types/ScheduleTypes";
 import { Link } from "react-router-dom";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { InfoTag } from "../InfoTag/InfoTag";
 type subjectData = {
   subject: subject;
   teacher?: {
     name: string;
     degree: string;
+    photo_url?: string | undefined;
+    fullName?: string | undefined;
+    cathedra?: string | undefined;
+    allInfo?: string | undefined;
+    additional?: string | undefined;
   };
   cabinet?: string;
 };
@@ -21,6 +28,11 @@ type teacherData = {
   subject: subject;
   cabinet?: string;
   groups?: string[];
+  photo_url?: string | undefined;
+  fullName?: string | undefined;
+  cathedra?: string | undefined;
+  allInfo?: string | undefined;
+  additional?: string | undefined;
 };
 
 /* export type lessonDataTeacher = {
@@ -115,6 +127,8 @@ export const LessonCard: FC<LessonCardI> = ({
         style={
           data.lowerWeek && !hideSwitch ? { borderRadius: "0 0 10px 10px" } : {}
         }
+        headStyle={{ margin: widthSize < mobileWidth ? "-5px 0 " : undefined }}
+        bodyStyle={{ padding: widthSize < mobileWidth ? 5 : undefined }}
         title={
           <div className={"lesson_card__main"}>
             <Tag
@@ -158,7 +172,7 @@ export const LessonCard: FC<LessonCardI> = ({
           <div
             className={"secondary__time"}
             style={{
-              margin: widthSize < mobileWidth ? 0 : undefined,
+              marginRight: widthSize < mobileWidth ? 10 : undefined,
             }}
           >
             <h3
@@ -178,19 +192,27 @@ export const LessonCard: FC<LessonCardI> = ({
             </h3>
           </div>
           {data[curWeek]?.subject && (
-            <div className={"secondary__info"}>
+            <div
+              className={"secondary__info"}
+              style={{
+                margin: widthSize < mobileWidth ? "0 0 0 10px" : "0 0 0 25px",
+              }}
+            >
               <div className={"secondary__info_tc"}>
                 {data[curWeek]?.teacher && data[curWeek]?.teacher?.name && (
-                  <Link to={`/edu/teacher/${data[curWeek]?.teacher?.name}`}>
-                    <Tag className={"tag_antd"} color="blue">
-                      {data[curWeek]?.teacher?.name}
-                      <i>
-                        {data[curWeek]?.teacher?.degree &&
-                          " (" + data[curWeek]?.teacher?.degree + ")"}
-                      </i>
-                    </Tag>
-                  </Link>
+                  <InfoTag
+                    query={data[curWeek]?.teacher?.name}
+                    title={data[curWeek]?.teacher?.name}
+                    additional={data[curWeek]?.teacher?.additional}
+                    desc={data[curWeek]?.teacher?.degree}
+                    photo_url={data[curWeek]?.teacher?.photo_url}
+                    popover={{
+                      fullTitle: data[curWeek]?.teacher?.fullName,
+                      desc: data[curWeek]?.teacher?.additional,
+                    }}
+                  />
                 )}
+
                 <h3>
                   {data[curWeek]?.groups &&
                     (data[curWeek]?.groups as string[]).map((curGroup) => (
@@ -205,11 +227,19 @@ export const LessonCard: FC<LessonCardI> = ({
                     ? data[curWeek]?.cabinet + " каб."
                     : undefined}
                 </h3>
+                {widthSize < mobileWidth && data[curWeek]?.subject.type && (
+                  <h4>
+                    <i>Тип пары: </i>
+                    {data[curWeek]?.subject.type}
+                  </h4>
+                )}
               </div>
 
-              <h3 className={"secondary__info_type"}>
-                {data[curWeek]?.subject.type}
-              </h3>
+              {widthSize > mobileWidth && (
+                <h3 className={"secondary__info_type"}>
+                  {data[curWeek]?.subject.type}
+                </h3>
+              )}
             </div>
           )}
         </div>

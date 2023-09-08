@@ -252,11 +252,14 @@ export const TopDot: FC<TopDotI> = ({
               <Button
                 style={{
                   background: widthSize > mobileWidth ? undefined : "#001529",
+                  borderRadius: "50%",
+                  width: 20,
                 }}
               >
                 <MenuOutlined
                   style={{
                     color: widthSize > mobileWidth ? undefined : "white",
+                    marginLeft: -7,
                   }}
                 />
               </Button>
