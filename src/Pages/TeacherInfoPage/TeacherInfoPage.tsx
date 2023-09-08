@@ -91,7 +91,7 @@ export const TeacherInfoPage: React.FC = () => {
       <TopDotEdu
         title={
           <h2 style={{ display: "flex" }}>
-            Преподаватели{" "}
+            Преподаватели
             <Tag
               style={{
                 marginLeft: 10,

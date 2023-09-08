@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Card, Collapse, Image, Space } from "antd";
+import { Avatar, Card, Collapse, Image, Space, Tag } from "antd";
 import { IWidget } from "src/Components/GroupsWidget/GroupsWidget";
 import styles from "./InfoWidget.module.css";
 import { PinButton } from "../PinButton/PinButton";
@@ -17,7 +17,6 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
       })
     );
   };
-
   return (
     <div>
       <div>
@@ -48,6 +47,7 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                     objectFit: "cover",
                     borderRadius: "50%",
                     overflow: "hidden",
+                    marginBottom: 10,
                   }}
                 >
                   <Image
@@ -61,21 +61,20 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                   />
                 </div>
               )}
-              <Space>
-                <h2
-                  className={styles.name}
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 600,
-                    margin: "auto 0",
-                    width: "fit-content",
-                    lineHeight: 1,
-                  }}
-                >
-                  {teacher.fullName ? teacher.fullName : teacher.name}
-                </h2>
+              <h2
+                className={styles.name}
+                style={{
+                  fontSize: 20,
+                  fontWeight: 600,
+                  margin: "auto 0",
+                  width: "fit-content",
+                  lineHeight: 1,
+                  marginBottom: 5,
+                }}
+              >
+                {teacher.fullName ? teacher.fullName : teacher.name}
                 {teacher.degree && (
-                  <h2
+                  <i
                     className={styles.degree}
                     style={{
                       fontSize: 18,
@@ -84,10 +83,26 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                       width: "fit-content",
                     }}
                   >
+                    {" "}
                     ({teacher.degree})
-                  </h2>
+                  </i>
                 )}
-              </Space>
+              </h2>
+              {teacher.cathedra && (
+                <div>
+                  <i style={{ fontWeight: 500, fontSize: 13 }}>Кафедра:</i>
+                  <Tag
+                    style={{
+                      marginLeft: 5,
+                      padding: 5,
+                      whiteSpace: "pre-wrap",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {teacher.cathedra}
+                  </Tag>
+                </div>
+              )}
               {teacher.additional && (
                 <h2
                   className={styles.degree}
@@ -101,40 +116,40 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                 >
                   {teacher.additional}
                 </h2>
-              )}
-              {teacher.allInfo && (
-                <Collapse
-                  size="small"
-                  bordered={false}
-                  style={{
-                    backgroundColor: "white",
-                    width: "100%",
-                  }}
-                  expandIcon={({ isActive }) => (
-                    <CaretRightOutlined rotate={isActive ? 90 : 0} />
-                  )}
-                  items={[
-                    {
-                      key: 1,
-                      children: (
-                        <p
-                          style={{ marginTop: 10 }}
-                          dangerouslySetInnerHTML={{
-                            __html: teacher.allInfo
-                              .substring(1)
-                              .split("\n")
-                              .join("<br/>"),
-                          }}
-                        />
-                      ),
-                      label: "Информация с сайта atidstu.ru",
-                    },
-                  ]}
-                />
-              )}
+              )}{" "}
             </div>
           </Card>
         </div>
+        {teacher.allInfo && (
+          <Collapse
+            size="small"
+            bordered={false}
+            style={{
+              backgroundColor: "white",
+            }}
+            expandIcon={({ isActive }) => (
+              <CaretRightOutlined rotate={isActive ? 90 : 0} />
+            )}
+            items={[
+              {
+                key: 1,
+                children: (
+                  <p
+                    style={{ marginTop: 10 }}
+                    dangerouslySetInnerHTML={{
+                      __html: teacher.allInfo
+                        .replace(/^(.*):/gm, "<br/><strong>$1:</strong>")
+                        .substring(6)
+                        .split("\n")
+                        .join("<br/>"),
+                    }}
+                  />
+                ),
+                label: "Информация с сайта atidstu.ru",
+              },
+            ]}
+          />
+        )}
       </div>
     </div>
   );

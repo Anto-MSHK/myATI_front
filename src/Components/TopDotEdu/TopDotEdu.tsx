@@ -113,6 +113,7 @@ export const TopDotEdu: FC<TopDotEduI> = ({
         style={{
           marginTop: widthSize < mobileWidth ? -8 : 0,
           marginRight: 20,
+          width: 200,
           color: widthSize > mobileWidth ? "black" : "white",
         }}
       >
@@ -130,7 +131,6 @@ export const TopDotEdu: FC<TopDotEduI> = ({
                 onChange={(e) => onSearch(e.target.value)}
               />
             )}
-
             <Select
               className={styles.select_antd}
               showArrow
