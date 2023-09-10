@@ -37,6 +37,7 @@ export const MainPage = () => {
           <div
             style={{
               padding: widthSize > mobileWidth ? 0 : "0 20px",
+              marginTop: widthSize > mobileWidth ? 0 : 20,
             }}
           >
             <div
