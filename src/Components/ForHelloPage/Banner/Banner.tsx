@@ -6,6 +6,7 @@ import styles from "./Banner.module.css";
 import logo from "../../../icons/fulllogo.png";
 import play from "../../../icons/google-play-badge.png";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { MTBanner } from "../MTBanner/MTBanner";
 
 interface BannerI {
   collapsible?: boolean;
@@ -28,6 +29,7 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
       }}
       className={styles.banner}
     >
+      <MTBanner style={{ position: "absolute", top: 0, right: 20 }} />
       <div
         style={{
           position: "absolute",
@@ -48,12 +50,13 @@ export const Banner: FC<BannerI> = ({ collapsible = true }) => {
           style={{
             backgroundColor: "black",
             border: "1.5px solid #A6A6A6",
+            marginTop: -10,
           }}
           href="https://github.com/Anto-MSHK/my_ati_admin"
           target="_blank"
           rel="noopener noreferrer"
         >
-          GitHub проекта
+          GitHub
         </Button>
         {/* <Button
           href="https://play.google.com/store/apps/details?id=com.antomshk.myati&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"

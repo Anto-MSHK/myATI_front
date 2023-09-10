@@ -34,6 +34,7 @@ export const Head = () => {
         className={styles.container}
         style={{
           justifyContent: widthSize < mobileWidth ? "flex-end" : undefined,
+          marginRight: widthSize < mobileWidth ? undefined : 25,
         }}
       >
         {widthSize > mobileWidth && (

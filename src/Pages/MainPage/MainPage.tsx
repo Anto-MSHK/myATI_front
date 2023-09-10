@@ -10,6 +10,7 @@ import pin from "../../icons/pin_active.png";
 import { DayCard } from "src/Components/DayCard/DayCard";
 import { useFetchScheduleQuery } from "src/State/services/ScheduleApi";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { MTBanner } from "src/Components/ForHelloPage/MTBanner/MTBanner";
 export const MainPage = () => {
   const pins = useAppSelector((state) => state.pins);
   const [curGroup, setCurGroup] = useState(pins.groups[0]);
@@ -31,8 +32,96 @@ export const MainPage = () => {
 
   return (
     <div>
+      {pins.groups.length > 0 ? (
+        <div>
+          <div
+            style={{
+              padding: widthSize > mobileWidth ? 0 : "0 20px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <h1
+                style={{
+                  marginTop: widthSize > mobileWidth ? 20 : 0,
+                  marginBottom: 20,
+                  marginRight: 20,
+                }}
+              >
+                Расписание по важным группам
+              </h1>
+              {pins.groups.length > 0 && (
+                <Select
+                  defaultValue={pins.groups[0]}
+                  style={{ width: 120 }}
+                  onChange={handleChange}
+                  options={pins.groups.map((group) => {
+                    return { value: group, label: group };
+                  })}
+                />
+              )}
+            </div>
+            <Alert
+              closable
+              style={{
+                marginTop: -5,
+                marginBottom: 10,
+              }}
+              message={
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: widthSize > cutWidth ? "center" : "start",
+                    flexDirection: widthSize > cutWidth ? "row" : "column",
+                  }}
+                >
+                  <p style={{ margin: 0 }}>
+                    Здесь доступна только часть функционала!
+                  </p>
+                  <Link to={`/schedule/group/${curGroup}`}>
+                    <Button
+                      type="link"
+                      size="small"
+                      style={{
+                        color: "#FAAD14",
+                        marginLeft: widthSize > cutWidth ? undefined : -10,
+                      }}
+                    >
+                      Открыть полную версию.
+                    </Button>
+                  </Link>
+                </div>
+              }
+              type="warning"
+              showIcon
+            />
+          </div>
+          {schedule ? (
+            <div style={{ position: "relative" }}>
+              <Slider schedule={schedule} withScrollTo={false} />
+            </div>
+          ) : (
+            <Spin
+              size="large"
+              style={{
+                margin: "auto 0",
+                padding: 30,
+                width: "100%",
+              }}
+            />
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
       <div style={{ padding: widthSize > mobileWidth ? 0 : 20 }}>
-        <h1 style={{ marginBottom: 20, marginLeft: 0 }}>Подобрано для тебя</h1>
+        <h1 style={{ marginTop: 25, marginBottom: 20, marginLeft: 0 }}>
+          Подобрано для тебя
+        </h1>
         <div
           style={{
             display: "flex",
@@ -126,95 +215,9 @@ export const MainPage = () => {
               description={"Ты раннее отметил их"}
             />
           </Card>
+          <MTBanner mobileMax />
         </div>
       </div>
-      {pins.groups.length > 0 ? (
-        <div>
-          <div
-            style={{
-              padding: widthSize > mobileWidth ? 0 : "0 20px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginTop: 25,
-              }}
-            >
-              <h1
-                style={{
-                  marginTop: widthSize > mobileWidth ? 20 : 0,
-                  marginBottom: 20,
-                  marginRight: 20,
-                }}
-              >
-                Расписание по важным группам
-              </h1>
-              {pins.groups.length > 0 && (
-                <Select
-                  defaultValue={pins.groups[0]}
-                  style={{ width: 120 }}
-                  onChange={handleChange}
-                  options={pins.groups.map((group) => {
-                    return { value: group, label: group };
-                  })}
-                />
-              )}
-            </div>
-            <Alert
-              closable
-              style={{
-                marginTop: -5,
-                marginBottom: 10,
-              }}
-              message={
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: widthSize > cutWidth ? "center" : "start",
-                    flexDirection: widthSize > cutWidth ? "row" : "column",
-                  }}
-                >
-                  <p style={{ margin: 0 }}>
-                    Здесь доступна только часть функционала!
-                  </p>
-                  <Link to={`/schedule/group/${curGroup}`}>
-                    <Button
-                      type="link"
-                      size="small"
-                      style={{
-                        color: "#FAAD14",
-                        marginLeft: widthSize > cutWidth ? undefined : -10,
-                      }}
-                    >
-                      Открыть полную версию.
-                    </Button>
-                  </Link>
-                </div>
-              }
-              type="warning"
-              showIcon
-            />
-          </div>
-          {schedule ? (
-            <div style={{ position: "relative" }}>
-              <Slider schedule={schedule} withScrollTo={false} />
-            </div>
-          ) : (
-            <Spin
-              size="large"
-              style={{
-                margin: "auto 0",
-                padding: 30,
-                width: "100%",
-              }}
-            />
-          )}
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

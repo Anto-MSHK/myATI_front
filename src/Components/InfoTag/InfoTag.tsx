@@ -61,71 +61,80 @@ export const InfoTag: FC<InfoTagI> = ({
       </Space>
     </div>
   );
-  return (
-    <Popover
-      // placement="bottomLeft"
-      content={content}
-      zIndex={100}
-      overlayInnerStyle={{ margin: 0, padding: 0 }}
-      style={{ zIndex: 100, position: "relative" }}
-    >
-      <Link to={`/edu/teacher/${query}`}>
-        <Tag className={"tag_antd"} bordered={false}>
-          <Space>
-            {photo_url !== null && (
-              <Avatar
-                style={{
-                  backgroundColor: "rgb(134 134 134)",
-                  width: widthSize > mobileWidth ? 45 : 35,
-                  height: widthSize > mobileWidth ? 45 : 35,
-                }}
-                icon={
-                  <UserOutlined
-                    style={{
-                      fontSize: widthSize > mobileWidth ? 23 : 20,
-                      height: widthSize > mobileWidth ? 40 : 30,
-                    }}
-                  />
-                }
-                src={
-                  photo_url && (
-                    <img
-                      style={{ objectFit: "cover" }}
-                      src={photo_url}
-                      alt="avatar"
-                    />
-                  )
-                }
-              />
-            )}
-            <div>
-              <h3
-                style={{
-                  fontSize: widthSize > mobileWidth ? undefined : 12,
-                  fontWeight: 700,
-                }}
-              >
-                {" "}
-                {title} <i>{desc && " (" + desc + ")"}</i>
-              </h3>
-
-              {additional && widthSize > mobileWidth && (
-                <i
+  if (photo_url)
+    return (
+      <Popover
+        // placement="bottomLeft"
+        content={content}
+        zIndex={100}
+        overlayInnerStyle={{ margin: 0, padding: 0 }}
+        style={{ zIndex: 100, position: "relative" }}
+      >
+        <Link to={`/edu/teacher/${query}`}>
+          <Tag className={"tag_antd"} bordered={false}>
+            <Space>
+              {photo_url !== null && (
+                <Avatar
                   style={{
-                    color: "rgb(134 134 134)",
-                    fontWeight: 500,
-                    fontSize: widthSize > mobileWidth ? 12 : 10,
-                    whiteSpace: "pre-wrap",
+                    backgroundColor: "rgb(134 134 134)",
+                    width: widthSize > mobileWidth ? 45 : 35,
+                    height: widthSize > mobileWidth ? 45 : 35,
+                  }}
+                  icon={
+                    <UserOutlined
+                      style={{
+                        fontSize: widthSize > mobileWidth ? 23 : 20,
+                        height: widthSize > mobileWidth ? 40 : 30,
+                      }}
+                    />
+                  }
+                  src={
+                    photo_url && (
+                      <img
+                        style={{ objectFit: "cover" }}
+                        src={photo_url}
+                        alt="avatar"
+                      />
+                    )
+                  }
+                />
+              )}
+              <div>
+                <h3
+                  style={{
+                    fontSize: widthSize > mobileWidth ? undefined : 12,
+                    fontWeight: 700,
                   }}
                 >
-                  {additional?.slice(0, widthSize > mobileWidth ? 250 : 21) +
-                    (widthSize < mobileWidth ? "..." : "")}
-                </i>
-              )}
-            </div>
-          </Space>
+                  {" "}
+                  {title} <i>{desc && " (" + desc + ")"}</i>
+                </h3>
+
+                {additional && widthSize > mobileWidth && (
+                  <i
+                    style={{
+                      color: "rgb(134 134 134)",
+                      fontWeight: 500,
+                      fontSize: widthSize > mobileWidth ? 12 : 10,
+                      whiteSpace: "pre-wrap",
+                    }}
+                  >
+                    {additional?.slice(0, widthSize > mobileWidth ? 250 : 21) +
+                      (widthSize < mobileWidth ? "..." : "")}
+                  </i>
+                )}
+              </div>
+            </Space>
+          </Tag>
+        </Link>
+      </Popover>
+    );
+  else
+    return (
+      <Link to={`/edu/teacher/${title}`}>
+        <Tag className={"tag"} bordered={false}>
+          {title}
         </Tag>
       </Link>
-    </Popover>
-  );
+    );
 };
