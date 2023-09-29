@@ -59,7 +59,7 @@ export const HelloPage = () => {
           className={styles.info}
           icon={<SmileOutlined />}
           style={{ height: widthSize > cutWidth ? "85vh" : undefined }}
-          title="Привет, давай начнём"
+          title="Расписание занятий"
           extra={
             <div>
               <div
