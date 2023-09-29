@@ -10,6 +10,7 @@ import {
 import { Banner } from "src/Components/ForHelloPage/Banner/Banner";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import { SuperBanner } from "src/Components/ForHelloPage/SuperBanner/SuperBanner";
+import { ClumsyBanner } from "src/Components/ForHelloPage/ClumsyBanner/ClumsyBanner";
 export const HelloPage = () => {
   const widthSize = useScreenWidth();
   const cutWidth = 900;
@@ -52,7 +53,7 @@ export const HelloPage = () => {
   ];
   return (
     <div>
-      <Banner />
+      <ClumsyBanner />
       <div id={"scroll"} className={styles.content}>
         <Result
           className={styles.info}
