@@ -1,5 +1,5 @@
 import { Avatar, Card, Popover, Space, Tag } from "antd";
-import React, { FC } from "react";
+import React, { FC, SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import { UserOutlined } from "@ant-design/icons";
@@ -27,15 +27,22 @@ export const InfoTag: FC<InfoTagI> = ({
   const widthSize = useScreenWidth();
   const cutWidth = 900;
   const mobileWidth = 600;
-
+  const [isDefault, setIsDefault] = useState(false);
+  const addDefaultSrc = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log("aa");
+    setIsDefault(true);
+  };
   const content = (
     <div style={{ border: "3px solid #3D94FF", borderRadius: 8 }}>
       <Space style={{ alignSelf: "center" }}>
         {photo_url && (
+          // eslint-disable-next-line jsx-a11y/img-redundant-alt
           <img
+            onError={addDefaultSrc}
             alt="photo"
             src={photo_url}
             style={{
+              display: isDefault ? "none" : undefined,
               height: 140,
               objectFit: "cover",
               borderRadius: 10,
@@ -79,6 +86,7 @@ export const InfoTag: FC<InfoTagI> = ({
                     backgroundColor: "rgb(134 134 134)",
                     width: widthSize > mobileWidth ? 45 : 35,
                     height: widthSize > mobileWidth ? 45 : 35,
+                    display: isDefault ? "none" : undefined,
                   }}
                   icon={
                     <UserOutlined
@@ -91,9 +99,13 @@ export const InfoTag: FC<InfoTagI> = ({
                   src={
                     photo_url && (
                       <img
-                        style={{ objectFit: "cover" }}
+                        style={{
+                          objectFit: "cover",
+                          display: isDefault ? "none" : undefined,
+                        }}
                         src={photo_url}
                         alt="avatar"
+                        onError={addDefaultSrc}
                       />
                     )
                   }

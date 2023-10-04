@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Avatar, Card, Collapse, Image, Space, Tag } from "antd";
 import { IWidget } from "src/Components/GroupsWidget/GroupsWidget";
 import styles from "./InfoWidget.module.css";
@@ -16,6 +16,11 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
         item: teacher.name,
       })
     );
+  };
+  const [isDefault, setIsDefault] = useState(false);
+  const addDefaultSrc = (ev: SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log("aa");
+    setIsDefault(true);
   };
   return (
     <div>
@@ -53,11 +58,13 @@ export const InfoWidget: React.FC<IWidget> = ({ teacher }) => {
                   <Image
                     style={{
                       objectFit: "cover",
+                      display: isDefault ? "none" : undefined,
                     }}
-                    width={170}
-                    height={170}
+                    width={isDefault ? 0 : 170}
+                    height={isDefault ? 0 : 170}
                     src={teacher.photo_url}
                     alt="avatar"
+                    onError={addDefaultSrc}
                   />
                 </div>
               )}
