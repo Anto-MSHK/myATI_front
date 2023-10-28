@@ -23,6 +23,7 @@ import {
 import { TopDot } from "src/Components/TopDot/TopDot";
 import { LessonT, DayT } from "src/Types/ScheduleTypes";
 import useScreenWidth from "src/Hooks/useScreenSize";
+import { Andrew } from "src/Components/Banners/Andrew/Andrew";
 
 interface SchedulePageI {
   type: "group" | "teacher";
@@ -159,6 +160,7 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
           </div>
         )}
       </Card>
+      {!isLoading && name?.toLowerCase() === "вис31" && <Andrew />}
     </>
   );
 };
