@@ -11,6 +11,7 @@ import { DayCard } from "src/Components/DayCard/DayCard";
 import { useFetchScheduleQuery } from "src/State/services/ScheduleApi";
 import useScreenWidth from "src/Hooks/useScreenSize";
 import { MTBanner } from "src/Components/ForHelloPage/MTBanner/MTBanner";
+import { Andrew } from "src/Components/Banners/Andrew/Andrew";
 export const MainPage = () => {
   const pins = useAppSelector((state) => state.pins);
   const [curGroup, setCurGroup] = useState(pins.groups[0]);

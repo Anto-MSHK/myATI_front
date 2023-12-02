@@ -1,6 +1,7 @@
 import { Card, Carousel, Rate } from "antd";
 import React, { useEffect, useState } from "react";
 import andrew from "../../../andrew.gif";
+import useScreenWidth from "src/Hooks/useScreenSize";
 
 function getRandomArbitrary(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -43,15 +44,26 @@ export const Andrew = () => {
   ];
   const [index] = useState(getRandomArbitrary(0, 6));
 
+  const widthSize = useScreenWidth();
+  const cutWidth = 1000;
+  const mobileWidth = 450;
+
   if (reviews[index].review)
     return (
       <div>
-        <h1 style={{ marginTop: 25, marginLeft: 15 }}>Отзывы</h1>
+        <h1
+          style={{
+            marginTop: 25,
+            marginLeft: widthSize < cutWidth ? 15 : 0,
+          }}
+        >
+          Отзывы
+        </h1>
         <Card
           style={{
             marginTop: 15,
-            marginRight: 16,
-            marginLeft: 16,
+            marginRight: widthSize < mobileWidth ? 16 : 0,
+            marginLeft: widthSize < mobileWidth ? 16 : 0,
             //  position: "relative",
             boxShadow: "rgba(0, 0, 0, 0.5) 0px 4px 10px",
           }}

@@ -160,7 +160,6 @@ export const SchedulePage: React.FC<SchedulePageI> = ({ type }) => {
           </div>
         )}
       </Card>
-      {!isLoading && name?.toLowerCase() === "вис31" && <Andrew />}
     </>
   );
 };
